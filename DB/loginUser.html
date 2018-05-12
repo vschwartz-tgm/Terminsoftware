@@ -1,0 +1,48 @@
+<!DOCTYPE html>   
+<html>
+	
+	<head>
+		<script>
+		
+			var users = [];
+		
+			function LoginUser(name = "mwintersperger", pw = "123Fiona"){
+				loadUsers();
+				
+				for (i = 0; i <users.length; i=i+2) {
+					if(name == users[i] && pw == users[i+1]) {
+						alert("Richtig")
+					} else {
+						alert("Falsch");
+					}
+				}
+			}
+		
+			function loadUsers() {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						saveUsers(this);
+					}
+				};
+				xhttp.open("GET", "User.xml", true);
+				xhttp.send();
+			}
+			
+			
+			function saveUsers(xml) {
+			  var i;
+			  var xmlDoc = xml.responseXML;
+			  var x = xmlDoc.getElementsByTagName("User");
+			  for (i = 0; i <x.length; i++) { 
+				users.push(x[i].getElementsByTagName("Username")[0].childNodes[0].nodeValue);
+				users.push(x[i].getElementsByTagName("Password")[0].childNodes[0].nodeValue);
+			  }
+			}
+
+		</script>
+    </head>
+    <body>
+		<button onclick="LoginUser()">Try it</button>
+	</body>
+</html>
