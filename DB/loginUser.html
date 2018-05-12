@@ -5,15 +5,24 @@
 		<script>
 		
 			var users = [];
-		
-			function LoginUser(name = "mwintersperger", pw = "123Fiona"){
+			
+			function Execute(){
+				var username = document.getElementById("username").value; 
+				var pwd = document.getElementById("pwd").value;
+				
+				LoginUser(username,pwd)
+			}
+			
+			function LoginUser(name, pwd){
 				loadUsers();
 				
 				for (i = 0; i <users.length; i=i+2) {
-					if(name == users[i] && pw == users[i+1]) {
+					if(name == users[i] && pwd == users[i+1]) {
 						alert("Richtig")
+						break;
 					} else {
 						alert("Falsch");
+						break;
 					}
 				}
 			}
@@ -43,6 +52,8 @@
 		</script>
     </head>
     <body>
-		<button onclick="LoginUser()">Try it</button>
+		Username:<input type="text" id="username"><br>
+		Password:<input type="text" id="pwd"><br>
+		<button onclick="Execute()">Try it</button>
 	</body>
 </html>
