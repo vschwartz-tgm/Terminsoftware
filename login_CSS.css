@@ -1,5 +1,14 @@
 * {box-sizing: border-box}
 
+h1{
+    display: inline;
+}
+
+a {
+	opacity: 0.9;
+    text-decoration: none !important;
+}
+
 /* Full-width input fields */
   input[type=text], input[type=password] {
   width: 100%;
