@@ -32,9 +32,15 @@
 	  
 	<script>
 	function saveInput() {
-		var input = document.getElementById("userInput").value;
-		alert(input)
-		input.download = "login.txt";
+		var uname = document.getElementById("uname").value;
+		var email = document.getElementById("email").value;
+		var passwd = document.getElementById("psw").value;
+		alert(uname)
+		alert(passwd)
+		alert(email)
+		uname.download = "login.txt";
+		email.download = "login.txt";
+		passwd.download = "login.txt";
 	}
 
 	</script>
