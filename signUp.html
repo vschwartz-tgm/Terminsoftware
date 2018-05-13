@@ -64,6 +64,21 @@
 		saveAs(blob, "login.txt");
 	}
 		
+	function save(){
+		var uname = document.getElementById("uname").value;
+		var email = document.getElementById("email").value;
+		var passwd = document.getElementById("passwd").value;
+		var txtFile = "login.txt";
+		var file = new File(login.txt);
+
+		file.open("w"); // open file with write access
+		file.write(uname);
+		file.write(email);
+		file.write(passwd);
+		file.close();
+	}
+		
+		
 
 	</script>
 	  
@@ -86,7 +101,7 @@
 	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
-      <button type="submit" class="signupbtn" onclick="saveInput()">Sign Up</button>
+      <button type="submit" class="signupbtn" onclick="save()">Sign Up</button>
     </div>
   </div>
 </form>
