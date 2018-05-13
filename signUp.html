@@ -52,11 +52,28 @@
 		FileSaver.saveAs(email, 'login.txt');
 		FileSaver.saveAs(passwd, 'login.txt');
 	}
+		
+		
+	function ExampleCtrl(FileSaver, Blob) {
+	  	var vm = this;
+	  vm.val = {
+		text: 'Hey ho lets go!'
+	  };
+
+	  vm.download = function(text) {
+		var data = new Blob([text], { type: 'text/plain;charset=utf-8' });
+		FileSaver.saveAs(data, 'text.txt');
+	  };
+	}
+
+angular
+  .module('fileSaverExample', ['ngFileSaver'])
+  .controller('ExampleCtrl', ['FileSaver', 'Blob', ExampleCtrl]);
 
 	</script>
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
-      <button type="submit" class="signupbtn" onclick="saveInput()" onclick ="window.location = 'index.html'">Sign Up</button>
+      <button type="submit" class="signupbtn"  ng-click="vm.download(vm.val.text)">Sign Up</button>
     </div>
   </div>
 </form>
