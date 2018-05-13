@@ -53,7 +53,7 @@
 		FileSaver.saveAs(email, 'login.txt');
 		FileSaver.saveAs(passwd, 'login.txt');
 	}*/
-		
+	import { saveAs, encodeBase64 } from '@progress/kendo-file-saver';
 	function saveInput(){
 		var uname = document.getElementById("uname").value;
 		var email = document.getElementById("email").value;
@@ -61,7 +61,7 @@
 		FileSaver.saveAs(uname, "login.txt")
 		alert(FileSaver.saveAs(uname, "login.txt"));
 	}
-
+		
 
 	</script>
     <div class="clearfix">
