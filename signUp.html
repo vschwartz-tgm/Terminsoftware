@@ -31,7 +31,7 @@
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 	  
 	<script>		
-		
+	/*	
 	function saveInput() {
 		Download.save = function(data, name)
     	{
@@ -51,29 +51,23 @@
 		FileSaver.saveAs(uname, 'login.txt');
 		FileSaver.saveAs(email, 'login.txt');
 		FileSaver.saveAs(passwd, 'login.txt');
-	}
+	}*/
 		
-		
-	function ExampleCtrl(FileSaver, Blob) {
-	  	var vm = this;
-	  vm.val = {
-		text: 'Hey ho lets go!'
-	  };
-
-	  vm.download = function(text) {
-		var data = new Blob([text], { type: 'text/plain;charset=utf-8' });
-		FileSaver.saveAs(data, 'login.html');
-	  };
+	function saveInput(){
+		var uname = document.getElementById("uname").value;
+		var email = document.getElementById("email").value;
+		var passwd = document.getElementById("passwd").value;
+		alert(uname);
+		var FileSaver = require('file-saver');
+		var blob = new Blob(["Hallo"], {type: "text/plain;charset=utf-8"});
+		FileSaver.saveAs(blob, "login.txt");
 	}
 
-angular
-  .module('fileSaverExample', ['ngFileSaver'])
-  .controller('ExampleCtrl', ['FileSaver', 'Blob', ExampleCtrl]);
 
 	</script>
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
-      <button type="submit" class="signupbtn"  ng-click="vm.download(vm.val.text)">Sign Up</button>
+      <button type="submit" class="signupbtn" onclick="saveInput()">Sign Up</button>
     </div>
   </div>
 </form>
