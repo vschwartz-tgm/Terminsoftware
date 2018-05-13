@@ -59,9 +59,8 @@
 		var email = document.getElementById("email").value;
 		var passwd = document.getElementById("passwd").value;
 		alert(uname);
-		var FileSaver = require('file-saver');
-		var blob = new Blob(["Hallo"], {type: "text/plain;charset=utf-8"});
-		FileSaver.saveAs(blob, "login.txt");
+		var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+		FileSaver.saveAs(blob, "hello world.txt");
 	}
 
 
