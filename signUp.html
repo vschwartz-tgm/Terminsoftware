@@ -29,7 +29,15 @@
     </label>
 
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+	  
+	<script>
+	function saveInput() {
+		var input = document.getElementById("userInput").value;
+		alert(input)
+		input.download = "login.txt";
+	}
 
+	</script>
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
       <button type="submit" class="signupbtn" onclick="saveInput()" onclick ="window.location = 'index.html'">Sign Up</button>
@@ -38,12 +46,3 @@
 </form>
 </body>
 </html>
-<script>
-function saveInput() {
-    var input = document.getElementById("userInput").value;
-    alert(input);
-	
-	input.download = "login.txt";
-}
-
-</script>
