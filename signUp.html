@@ -8,7 +8,7 @@
 <title>Terminreservierung</title>
 </head>
 <body>
-<form action="" style="border:1px solid #ccc">
+<form action="" method="get" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
     <hr>
@@ -32,6 +32,13 @@
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
 	  
+	  
+	<? php
+	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
+	$txt = 	$_GET['uname'];
+	fwrite($myfile, $txt);
+	?>
+	  
 	<script src="https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js"></script>
 	<script>		
 	/*	
@@ -54,7 +61,7 @@
 		FileSaver.saveAs(uname, 'login.txt');
 		FileSaver.saveAs(email, 'login.txt');
 		FileSaver.saveAs(passwd, 'login.txt');
-	}*/
+	}
 	function saveInput(){
 		var uname = document.getElementById("uname").value;
 		var email = document.getElementById("email").value;
@@ -76,7 +83,7 @@
 		file.write(email);
 		file.write(passwd);
 		file.close();
-	}
+	}*/
 		
 		
 
@@ -84,7 +91,7 @@
 	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
-      <button type="submit" class="signupbtn" onclick="save()">Sign Up</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
     </div>
   </div>
 </form>
