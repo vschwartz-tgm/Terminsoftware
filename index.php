@@ -7,7 +7,7 @@
 <title>Terminreservierung</title>
 </head>
 <body>
-<form action="" style="border:1px solid #ccc">
+<form action="index.html" method="post" style="border:1px solid #ccc">
   <div class="container">
 	<h1>Login</h1>&nbsp;&nbsp;&nbsp;
 	<a href="signUp.php"><h1>Sign Up</h1></a>
@@ -31,3 +31,24 @@
 </form>
 </body>
 </html>
+
+<?php
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
+    {
+		
+	$uname = $_POST['uname'];
+	$psw = $_POST['psw'];
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+
+
+	$getUname = "SELECT uname FROM users WHERE uname = '$uname';";
+	$getPsw = "SELECT passwd FROM users WHERE passwd = '$passwd';";
+	if($getUname == true && $getPsw == true){
+		echo "<script type='text/javascript'>alert('success');</script>";
+	}
+	$i = pg_query($dbconn, $insert);
+		
+	
+}
+
+?>
