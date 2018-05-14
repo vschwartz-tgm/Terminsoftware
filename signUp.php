@@ -42,12 +42,19 @@
 </body>
 </html>
 <?php
-
+/*
 $host ="ec2-23-23-247-245.compute-1.amazonaws.com";
 $user = "xokkwplhovrges";
 $password ="56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d";
 $dbname = "de8h555uj0b1mq";
 $port = "5432";
+
+
+$db = parse_url(getenv("DATABASE_URL"));
+$db["path"] = ltrim($db["path"], "/");
+
+$conn = pg_connect(getenv("DATABASE_URL"));
+
 
 if($_POST){
 $sql = 'SELECT * FROM users';
@@ -55,19 +62,24 @@ $sql = 'SELECT * FROM users';
 echo "<script type='text/javascript'>alert('$sql');</script>";
 }
 
-/*
-$db = parse_url(getenv("DATABASE_URL"));
-$db["path"] = ltrim($db["path"], "/");
 
-$conn = pg_connect(getenv("DATABASE_URL"));
-*/
+
 $uname = $_POST['uname'];
 $email = $_POST['email'];
 $psw = $_POST['psw'];
 
 
-?>
+*/
 
+$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+$sql = "create table lorem (id int not null, foo varchar(15), primary key (id));";
+$r = pg_query($dbconn, $sql);
+$tbls = "select * from information_schema.tables";
+$qr = pg_query($dbconn, $tbls);
+while($r = pg_fetch_array($qr)) {
+	echo "<script type='text/javascript'>alert('$r');</script>";
+}
+?>
 
 <?php
 
