@@ -5,10 +5,11 @@
 <link href="signUp_CSS.css" rel="stylesheet">
 <link rel="icon" href="kalender.jpg">
 <script src="/node_modules/angular/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Terminreservierung</title>
 </head>
 <body>
-<form action="/" method="get" style="border:1px solid #ccc">
+<form action="/" method="post" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
     <hr>
@@ -33,24 +34,25 @@
 	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.php'">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
+      <button type="submit" class="signupbtn" name="submit">Sign Up</button>
 
     </div>
   </div>
 </form>
 </body>
 </html>
-<?php
-if($_GET){
-    saveData();
-}
 
+<?php
 function saveData(){
 	echo"<script type='text/javascript'>alert('BLABLA');</script>";
 	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
 	$txt = 	$_GET['uname'];
 	fwrite($myfile, $txt);
 }
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
+    {
+        saveData();
+    }
 
 ?>
 	  
