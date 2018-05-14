@@ -38,8 +38,9 @@
     </div>
   </div>
 </form>
-	<p>
-		<?php
+</body>
+</html>
+<?php
 if($_GET){
     saveData();
 }
@@ -52,9 +53,5 @@ function saveData(){
 }
 
 ?>
-	</p>
-</body>
-</html>
-
 	  
 
