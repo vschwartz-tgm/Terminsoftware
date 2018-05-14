@@ -21,7 +21,7 @@
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="passwd" required>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
     <label for="psw-repeat"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
@@ -42,6 +42,45 @@
 </body>
 </html>
 <?php
+
+$host ="ec2-23-23-247-245.compute-1.amazonaws.com";
+$user = "xokkwplhovrges";
+$password ="56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d";
+$dbname = "de8h555uj0b1mq";
+$port = "5432";
+
+/*
+$db = parse_url(getenv("DATABASE_URL"));
+$db["path"] = ltrim($db["path"], "/");
+
+$conn = pg_connect(getenv("DATABASE_URL"));
+*/
+$uname = $_POST['uname'];
+$email = $_POST['email'];
+$psw = $_POST['psw'];
+
+
+?>
+
+
+<?php 
+$sql = 'SELECT * FROM users';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$rowcount = $stmt->rowCount();
+$details = $stmt->Fetch();
+
+print_r($details);
+?>
+	  
+
+
+
+
+<?php
+
+/*
+Funktioniert lokal aber nicht mit Heroku da schreibrechte Fehlen.
  if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
     {
         saveData();
@@ -56,8 +95,5 @@ function saveData(){
 	file_put_contents($file, $txt);
 	echo "<script type='text/javascript'>alert('$current');</script>";
 }
-   
-
+*/
 ?>
-	  
-
