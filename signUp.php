@@ -50,7 +50,7 @@
 function saveData(){
 	$myfile = 'login.txt';
 	$txt = 	$_POST['uname'];
-	$file = 'people.txt';
+	$file = 'php://people.txt';
 	file_put_contents($file, $txt);
 }
    
