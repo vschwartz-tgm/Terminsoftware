@@ -8,7 +8,7 @@
 <title>Terminreservierung</title>
 </head>
 <body>
-<form action="" method="get" style="border:1px solid #ccc">
+<form action="/" method="get" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
     <hr>
@@ -33,13 +33,8 @@
 	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
-		
-<? php
-$myfile = fopen("login.txt", "w") or die("Unable to open file!");
-$txt = 	$_GET['uname'];
-fwrite($myfile, $txt);
-?>
+      <button type="submit" class="signupbtn" onclick = "saveData()">Sign Up</button>
+
     </div>
   </div>
 </form>
@@ -48,3 +43,11 @@ fwrite($myfile, $txt);
 
 	  
 
+
+<? php
+function saveData(){
+	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
+	$txt = 	$_GET['uname'];
+	fwrite($myfile, $txt);
+}
+?>
