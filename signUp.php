@@ -52,6 +52,7 @@ function saveData(){
 	$txt = 	$_POST['uname'];
 	echo"<script type='text/javascript'>alert('$txt');</script>";
 	fwrite($myfile, $txt);
+	fclose($myfile);
 }
    
 
