@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 
 	$getUname = "SELECT uname FROM users WHERE uname = '$uname';";
 	$getPsw = "SELECT passwd FROM users WHERE passwd = '$passwd';";
-	if($getUname == true && $getPsw == true){
+	if($getUname == $uname && $getPsw == $psw){
 		echo "<script type='text/javascript'>alert('success');</script>";
 	}
 	$i = pg_query($dbconn, $insert);
