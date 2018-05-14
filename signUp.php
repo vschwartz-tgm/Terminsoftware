@@ -33,7 +33,7 @@
 	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
-      <button type="submit" class="signupbtn" onclick = "saveData()">Sign Up</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
 
     </div>
   </div>
