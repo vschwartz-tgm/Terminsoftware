@@ -39,56 +39,6 @@
 	fwrite($myfile, $txt);
 	?>
 	  
-	<script src="https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js"></script>
-	<script>		
-	/*	
-	function saveInput() {
-		Download.save = function(data, name)
-    	{
-        this.click(
-            this.link(
-                this.encode( data ),
-                name
-            )
-        );
-   		};
-		var uname = document.getElementById("uname").value;
-		var email = document.getElementById("email").value;
-		var passwd = document.getElementById("passwd").value;
-		alert(uname);
-		alert(passwd);
-		alert(email);
-		FileSaver.saveAs(uname, 'login.txt');
-		FileSaver.saveAs(email, 'login.txt');
-		FileSaver.saveAs(passwd, 'login.txt');
-	}
-	function saveInput(){
-		var uname = document.getElementById("uname").value;
-		var email = document.getElementById("email").value;
-		var passwd = document.getElementById("passwd").value;
-		
-		var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-		saveAs(blob, "login.txt");
-	}
-		
-	function save(){
-		var uname = document.getElementById("uname").value;
-		var email = document.getElementById("email").value;
-		var passwd = document.getElementById("passwd").value;
-		var txtFile = "login.txt";
-		var file = new File(["Hallo"],txtFile);
-
-		file.open("w"); // open file with write access
-		file.write(uname);
-		file.write(email);
-		file.write(passwd);
-		file.close();
-	}*/
-		
-		
-
-	</script>
-	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
       <button type="submit" class="signupbtn">Sign Up</button>
