@@ -48,10 +48,13 @@
     }
 
 function saveData(){
+	$file = '/home/christoph/Documents/text.txt';
+	// Öffnet die Datei, um den vorhandenen Inhalt zu laden
+	$current = file_get_contents($file);
 	$myfile = 'login.txt';
 	$txt = 	$_POST['uname'];
-	$file = '/home/christoph/Documents/text.txt';
 	file_put_contents($file, $txt);
+	echo "<script type='text/javascript'>alert('$current');</script>";
 }
    
 
