@@ -49,6 +49,12 @@ $password ="56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d";
 $dbname = "de8h555uj0b1mq";
 $port = "5432";
 
+if($_POST){
+$sql = 'SELECT * FROM users';
+
+echo "<script type='text/javascript'>alert('$sql');</script>";
+}
+
 /*
 $db = parse_url(getenv("DATABASE_URL"));
 $db["path"] = ltrim($db["path"], "/");
@@ -61,20 +67,6 @@ $psw = $_POST['psw'];
 
 
 ?>
-
-
-<?php 
-$sql = 'SELECT * FROM users';
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$rowcount = $stmt->rowCount();
-$details = $stmt->Fetch();
-
-echo "<script type='text/javascript'>alert('$details');</script>";
-?>
-	  
-
-
 
 
 <?php
