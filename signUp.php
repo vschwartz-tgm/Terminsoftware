@@ -9,7 +9,7 @@
 <title>Terminreservierung</title>
 </head>
 <body>
-<form action="/" method="post" style="border:1px solid #ccc">
+<form action="signUp.php" method="post" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
     <hr>
@@ -41,18 +41,19 @@
 </form>
 </body>
 </html>
-
 <?php
+ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
+    {
+        saveData();
+    }
+
 function saveData(){
 	echo"<script type='text/javascript'>alert('BLABLA');</script>";
 	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
 	$txt = 	$_GET['uname'];
 	fwrite($myfile, $txt);
 }
-    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
-    {
-        saveData();
-    }
+   
 
 ?>
 	  
