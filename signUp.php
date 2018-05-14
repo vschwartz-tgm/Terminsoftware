@@ -75,7 +75,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$r = pg_query($dbconn, $sql);
 	$tbls = "select * from information_schema.tables";
 	$qr = pg_query($dbconn, $tbls);	
-	$r = pg_fetch_array($qr)
+	$r = pg_fetch_array($qr);
 }
 /*
 $tbls = "select * from information_schema.tables";
