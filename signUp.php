@@ -73,6 +73,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 
 	$sql = "create table passwd (varchar(255));";
 	$r = pg_query($dbconn, $sql);
+	$tbls = "select * from information_schema.tables";
+	$qr = pg_query($dbconn, $tbls);	
 }
 /*
 $tbls = "select * from information_schema.tables";
