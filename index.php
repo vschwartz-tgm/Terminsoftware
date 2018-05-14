@@ -46,8 +46,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$s = pg_query($dbconn, $getUname);
 	$sp = pg_query($dbconn, $getPws);
 		
-	$row = pg_fetch_row($getUname)
-	echo "<script type='text/javascript'>alert('$row');</script>";
+	while($row = pg_fetch_row($getUname)){
+		echo "<script type='text/javascript'>alert('$row');</script>";
+	}
 	if($getUname == $uname){
 		echo "<script type='text/javascript'>alert('success');</script>";
 	}
