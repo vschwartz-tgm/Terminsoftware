@@ -34,6 +34,7 @@
 	  
 	  
 	<? php
+	$cmd = "signUp.php"
 	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
 	$txt = 	$_GET['uname'];
 	fwrite($myfile, $txt);
