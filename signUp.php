@@ -48,11 +48,15 @@
     }
 
 function saveData(){
-	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
+	$myfile = 'login.txt';
 	$txt = 	$_POST['uname'];
-	echo"<script type='text/javascript'>alert('$txt');</script>";
-	fwrite($myfile, "123");
-	fclose($myfile);
+	$file = 'people.txt';
+	// Öffnet die Datei, um den vorhandenen Inhalt zu laden
+	$current = file_get_contents($file);
+	// Fügt eine neue Person zur Datei hinzu
+	$current .= "John Smith\n";
+	// Schreibt den Inhalt in die Datei zurück
+	file_put_contents($file, $current);
 }
    
 
