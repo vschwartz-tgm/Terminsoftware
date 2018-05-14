@@ -48,9 +48,8 @@
     }
 
 function saveData(){
-	echo"<script type='text/javascript'>alert('BLABLA');</script>";
 	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
-	$txt = 	$_GET['uname'];
+	$txt = 	$_POST['uname'];
 	fwrite($myfile, $txt);
 }
    
