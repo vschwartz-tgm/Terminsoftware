@@ -45,7 +45,7 @@ if($_GET){
 }
 
 function saveData(){
-	echo"function called";
+	echo"<script type='text/javascript'>alert('BLABLA');</script>";
 	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
 	$txt = 	$_GET['uname'];
 	fwrite($myfile, $txt);
