@@ -9,7 +9,7 @@
 <title>Terminreservierung</title>
 </head>
 <body>
-<form action="index.php" method="post" style="border:1px solid #ccc">
+<form action="" method="post" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
     <hr>
@@ -74,7 +74,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 
 	$insert = "INSERT INTO users VALUES('$uname','$email','$psw');";
 	$i = pg_query($dbconn, $insert);
-		
 	
 }
 
