@@ -32,7 +32,7 @@
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 	  
     <div class="clearfix">
-      <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
+      <button type="button" class="cancelbtn" onclick ="window.location = 'index.php'">Cancel</button>
       <button type="submit" class="signupbtn">Sign Up</button>
 
     </div>
