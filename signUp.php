@@ -30,15 +30,6 @@
     </label>
 
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-	  
-	  
-	<? php
-	$cmd = "signUp.php"
-	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
-	$txt = 	$_GET['uname'];
-	fwrite($myfile, $txt);
-	?>
 	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.html'">Cancel</button>
