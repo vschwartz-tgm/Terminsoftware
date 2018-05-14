@@ -43,6 +43,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 
 	$getUname = "SELECT uname FROM users WHERE uname = '$uname';";
 	$getPsw = "SELECT passwd FROM users WHERE passwd = '$passwd';";
+	echo "<script type='text/javascript'>alert('$getUname');</script>";
+	echo "<script type='text/javascript'>alert('$uname');</script>";
 	if($getUname == $uname && $getPsw == $psw){
 		echo "<script type='text/javascript'>alert('success');</script>";
 	}
