@@ -9,7 +9,7 @@
 <title>Terminreservierung</title>
 </head>
 <body>
-<form action="" method="post" style="border:1px solid #ccc">
+<form action="index.php" method="post" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
     <hr>
