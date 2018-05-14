@@ -70,7 +70,7 @@ $stmt->execute();
 $rowcount = $stmt->rowCount();
 $details = $stmt->Fetch();
 
-print_r($details);
+echo "<script type='text/javascript'>alert('$details');</script>";
 ?>
 	  
 
