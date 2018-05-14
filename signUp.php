@@ -43,11 +43,16 @@
 
 	  
 
+<?php
+if($_GET){
+    saveData();
+}
 
-<? php
 function saveData(){
+	echo"function called";
 	$myfile = fopen("login.txt", "w") or die("Unable to open file!");
 	$txt = 	$_GET['uname'];
 	fwrite($myfile, $txt);
 }
+
 ?>
