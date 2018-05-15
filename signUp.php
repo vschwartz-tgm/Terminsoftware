@@ -70,10 +70,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$uname = $_POST['uname'];
 	$email = $_POST['email'];
 	$psw = $_POST['psw'];
-		
-
-	$insert = "INSERT INTO users VALUES('$uname','$email','$psw');";
-	$i = pg_query($dbconn, $insert);
 
 	$pswrepeat = $_POST['psw-repeat'];
 	$fehler = false; 
