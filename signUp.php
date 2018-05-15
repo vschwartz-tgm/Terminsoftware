@@ -71,15 +71,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$email = $_POST['email'];
 	$psw = $_POST['psw'];
 		
-	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-
 
 	$insert = "INSERT INTO users VALUES('$uname','$email','$psw');";
 	$i = pg_query($dbconn, $insert);
 
 	$pswrepeat = $_POST['psw-repeat'];
 	$fehler = false; 
-	
+
+
 	// Uname schon vorhanden?
 	$sql = "SELECT COUNT(*) FROM users WHERE uname = '".$uname."';"; 
 	$sql = pg_query($dbconn, $sql); 
@@ -88,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 		$fehler = true;
 		echo "<script type='text/javascript'>alert('Eingegebener Username schon vergeben!');</script>";
 	}
-	
+/*	
 	// Email schon vorhanden?
 	if ($fehler == false){
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$email."';"; 
@@ -125,19 +124,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	}
 }
 
-/*Erstellen der Tabellen (FUNKTIONIERT)
+	Erstellen der Tabellen (FUNKTIONIERT)
 
 	$sql = "create table passwd (pwd varchar(255));";
 	$r = pg_query($dbconn, $sql);
 
 
-*/
-/*
+
+
 $tbls = "select * from information_schema.tables";
 $qr = pg_query($dbconn, $tbls);
 while($r = pg_fetch_array($qr)) {
 	echo "<script type='text/javascript'>alert('$r');</script>";
 }*/
+
 ?>
 
 <?php
