@@ -45,9 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$getUname = "SELECT uname FROM users WHERE uname = '$uname';";
 	$getPsw = "SELECT passwd FROM users WHERE passwd = '$passwd';";
 		
-	while($row = pg_fetch_row($getUname)){
-		echo "<script type='text/javascript'>alert('$row[0]');</script>";
-	}
+	$s = pg_query($dbconn, $getUname);
 	if($getUname == $uname){
 		echo "<script type='text/javascript'>alert('success');</script>";
 	}
