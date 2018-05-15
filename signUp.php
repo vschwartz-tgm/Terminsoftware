@@ -78,7 +78,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$pswrepeat = $_POST['psw-repeat'];
 	$fehler = false; 
 
-
+/*
 	// Uname schon vorhanden?
 	$slct = "SELECT COUNT(*) FROM users WHERE uname = '".$uname."';"; 
 	$sql = pg_query($dbconn, $slct); 
@@ -87,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 		$fehler = true;
 		echo "<script type='text/javascript'>alert('Eingegebener Username schon vergeben!');</script>";
 	}
-/*	
+	
 
 	// Email schon vorhanden?
 	if ($fehler == false){
@@ -99,7 +99,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 			echo "<script type='text/javascript'>alert('Eingegebene Email-Adresse schon verwendet!');</script>";
 		}
 	}
-	
+*/
 	// Email möglich?
 	if ($fehler == false){
 		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -109,7 +109,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 			echo "<script type='text/javascript'>alert('Eingegebene Email ungültig!');</script>";
 		}
 	}
-	
+/*
 	// Passwort gleich?
 	if ($fehler == false){
 		if ($psw != $pswrepeat){
