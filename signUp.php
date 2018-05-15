@@ -80,14 +80,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 
 
 	// Uname schon vorhanden?
-	$sql = "SELECT COUNT(*) FROM users WHERE uname = '".$uname."';"; 
-	$sql = pg_query($dbconn, $sql); 
+	$slct = "SELECT COUNT(*) FROM users WHERE uname = '".$uname."';"; 
+	$sql = pg_query($dbconn, $slct); 
 	$row = pg_fetch_row($sql); 
 	if($row[0] > 0) { 
 		$fehler = true;
 		echo "<script type='text/javascript'>alert('Eingegebener Username schon vergeben!');</script>";
 	}
 /*	
+
 	// Email schon vorhanden?
 	if ($fehler == false){
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$email."';"; 
