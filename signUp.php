@@ -87,8 +87,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 		$fehler = true;
 		echo "<script type='text/javascript'>alert('Eingegebener Username schon vergeben!');</script>";
 	}
-	
-/*
+
+		
 	// Email schon vorhanden?
 	if ($fehler == false){
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$email."';"; 
@@ -123,8 +123,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 		$i = pg_query($dbconn, $insert);
 		header("Location: index.php");
 	}
-}
-
+	}
+/*
 	Erstellen der Tabellen (FUNKTIONIERT)
 
 	$sql = "create table passwd (pwd varchar(255));";
