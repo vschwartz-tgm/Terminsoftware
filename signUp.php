@@ -24,7 +24,7 @@
     <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
     <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 
     <label>
       <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
@@ -65,16 +65,65 @@ echo "<script type='text/javascript'>alert('$sql');</script>";
 
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
     {
-		
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+	
 	$uname = $_POST['uname'];
 	$email = $_POST['email'];
 	$psw = $_POST['psw'];
+<<<<<<< HEAD
 	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 
 
 	$insert = "INSERT INTO users VALUES('$uname','$email','$psw');";
 	$i = pg_query($dbconn, $insert);
+=======
+	$pswrepeat = $_POST['psw-repeat'];
+	$fehler = false; 
 	
+	// Uname schon vorhanden?
+	$sql = "SELECT COUNT(*) FROM users WHERE uname = '".$uname."';"; 
+	$sql = pg_query($dbconn, $sql); 
+	$row = pg_fetch_row($sql); 
+	if($row[0] > 0) { 
+		$fehler = true;
+		echo "<script type='text/javascript'>alert('Eingegebener Username schon vergeben!');</script>";
+	}
+	
+	// Email schon vorhanden?
+	if ($fehler == false){
+		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$email."';"; 
+		$sql = pg_query($dbconn, $sql);
+		$row = pg_fetch_row($sql);
+		if($row[0] > 0) { 
+			$fehler = true;
+			echo "<script type='text/javascript'>alert('Eingegebene Email-Adresse schon verwendet!');</script>";
+		}
+	}
+	
+	// Email möglich?
+	if ($fehler == false){
+		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			// Kein Fehler
+		} else {
+			$fehler = true;
+			echo "<script type='text/javascript'>alert('Eingegebene Email ungültig!');</script>";
+		}
+	}
+	
+	// Passwort gleich?
+	if ($fehler == false){
+		if ($psw != $pswrepeat){
+			echo "<script type='text/javascript'>alert('Passwörter stimmen nicht gleich!');</script>";
+			$fehler = true; 
+		}
+>>>>>>> 366e33dc728524afa778ab5925d423b231966cb7
+	
+	// Bei keinem Fehler, Account erstellen und auf login Seite ändern
+	if ($fehler == false){
+		$insert = "INSERT INTO users VALUES('$uname','$email','$psw');";
+		$i = pg_query($dbconn, $insert);
+		header("Location: index.php");
+	}
 }
 
 /*Erstellen der Tabellen (FUNKTIONIERT)
