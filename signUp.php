@@ -26,10 +26,6 @@
     <label for="psw-repeat"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-    </label>
-
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 	  
     <div class="clearfix">
@@ -81,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$row = pg_fetch_row($sql); 
 	if($row[0] > 0) { 
 		$fehler = true;
-		echo "<script type='text/javascript'>alert('Eingegebener Username schon vergeben!');</script>";
+		echo "<script type='text/javascript'>alert('Dieser User existiert bereits!');</script>";
 	}
 
 		
@@ -92,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 		$row = pg_fetch_row($sql);
 		if($row[0] > 0) { 
 			$fehler = true;
-			echo "<script type='text/javascript'>alert('Eingegebene Email-Adresse schon verwendet!');</script>";
+			echo "<script type='text/javascript'>alert('Diese Email hat bereits einen Account!');</script>";
 		}
 	}
 
@@ -102,14 +98,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 			// Kein Fehler
 		} else {
 			$fehler = true;
-			echo "<script type='text/javascript'>alert('Eingegebene Email ungültig!');</script>";
+			echo "<script type='text/javascript'>alert('Diese Email existiert nicht!');</script>";
 		}
 	}
 
 	// Passwort gleich?
 	if ($fehler == false){
 		if ($psw != $pswrepeat){
-			echo "<script type='text/javascript'>alert('Passwörter stimmen nicht gleich!');</script>";
+			echo "<script type='text/javascript'>alert('Passwörter stimmen nicht überein!');</script>";
 			$fehler = true; 
 		}
 	
