@@ -69,7 +69,7 @@
 			// Zur nächsten Seite
 			session_start();
 			$_SESSION['uname'] = $uname; // Eigentlich die ID
-			header("Location: menu.php");
+			header("Location: terminreservierung.php");
 		}
 	}
 	
