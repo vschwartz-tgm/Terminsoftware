@@ -66,7 +66,10 @@
 		if ($fehler == true){
 			echo "<script type='text/javascript'>alert('Benutzername oder Passwort ist falsch!');</script>";
 		}else{
-			// Zur Benutzerpage ...
+			// Zur nächsten Seite
+			session_start();
+			$_SESSION['uname'] = $uname;
+			header("Location: menu.php");
 		}
 	}
 	
