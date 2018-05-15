@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['userid'])) {
+	if(!isset($_SESSION['uname'])) {
 		die('Bitte zuerst <a href="index.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
