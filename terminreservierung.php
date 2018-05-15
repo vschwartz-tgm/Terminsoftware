@@ -6,6 +6,7 @@
 	$username = $_SESSION['uname'];
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
+		echo "<script type='text/javascript'>alert('Logout');</script>";
 		session_start();
 		session_destroy();
 		header("Location: index.php");
