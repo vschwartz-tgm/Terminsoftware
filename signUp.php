@@ -99,7 +99,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 			echo "<script type='text/javascript'>alert('Eingegebene Email-Adresse schon verwendet!');</script>";
 		}
 	}
-*/
+
 	// Email möglich?
 	if ($fehler == false){
 		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -109,7 +109,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 			echo "<script type='text/javascript'>alert('Eingegebene Email ungültig!');</script>";
 		}
 	}
-/*
+
 	// Passwort gleich?
 	if ($fehler == false){
 		if ($psw != $pswrepeat){
