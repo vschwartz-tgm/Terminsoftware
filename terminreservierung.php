@@ -31,7 +31,7 @@
 				<div class="navbar-text px-sm-2 pt-sm-3">
 					<p id="usr"><?php echo $username; ?></p>
 				</div>
-				<button type="submit" class="btn btn-outline-light" method="">Logout</button>
+				<button type="submit" name="submit" class="btn btn-outline-light" method="">Logout</button>
 			</form>
 		</nav>
 		<br>
