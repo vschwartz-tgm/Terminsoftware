@@ -61,11 +61,14 @@ echo "<script type='text/javascript'>alert('$sql');</script>";
 
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
     {
-	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-	
 	$uname = $_POST['uname'];
 	$email = $_POST['email'];
 	$psw = $_POST['psw'];
+	register();
+	
+	}
+function register($uname, $email, $psw){
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 
 	$pswrepeat = $_POST['psw-repeat'];
 	$fehler = false; 
