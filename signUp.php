@@ -78,7 +78,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 	$pswrepeat = $_POST['psw-repeat'];
 	$fehler = false; 
 
-/*
+
 	// Uname schon vorhanden?
 	$slct = "SELECT COUNT(*) FROM users WHERE uname = '".$uname."';"; 
 	$sql = pg_query($dbconn, $slct); 
@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 		echo "<script type='text/javascript'>alert('Eingegebener Username schon vergeben!');</script>";
 	}
 	
-
+/*
 	// Email schon vorhanden?
 	if ($fehler == false){
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$email."';"; 
@@ -138,7 +138,7 @@ $qr = pg_query($dbconn, $tbls);
 while($r = pg_fetch_array($qr)) {
 	echo "<script type='text/javascript'>alert('$r');</script>";
 }*/
-
+}
 ?>
 
 <?php
