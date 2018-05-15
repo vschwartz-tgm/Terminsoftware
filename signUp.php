@@ -34,7 +34,7 @@
 	  
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick ="window.location = 'index.php'">Cancel</button>
-      <button type="submit" class="signupbtn" name="submit" onclick="index.html">Sign Up</button>
+      <button type="submit" class="signupbtn" name="submit">Sign Up</button>
 
     </div>
   </div>
