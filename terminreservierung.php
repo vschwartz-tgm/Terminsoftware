@@ -70,6 +70,16 @@
 				</div>
 			</div>
 		</form>
-		<button type="button" class="btn btn-outline-dark" name="addEvent">Add Event</button>
+		<div class="container">
+  			<div class="row">
+    			<div class="col-sm border">
+     				One of two columns
+    			</div>
+    			<div class="col-sm border">
+      				One of two columns
+      				<button type="button" class="btn btn-outline-dark" name="addEvent">Add Event</button>
+    			</div>
+    		</div>
+		</div>
 	</body>
 </html>
