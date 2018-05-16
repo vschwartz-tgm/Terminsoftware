@@ -77,7 +77,7 @@
     			</div>
     			<div class="col-sm border">
       				One of two columns
-      				<button type="button" class="btn btn-outline-dark" name="addEvent">Add Event</button>
+      				<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.html'">Add Event</button>
     			</div>
     		</div>
 		</div>

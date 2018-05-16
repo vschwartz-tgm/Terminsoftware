@@ -30,7 +30,7 @@
 				<div id="wrapperDate">
     				<label for="date"><b>Datum & Uhrzeit</b></label>
     				<button type="button" class="btn btn-outline-success" onclick="addDate()" style="float: right;">+</button>
-    				<input type="datetime-local" name="date" id="date" required>
+    				<input type="datetime-local" name="date" id="date">
 				</div>
     			<label for="location"><b>Ort</b></label>
     			<input type="text" placeholder="Gib den Ort ein" name="location" id="location" required>
@@ -49,6 +49,7 @@
     		</div>
 		</form>
 		<script>
+			//Adds new input with incrementing id and name
 			var count_date = 1;
 			var count_people = 1;
 			function addDate(){
