@@ -35,8 +35,6 @@
 <?php
 	include ("functions.php");
 	
-	
-	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$uname = $_POST['uname'];
 		$psw = $_POST['psw'];
