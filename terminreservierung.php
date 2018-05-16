@@ -13,9 +13,9 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['search'])){
 		$searchtext = $_POST['searchtext'];
-		/*if ($_POST['optradio']) { 
+		if ($_POST['optradio']) { 
 			echo $_POST['optradio'];
-			search($searchtext, );
+		/*	search($searchtext, );
 		}*/
 	}
 	
