@@ -36,6 +36,7 @@
 	include ("functions.php");
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
+		echo "<script type='text/javascript'>alert('Aufgerufen');</script>";
 		$uname = $_POST['uname'];
 		$psw = $_POST['psw'];
 		$l = new LoginUser($uname, $psw);
