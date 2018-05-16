@@ -109,7 +109,7 @@
 		
 		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
 		if ($fehler == false){
-			$insert = "INSERT INTO users VALUES('$uname','$email','$psw');";
+			$insert = "INSERT INTO users(name,email,pw) VALUES('$uname','$email','$psw');";
 			$i = pg_query($dbconn, $insert);
 			header("Location: index.php");
 		}
