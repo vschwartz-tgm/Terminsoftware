@@ -43,7 +43,7 @@
 				</div>
 				<br>
 				<div>
-					<label class="radio-inline"><input type="radio" name="optradio">Event</label>
+					<label class="radio-inline"><input type="radio" name="optradio" checked>Event</label>
 					&nbsp;&nbsp;
 					<label class="radio"><input type="radio" name="optradio">User</label>
 					&nbsp;&nbsp;
