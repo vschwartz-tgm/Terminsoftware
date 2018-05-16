@@ -10,6 +10,18 @@
 		session_destroy();
 		header("Location: index.php");
 	}
+	
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['search'])){
+		$searchtext = $_POST['searchtext'];
+		/*if ($_POST['optradio']) { 
+			echo $_POST['optradio'];
+			search($searchtext, );
+		}*/
+	}
+	
+	function search($text, $type){
+		
+	}
 ?>
 
 <html>
@@ -34,20 +46,21 @@
 			</form>
 		</nav>
 		<br>
+		<form method="post">
 			<div class="container" align="center">
 				<div class="input-group col-md-6">
 					<div class="input-group-prepend">
 						<div class="input-group-text">&#x1F50D;</div>
 					</div>
-					<input type="text" class="form-control " placeholder="search">
+					<input type="text" class="form-control" name="searchtext" placeholder="search">
 				</div>
 				<br>
 				<div>
-					<label class="radio-inline"><input type="radio" name="optradio" checked>Event</label>
+					<label class="radio-inline"><input type="radio" name="optradio" value="event">Event</label>
 					&nbsp;&nbsp;
-					<label class="radio"><input type="radio" name="optradio">User</label>
+					<label class="radio"><input type="radio" name="optradio" value="user">User</label>
 					&nbsp;&nbsp;
-					<button type="button" class="btn btn-outline-dark">Search</button>
+					<button type="submit" class="btn btn-outline-dark" name="search">Search</button>
 				</div>
 			</div>
 		</form>
