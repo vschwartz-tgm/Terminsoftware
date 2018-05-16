@@ -42,6 +42,7 @@ class LoginUser
 		$sql = pg_query($dbconn, $slct); 
 		$row = pg_fetch_row($sql); 
 		if($row[0] <= 0) {
+			echo "<script type='text/javascript'>alert('USER');</script>";
 			$fehler = true;
 		}
 		// Ist das Passwort richtig für den Benutzer?
@@ -50,6 +51,7 @@ class LoginUser
 			$sql = pg_query($dbconn, $pwdselect);
 			$row = pg_fetch_row($sql); 
 			if ($psw != $row[0]){
+				echo "<script type='text/javascript'>alert('PW');</script>";
 				$fehler = true;
 			}
 		}
