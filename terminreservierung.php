@@ -13,13 +13,19 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['search'])){
 		$searchtext = $_POST['searchtext'];
-		if ($_POST['optradio']) { 
-			$type = $_POST['optradio'];
-			search($searchtext, $type);
+		
+		if ($searchtext == ''){
+			echo "<script type='text/javascript'>alert('Bitte geben Sie einen Suchbegriff ein!');</script>";
+		}else{
+			if ($_POST['optradio']) { 
+				$type = $_POST['optradio'];
+				search($searchtext, $type);
+			}
 		}
 	}
 	
 	function search($text, $type){
+		echo $text;
 		echo $type;
 	}
 ?>
@@ -56,7 +62,7 @@
 				</div>
 				<br>
 				<div>
-					<label class="radio-inline"><input type="radio" name="optradio" value="event">Event</label>
+					<label class="radio-inline"><input type="radio" name="optradio" value="event" checked>Event</label>
 					&nbsp;&nbsp;
 					<label class="radio"><input type="radio" name="optradio" value="user">User</label>
 					&nbsp;&nbsp;
