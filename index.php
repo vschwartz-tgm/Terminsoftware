@@ -38,8 +38,9 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$uname = $_POST['uname'];
 		$psw = $_POST['psw'];
-		$loginUser = new LoginUser($uname, $psw);
-		$loginUser->execute();
+		$l = new LoginUser($uname, $psw);
+		$l->execute();
+		echo "<script type='text/javascript'>alert('In POST');</script>";
 		//login($uname, $psw);
 	}
 		
