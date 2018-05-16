@@ -70,7 +70,7 @@
 		$fehler = false; 
 		
 		// Uname schon vorhanden?
-		$slct = "SELECT COUNT(*) FROM users WHERE uname = '".$uname."';"; 
+		$slct = "SELECT COUNT(*) FROM users WHERE name = '".$uname."';"; 
 		$sql = pg_query($dbconn, $slct); 
 		$row = pg_fetch_row($sql); 
 		if($row[0] > 0) { 
