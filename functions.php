@@ -29,7 +29,7 @@ class LoginUser extends UserCommand
 	private $psw;
 	
 	function __construct($un, $pw){
-		$uname = $u;
+		$uname = $un;
 		$psw = $pw;
 	}
 	

@@ -1,6 +1,3 @@
-<?php include ("functions.php"); ?>
-
-
 <html>
 	<head>
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +33,8 @@
 </html>
 
 <?php
+	include ("functions.php");
+	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$uname = $_POST['uname'];
 		$psw = $_POST['psw'];
