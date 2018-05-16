@@ -20,7 +20,7 @@
 	}
 	
 	function search($text, $type){
-		echo "<script type='text/javascript'>alert('".$text."' '".$type."');</script>";
+		echo $type;
 	}
 ?>
 
