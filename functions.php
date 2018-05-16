@@ -50,7 +50,7 @@ class LoginUser
 			$pwdselect = "SELECT pw FROM users WHERE name = '".$this->uname."';"; 
 			$sql = pg_query($dbconn, $pwdselect);
 			$row = pg_fetch_row($sql); 
-			if ($psw != $row[0]){
+			if ($this->psw != $row[0]){
 				echo "<script type='text/javascript'>alert('PW');</script>";
 				$fehler = true;
 			}
