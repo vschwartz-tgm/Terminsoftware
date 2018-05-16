@@ -28,7 +28,7 @@
 			</div>
 			<form class="nav navbar-right" method="post">
 				<div class="navbar-text px-sm-2 pt-sm-3">
-					<p id="usr"><?php echo $username; ?></p>
+					<p id="usr"><?php echo "Hallo, $username"; ?></p>
 				</div>
 				<button type="submit" name="submit" class="btn btn-outline-light" method="">Logout</button>
 			</form>
