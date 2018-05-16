@@ -1,29 +1,5 @@
 <?php
-interface Command
-{
-	public function execute();
-}
-?>
-
-<?php
-abstract class UserCommand implements Command
-{
-	public function execute();
-}
-
-abstract class OrganisatorCommand implements Command
-{
-	public function execute();
-}
-
-abstract class EventCommand implements Command
-{
-	public function execute();
-}
-?>
-
-<?php
-class LoginUser extends UserCommand
+class LoginUser
 {
 	private $uname;
 	private $psw;
