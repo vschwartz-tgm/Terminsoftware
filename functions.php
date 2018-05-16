@@ -30,15 +30,15 @@ class LoginUser
 	private $psw;
 	
 	function __construct($un, $pw){
-		$uname = $un;
-		$psw = $pw;
+		$this->uname = $un;
+		$this->psw = $pw;
 	}
 	
 	public function execute(){
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false;
 		// Gibt es diesen User?
-		$slct = "SELECT count(*) FROM users WHERE name = '".$uname."';"; 
+		$slct = "SELECT count(*) FROM users WHERE name = '".$this->uname."';"; 
 		$sql = pg_query($dbconn, $slct); 
 		$row = pg_fetch_row($sql); 
 		if($row[0] <= 0) {
@@ -47,7 +47,7 @@ class LoginUser
 		}
 		// Ist das Passwort richtig für den Benutzer?
 		if ($fehler == false){
-			$pwdselect = "SELECT pw FROM users WHERE name = '".$uname."';"; 
+			$pwdselect = "SELECT pw FROM users WHERE name = '".$this->uname."';"; 
 			$sql = pg_query($dbconn, $pwdselect);
 			$row = pg_fetch_row($sql); 
 			if ($psw != $row[0]){
@@ -61,7 +61,7 @@ class LoginUser
 		}else{
 			// Zur nächsten Seite
 			session_start();
-			$_SESSION['uname'] = $uname; // Eigentlich die ID
+			$_SESSION['uname'] = $this->uname; // Eigentlich die ID
 			header("Location: terminreservierung.php");
 		}
 	}
