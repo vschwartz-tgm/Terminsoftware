@@ -1,16 +1,18 @@
 <html>
 	<head>
+		<meta charset="utf-8">
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<link href="terminreservierung_CSS.css" rel="stylesheet">
 		<link rel="icon" href="kalender.jpg">
+		<link href="newEvent_CSS.css" rel="stylesheet">
 		<script src="/node_modules/angular/angular.js"></script>
 		<title>Terminreservierung</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
-				<h2>Terminreservierung / Neues Event</h2>
+				<h2>Terminreservierung</h2>
 			</div>
 			<form class="nav navbar-right" method="post">
 				<div class="navbar-text px-sm-2 pt-sm-3">
@@ -20,6 +22,45 @@
 			</form>
 		</nav>
 	<body>
-
+		<br>
+		<form method="get">
+			<div class="container border">
+				<label for="eventName"><b>Eventname</b></label>
+    			<input type="text" placeholder="Gib den Eventnamen ein" name="eventName" id="eventName" required>
+				<div id="wrapperDate">
+    				<label for="date"><b>Datum & Uhrzeit</b></label>
+    				<button type="button" class="btn btn-outline-success" onclick="addDate()" style="float: right;">+</button>
+    				<input type="datetime-local" name="date" id="date" required>
+				</div>
+    			<label for="location"><b>Ort</b></label>
+    			<input type="text" placeholder="Gib den Ort ein" name="location" id="location" required>
+			
+				<label for="desc"><b>Beschreibung</b></label>
+				<input type="text" placeholder="Füge eine Beschreibung hinzu" name="desc" id="desc">
+				<div id="wrapperPeople">
+					<label for="people"><b>Teilnehmer</b></label>
+					<button type="button" class="btn btn-outline-success" onclick="addPeople()" style="float: right;">+</button>
+					<input type="text" placeholder="Benutzername" name="people" id="people">
+				</div>
+				<div class="clearfix">
+      				<button type="button" class="cancelbtn" onclick ="window.location = 'terminreservierung.php'">Abbrechen</button>
+      				<button type="submit" class="addbtn">Hinzufügen</button>
+    			</div>
+    		</div>
+		</form>
+		<script>
+			var count_date = 1;
+			var count_people = 1;
+			function addDate(){
+				var dummy = '<input type="datetime-local" name="date'+count_date+'" id="date'+count_date+'">\r\n';
+				document.getElementById('wrapperDate').innerHTML += dummy;
+				count_date++;
+			}
+			function addPeople(){
+				var dummy = '<input type="text" placeholder="Benutzername'+count_people+'" name="people'+count_people+'" id="people'+count_people+'">\r\n';
+				document.getElementById('wrapperPeople').innerHTML += dummy;
+				count_people ++;
+			}
+		</script>
 	</body>
 </html>
