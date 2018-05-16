@@ -13,14 +13,14 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['search'])){
 		$searchtext = $_POST['searchtext'];
-		/*if ($_POST['optradio']) { 
-			echo $_POST['optradio'];
-			search($searchtext, );
-		}*/
+		if ($_POST['optradio']) { 
+			$type = $_POST['optradio'];
+			search($searchtext, $type);
+		}
 	}
 	
 	function search($text, $type){
-		
+		echo "<script type='text/javascript'>alert('".$text."' '".$type."');</script>";
 	}
 ?>
 
