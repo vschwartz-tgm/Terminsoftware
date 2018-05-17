@@ -170,15 +170,23 @@ class Search extends UserCommand
 
 
 <?php
+/**
+* Klasse CreateEvent, zum Erstellen eines Events
+*
+* @author	Paul Mazzolini
+* @version  1.0
+*/
 class CreateEvent
 {
 	private $eventName;
 	private $host;
 	private $users;
 	private $dates;
+	private $ort;
+	private $desc;
 	
 	
-	function __construct($evN, $host, $usrs, $dates){
+	function __construct($eventName, $host, $users, $dates, $ort, $desc){
 		$this->eventName = $evN;
 		$this->host = $host;
 		$this->users = $usrs;
@@ -188,7 +196,10 @@ class CreateEvent
 	public function execute(){
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false;
-/*
+		
+		//ToDo
+		
+		/*
 		// ist etwas eingetragen
 		if ($fehler == false){
 			$pwdselect = "SELECT pw FROM users WHERE name = '".$this->uname."';"; 
@@ -199,15 +210,7 @@ class CreateEvent
 				$fehler = true;
 			}
 		}
-*/
-		// Fehler?
-		if ($fehler == true){
-			echo "<script type='text/javascript'>alert('Benutzername oder Passwort ist falsch!');</script>";
-		}else{
-			// Event hinzufügen
-			$insert = "INSERT INTO users(name,teilnehmer,usr,dates) VALUES('$this->eventName','$this->users','$this->host, $this->dates');";
-			$i = pg_query($dbconn, $insert);
-		}
+		*/
 	}
 }
 ?>

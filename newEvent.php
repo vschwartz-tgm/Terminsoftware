@@ -10,6 +10,20 @@
 		session_destroy();
 		header("Location: index.php");
 	}
+	
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
+		// Funktioniert nicht -> Date = Array
+		
+		/*
+		$eventName = $_POST['eventName'];
+		$users = $_POST['people'];
+		$dates = $_POST['date']; 
+		$ort = $_POST['location'];
+		$desc = $_POST['desc'];
+		
+		$e = new CreateEvent($eventName, $username, $users, $dates, $ort, $desc);
+		$e->execute();*/
+	}
 ?>
 
 <html>
@@ -80,20 +94,10 @@
 		</script>
 	</body>
 </html>
-	
+
+
 <?php 
-	session_start();
-	$host = $_SESSION['uname']
-	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
-		$eventName = $_POST['eventName'];
-		$users = $_POST['people'];
-		$dates = $_POST['date'];
-		$ort = $_POST['location'];
-		$desc = $_POST['desc'];
-			
-		addEvent($eventName, $users, $dates, $ort, $desc);
-	}
-	
+	/*
 	function addEvent($eventName, $users, $dates, $ort, $desc){
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false;
@@ -104,8 +108,5 @@
 			$insert = "INSERT INTO users(name,teilnehmer,dates, place, descr,usr) VALUES('$eventName','$users',{'$dates'}, '$ort', '$desc', {'$uname'});";
 			$i = pg_query($dbconn, $insert);
 		}
-	}
-	
+	}*/
 ?>
-	
-	
