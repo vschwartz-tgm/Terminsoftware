@@ -76,30 +76,30 @@
 						<tr>
 							<th>Eventname:</th><th>Ort:</th>
 						</tr>
-							<?php
-								// Vom aktuellen Benutzer alle Events aulesen und in die Tabelle schreiben
+						<?php
+							// Vom aktuellen Benutzer alle Events aulesen und in die Tabelle schreiben
+							
+							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+							
+							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
+							$sql = pg_query($dbconn, $userid); 
+							$row = pg_fetch_row($sql);
+							
+							$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]';";
+							$sql = pg_query($dbconn, $eventid);
+							
+							while ($row = pg_fetch_row($sql)) {
+								$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
+								$sqlname = pg_query($dbconn, $eventname); 
+								$ergname = pg_fetch_row($sqlname);
 								
-								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
+								$sqlort = pg_query($dbconn, $eventort); 
+								$ergort = pg_fetch_row($sqlort);
 								
-								$userid = "SELECT id FROM benutzer WHERE name = '$username';";
-								$sql = pg_query($dbconn, $userid); 
-								$row = pg_fetch_row($sql);
-								
-								$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]';";
-								$sql = pg_query($dbconn, $eventid);
-								
-								while ($row = pg_fetch_row($sql)) {
-									$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
-									$sqlname = pg_query($dbconn, $eventname); 
-									$ergname = pg_fetch_row($sqlname);
-									
-									$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
-									$sqlort = pg_query($dbconn, $eventort); 
-									$ergort = pg_fetch_row($sqlort);
-									
-									echo "<tr><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
-								}
-							?>
+								echo "<tr><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
+							}
+						?>
 					</table>
     			</div>
     			<div class="col-sm border">
