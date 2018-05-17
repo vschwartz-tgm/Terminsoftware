@@ -1,3 +1,17 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['uname'])) {
+		die('Bitte zuerst <a href="index.php">einloggen</a>');
+	}
+	$username = $_SESSION['uname'];
+	
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
+		session_start();
+		session_destroy();
+		header("Location: index.php");
+	}
+?>
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -18,7 +32,7 @@
 				<div class="navbar-text px-sm-2 pt-sm-3">
 					<p id="usr"><?php echo "Hallo, $username"; ?></p>
 				</div>
-				<button type="submit" name="submit" class="btn btn-outline-light" method="">Logout</button>
+				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>
 	<body>

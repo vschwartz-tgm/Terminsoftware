@@ -25,11 +25,6 @@
 			}
 		}
 	}
-	
-	/*function search($text, $type){
-		echo $text;
-		echo $type;
-	}*/
 ?>
 
 <html>
