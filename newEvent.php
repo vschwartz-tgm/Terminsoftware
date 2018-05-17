@@ -90,7 +90,7 @@
 		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
 		if ($fehler == false){
 			// Event hinzufügen
-			$insert = "INSERT INTO users(name,teilnehmer,dates, place, descr,usr) VALUES('$eventName','$users','$dates', '$ort', '$desc', '$uname');";
+			$insert = "INSERT INTO users(name,teilnehmer,dates, place, descr,usr) VALUES('$eventName','$users',{'$dates'}, '$ort', '$desc', {'$uname'});";
 			$i = pg_query($dbconn, $insert);
 		}
 	}
