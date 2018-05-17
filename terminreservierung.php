@@ -5,7 +5,7 @@
 	}
 	$username = $_SESSION['uname'];
 	
-	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();
 		header("Location: index.php");
@@ -19,15 +19,17 @@
 		}else{
 			if ($_POST['optradio']) { 
 				$type = $_POST['optradio'];
-				search($searchtext, $type);
+				
+				$s = new Search($searchtext, $type);
+				$s->execute();
 			}
 		}
 	}
 	
-	function search($text, $type){
+	/*function search($text, $type){
 		echo $text;
 		echo $type;
-	}
+	}*/
 ?>
 
 <html>
@@ -48,7 +50,7 @@
 				<div class="navbar-text px-sm-2 pt-sm-3">
 					<p id="usr"><?php echo "Hallo, $username"; ?></p>
 				</div>
-				<button type="submit" name="submit" class="btn btn-outline-light" method="">Logout</button>
+				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>
 		<br>

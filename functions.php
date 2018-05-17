@@ -20,8 +20,14 @@ abstract class EventCommand implements Command
 }
 ?>
 
+
 <?php
-//class LoginUser extends UserCommand
+/**
+* Klasse LoginUser, zum Einloggen des Users
+*
+* @author	Paul Mazzolini
+* @version  1.0
+*/
 class LoginUser extends UserCommand
 {
 	private $uname;
@@ -64,8 +70,16 @@ class LoginUser extends UserCommand
 		}
 	}
 }
+?>
 
 
+<?php
+/**
+* Klasse RegisterUser, zum Registrieren neuer User
+*
+* @author	Paul Mazzolini
+* @version  1.0
+*/
 class RegisterUser extends UserCommand
 {
 	private $uname;
@@ -125,8 +139,37 @@ class RegisterUser extends UserCommand
 		}
 	}
 }
+?>
 
 
+<?php
+/**
+* Klasse Search, zum Suchen von Events oder User
+*
+* @author	Paul Mazzolini
+* @version  1.0
+*/
+class Search extends UserCommand
+{
+	private $text;
+	private $type;
+	
+	function __construct($text, $type){
+		$this->text = $text;
+		$this->type = $type;
+	}
+	
+	public function execute(){
+		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		$fehler = false; 
+		
+		
+	}
+}
+?>
+
+
+<?php
 class createEvent
 {
 	private $eventName;
@@ -167,8 +210,10 @@ class createEvent
 		}
 	}
 }
+?>
 
 
+<?php
 class searchEvent
 {
 	private $eventName;
