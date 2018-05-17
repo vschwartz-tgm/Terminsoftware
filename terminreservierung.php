@@ -67,13 +67,46 @@
 				</div>
 			</div>
 		</form>
+		<br>
 		<div class="container">
   			<div class="row">
     			<div class="col-sm border">
-     				One of two columns
+     				<h4>Eventteilnahmen an:</h4>
+					<table class="table">
+						<tr>
+							<th>Eventname:</th><th>Datum:</th>
+						</tr>
+						<tr>
+							<?php
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$userid = "SELECT id FROM event WHERE name = '$username';";
+								$sql = pg_query($dbconn, $userid); 
+								$eventid = "SELECT event FROM teilnehmer WHERE usr = '$userid';";
+								$sql = pg_query($dbconn, $eventid); 
+								$eventname = "SELECT name FROM event WHERE id = '$eventid';";
+								$sql = pg_query($dbconn, $eventname); 
+								$row = pg_fetch_row($eventname);
+								echo "<script type='text/javascript'>alert('$row[0]');</script>";
+								/*if($row[0] > 0) {
+									$fehler = true;
+									echo "<script type='text/javascript'>alert('Dieser User existiert bereits!');</script>";
+								}*/
+							?>
+							<td>Event A</td><td>Unfixed</td>
+						</tr>
+					</table>
     			</div>
     			<div class="col-sm border">
-      				One of two columns
+      				<h4>Meine Events:</h4>
+					<table class="table">
+						<tr>
+							<th>Eventname:</th><th>Datum:</th>
+						</tr>
+						<tr>
+							<?php?>
+							<td>Event A</td><td>Unfixed</td>
+						</tr>
+					</table>
       				<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
     			</div>
     		</div>
