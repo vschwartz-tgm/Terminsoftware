@@ -55,7 +55,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">&#x1F50D;</div>
 					</div>
-					<input type="text" class="form-control" name="searchtext" placeholder="search">
+					<input type="text" class="form-control" name="searchtext" placeholder="search" />
 				</div>
 				<br>
 				<div>
