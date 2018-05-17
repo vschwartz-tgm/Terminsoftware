@@ -170,7 +170,7 @@ class Search extends UserCommand
 
 
 <?php
-class createEvent
+class CreateEvent
 {
 	private $eventName;
 	private $host;
