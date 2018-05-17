@@ -89,19 +89,23 @@
 								$sql = pg_query($dbconn, $eventid);
 								
 								while ($row = pg_fetch_row($sql)) {
-								  echo "<script type='text/javascript'>alert('$row[0]');</script>";
+									$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
+									$sql = pg_query($dbconn, $eventname); 
+									$erg = pg_fetch_row($sql);
+									echo "<script type='text/javascript'>alert('$erg[0]');</script>";
 								}
 								
 								/*echo "<script type='text/javascript'>alert('$row[0]');</script>";
 								echo "<script type='text/javascript'>alert('$row[1]');</script>";
 								echo "<script type='text/javascript'>alert('$row[2]');</script>";*/
 								
+								/*
 								for($i=0; $i < count($row); $i++) {
 									$eventname = "SELECT name FROM event WHERE id = '$row[$i]';";
 									$sql = pg_query($dbconn, $eventname); 
 									$erg = pg_fetch_row($sql);
 									echo "<script type='text/javascript'>alert('$erg[0]');</script>";
-								}
+								}*/
 								
 								
 								
