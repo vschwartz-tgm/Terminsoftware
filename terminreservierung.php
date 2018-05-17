@@ -89,13 +89,14 @@
 								$sql = pg_query($dbconn, $eventid);
 								$row = pg_fetch_row($sql);
 								echo "<script type='text/javascript'>alert('$row[0]');</script>";
+								echo "<script type='text/javascript'>alert('$row[1]');</script>";
+								echo "<script type='text/javascript'>alert('$row[2]');</script>";
 								
 								$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
 								$sql = pg_query($dbconn, $eventname); 
 								$row = pg_fetch_row($sql);
 								echo "<script type='text/javascript'>alert('$row[0]');</script>";
-								echo "<script type='text/javascript'>alert('$row[1]');</script>";
-								echo "<script type='text/javascript'>alert('$row[2]');</script>";
+								
 								
 								/*if($row[0] > 0) {
 									$fehler = true;
