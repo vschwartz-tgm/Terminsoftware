@@ -17,7 +17,7 @@
 		/*
 		$eventName = $_POST['eventName'];
 		$users = $_POST['people'];
-		$dates = $_POST['date'];
+		$dates = $_POST['date']; 
 		$ort = $_POST['location'];
 		$desc = $_POST['desc'];
 		
