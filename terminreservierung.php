@@ -88,9 +88,9 @@
 								$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]';";
 								$sql = pg_query($dbconn, $eventid);
 								$row = pg_fetch_row($sql);
-								/*echo "<script type='text/javascript'>alert('$row[0]');</script>";
+								echo "<script type='text/javascript'>alert('$row[0]');</script>";
 								echo "<script type='text/javascript'>alert('$row[1]');</script>";
-								echo "<script type='text/javascript'>alert('$row[2]');</script>";*/
+								echo "<script type='text/javascript'>alert('$row[2]');</script>";
 								
 								for($i=0; $i < count($row); $i++) {
 									$eventname = "SELECT name FROM event WHERE id = '$row[$i]';";
