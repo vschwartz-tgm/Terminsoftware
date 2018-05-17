@@ -1,3 +1,17 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['uname'])) {
+		die('Bitte zuerst <a href="index.php">einloggen</a>');
+	}
+	$username = $_SESSION['uname'];
+	
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
+		session_start();
+		session_destroy();
+		header("Location: index.php");
+	}
+?>
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -18,7 +32,7 @@
 				<div class="navbar-text px-sm-2 pt-sm-3">
 					<p id="usr"><?php echo "Hallo, $username"; ?></p>
 				</div>
-				<button type="submit" name="submit" class="btn btn-outline-light" method="">Logout</button>
+				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>
 	<body>
@@ -44,7 +58,7 @@
 				</div>
 				<div class="clearfix">
       				<button type="button" class="cancelbtn" onclick ="window.location = 'terminreservierung.php'">Abbrechen</button>
-      				<button type="submit" class="addbtn">Hinzufügen</button>
+      				<button type="submit" name="submit" class="addbtn">Hinzufügen</button>
     			</div>
     		</div>
 		</form>
@@ -79,7 +93,7 @@
 			
 		addEvent($eventName, $users, $dates, $ort, $desc);
 	}
-
+	
 	function addEvent($eventName, $users, $dates, $ort, $desc){
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false; 
