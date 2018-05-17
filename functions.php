@@ -7,17 +7,17 @@ interface Command
 
 abstract class UserCommand implements Command
 {
-	public function execute();
+	public function execute(){}
 }
 
 abstract class OrganisatorCommand implements Command
 {
-	public function execute();
+	public function execute(){}
 }
 
 abstract class EventCommand implements Command
 {
-	public function execute();
+	public function execute(){}
 }
 */
 ?>
@@ -105,7 +105,7 @@ class RegisterUser
 		}
 		// Email möglich?
 		if ($fehler == false){
-			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			if (filter_var(.$this->$email, FILTER_VALIDATE_EMAIL)) {
 				// Kein Fehler
 			} else {
 				$fehler = true;
