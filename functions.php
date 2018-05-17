@@ -1,5 +1,4 @@
 <?php
-/*
 interface Command
 {
 	public function execute();
@@ -19,12 +18,11 @@ abstract class EventCommand implements Command
 {
 	public function execute(){}
 }
-*/
 ?>
 
 <?php
 //class LoginUser extends UserCommand
-class LoginUser
+class LoginUser extends UserCommand
 {
 	private $uname;
 	private $psw;
@@ -68,7 +66,7 @@ class LoginUser
 }
 
 
-class RegisterUser
+class RegisterUser extends UserCommand
 {
 	private $uname;
 	private $email;
