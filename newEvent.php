@@ -14,7 +14,7 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		// Funktioniert nicht -> Date = Array
 		$eventName = $_POST['eventName'];
-		$users = $_POST['people'];
+		$users = "Paul";
 		$ort = $_POST['location'];
 		$desc = $_POST['desc'];
 		$dates = "2018-05-17 13:30:00";
