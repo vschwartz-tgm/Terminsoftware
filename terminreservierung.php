@@ -74,16 +74,16 @@
      				<h4>Eventteilnahmen an:</h4>
 					<table class="table">
 						<tr>
-							<th>Eventname:</th><th>Datum:</th>
+							<th>Eventname:</th><th>Ort:</th>
 						</tr>
-						
 							<?php
+								// Vom aktuellen Benutzer alle Events aulesen und in die Tabelle schreiben
+								
 								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 								
 								$userid = "SELECT id FROM benutzer WHERE name = '$username';";
 								$sql = pg_query($dbconn, $userid); 
 								$row = pg_fetch_row($sql);
-								// echo "<script type='text/javascript'>alert('$row[0]');</script>";
 								
 								$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]';";
 								$sql = pg_query($dbconn, $eventid);
@@ -91,32 +91,15 @@
 								while ($row = pg_fetch_row($sql)) {
 									$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
 									$sqlname = pg_query($dbconn, $eventname); 
-									$erg = pg_fetch_row($sqlname);
-									//echo "<script type='text/javascript'>alert('$erg[0]');</script>";
-									echo "<tr><td>$erg[0]</td></tr>";
+									$ergname = pg_fetch_row($sqlname);
+									
+									$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
+									$sqlort = pg_query($dbconn, $eventort); 
+									$ergort = pg_fetch_row($sqlort);
+									
+									echo "<tr><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
 								}
-								
-								/*echo "<script type='text/javascript'>alert('$row[0]');</script>";
-								echo "<script type='text/javascript'>alert('$row[1]');</script>";
-								echo "<script type='text/javascript'>alert('$row[2]');</script>";*/
-								
-								/*
-								for($i=0; $i < count($row); $i++) {
-									$eventname = "SELECT name FROM event WHERE id = '$row[$i]';";
-									$sql = pg_query($dbconn, $eventname); 
-									$erg = pg_fetch_row($sql);
-									echo "<script type='text/javascript'>alert('$erg[0]');</script>";
-								}*/
-								
-								
-								
-								
-								/*if($row[0] > 0) {
-									$fehler = true;
-									echo "<script type='text/javascript'>alert('Dieser User existiert bereits!');</script>";
-								}*/
 							?>
-							<!--<td>Event A</td><td>Unfixed</td>-->
 					</table>
     			</div>
     			<div class="col-sm border">
