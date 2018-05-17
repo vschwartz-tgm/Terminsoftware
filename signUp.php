@@ -1,3 +1,18 @@
+<?php
+	include ("functions.php");
+	
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
+		$uname = $_POST['uname'];
+		$email = $_POST['email'];
+		$psw = $_POST['psw'];
+		$pswrepeat = $_POST['psw-repeat'];
+		
+		$l = new RegisterUser($uname, $email, $psw, $pswrepeat);
+		$l->execute();
+		//register($uname, $email, $psw, $pswrepeat);
+	}
+?>
+
 <html>
 	<head>
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -56,15 +71,15 @@
 	}
 	*/
 
-	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
+	/*if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$uname = $_POST['uname'];
 		$email = $_POST['email'];
 		$psw = $_POST['psw'];
 		$pswrepeat = $_POST['psw-repeat'];
 		register($uname, $email, $psw, $pswrepeat);
-	}
+	}*/
 	
-	
+	/*
 	function register($uname, $email, $psw, $pswrepeat){
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false; 
@@ -113,7 +128,7 @@
 			$i = pg_query($dbconn, $insert);
 			header("Location: index.php");
 		}
-	}
+	}*/
 ?>
 
 <?php
