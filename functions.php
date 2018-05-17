@@ -105,7 +105,7 @@ class RegisterUser
 		}
 		// Email möglich?
 		if ($fehler == false){
-			if (filter_var(.$this->$email, FILTER_VALIDATE_EMAIL)) {
+			if (filter_var($this->$email, FILTER_VALIDATE_EMAIL)) {
 				// Kein Fehler
 			} else {
 				$fehler = true;
