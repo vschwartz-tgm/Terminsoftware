@@ -92,7 +92,8 @@
 									$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
 									$sqlname = pg_query($dbconn, $eventname); 
 									$erg = pg_fetch_row($sqlname);
-									echo "<script type='text/javascript'>alert('$erg[0]');</script>";
+									//echo "<script type='text/javascript'>alert('$erg[0]');</script>";
+									echo "<td>$erg</td>";
 								}
 								
 								/*echo "<script type='text/javascript'>alert('$row[0]');</script>";
@@ -115,7 +116,7 @@
 									echo "<script type='text/javascript'>alert('Dieser User existiert bereits!');</script>";
 								}*/
 							?>
-							<td>Event A</td><td>Unfixed</td>
+							<!--<td>Event A</td><td>Unfixed</td>-->
 						</tr>
 					</table>
     			</div>
