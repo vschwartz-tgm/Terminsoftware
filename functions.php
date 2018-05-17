@@ -177,18 +177,24 @@ class Search extends UserCommand
 class CreateEvent extends OrganisatorCommand
 {
 	private $eventName;
-	private $host;
-	private $users;
+	private $user;
 	private $dates;
 	private $ort;
 	private $desc;
+	private $uname;
 	
 	
-	function __construct($eventName, $host, $users, $dates, $ort, $desc){
+	
+	
+	function __construct($eventName, $users, $dates, $ort, $desc){
 		$this->eventName = $evN;
-		$this->host = $host;
-		$this->users = $usrs;
+		$this->user = $usrs;
 		$this->dates = $dates;
+		$this->ort = $ort;
+		$this->desc = $desc;
+		
+		session_start();
+		$_SESSION['uname'] = $this->uname;
 	}
 	
 	public function execute(){
@@ -196,6 +202,19 @@ class CreateEvent extends OrganisatorCommand
 		$fehler = false;
 		
 		//ToDo
+		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
+		if ($fehler == false){
+			$usernameid = "SELECT id FROM benutzer WHERE name = '$this->uname');";
+			// Event hinzufügen
+			$insert = "INSERT INTO event(name, place, descr,usr) VALUES('$this->eventName', '$this->ort', '$this->desc', '$unameid');";
+			$i = pg_query($dbconn, $insert);
+			$eventId = "SELECT id FROM event WHERE name = '$this->eventName');";
+			$userId = "SELECT id FROM benutzer WHERE name = '$this->user');";
+			$insertUsers = "INSERT INTO teilnehmer VALUES('$this->user','$this->eventId');";
+			$iuser = pg_query($dbconn, $insertUsers);
+			$insertDates = "INSERT INTO dates VALUES('$this->eventId','$this->date');";
+			$idates = pg_query($dbconn, $insertDates);
+		}
 	}
 }
 ?>

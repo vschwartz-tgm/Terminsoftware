@@ -13,16 +13,13 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		// Funktioniert nicht -> Date = Array
-		
-		/*
 		$eventName = $_POST['eventName'];
 		$users = $_POST['people'];
-		$dates = $_POST['date']; 
 		$ort = $_POST['location'];
 		$desc = $_POST['desc'];
-		
+		$dates = "2018-05-17 13:30:00";
 		$e = new CreateEvent($eventName, $username, $users, $dates, $ort, $desc);
-		$e->execute();*/
+		$e->execute();
 	}
 ?>
 
