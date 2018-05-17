@@ -90,8 +90,8 @@
 								
 								while ($row = pg_fetch_row($sql)) {
 									$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
-									$sql = pg_query($dbconn, $eventname); 
-									$erg = pg_fetch_row($sql);
+									$sqlname = pg_query($dbconn, $eventname); 
+									$erg = pg_fetch_row($sqlname);
 									echo "<script type='text/javascript'>alert('$erg[0]');</script>";
 								}
 								
