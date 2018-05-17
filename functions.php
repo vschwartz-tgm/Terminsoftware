@@ -176,7 +176,7 @@ class Search extends UserCommand
 * @author	Paul Mazzolini
 * @version  1.0
 */
-class CreateEvent
+class CreateEvent extends OrganisatorCommand
 {
 	private $eventName;
 	private $host;
@@ -198,19 +198,6 @@ class CreateEvent
 		$fehler = false;
 		
 		//ToDo
-		
-		/*
-		// ist etwas eingetragen
-		if ($fehler == false){
-			$pwdselect = "SELECT pw FROM users WHERE name = '".$this->uname."';"; 
-			$sql = pg_query($dbconn, $pwdselect);
-			$row = pg_fetch_row($sql); 
-			if ($this->psw != $row[0]){
-				echo "<script type='text/javascript'>alert('PW');</script>";
-				$fehler = true;
-			}
-		}
-		*/
 	}
 }
 ?>
