@@ -54,21 +54,21 @@
 		<form method="get">
 			<div class="container border">
 				<label for="eventName"><b>Eventname</b></label>
-    			<input type="text" placeholder="Gib den Eventnamen ein" name="eventName" id="eventName" required>
+    			<input type="text" placeholder="Gib den Eventnamen ein" name="eventName" id="eventName" required />
 				<div id="wrapperDate">
     				<label for="date"><b>Datum & Uhrzeit</b></label>
     				<button type="button" class="btn btn-outline-success" onclick="addDate()" style="float: right;">+</button>
     				<input type="datetime-local" name="date" id="date">
 				</div>
     			<label for="location"><b>Ort</b></label>
-    			<input type="text" placeholder="Gib den Ort ein" name="location" id="location" required>
+    			<input type="text" placeholder="Gib den Ort ein" name="location" id="location" required />
 			
 				<label for="desc"><b>Beschreibung</b></label>
-				<input type="text" placeholder="Füge eine Beschreibung hinzu" name="desc" id="desc">
+				<input type="text" placeholder="Füge eine Beschreibung hinzu" name="desc" id="desc" />
 				<div id="wrapperPeople">
 					<label for="people"><b>Teilnehmer</b></label>
 					<button type="button" class="btn btn-outline-success" onclick="addPeople()" style="float: right;">+</button>
-					<input type="text" placeholder="Benutzername" name="people" id="people">
+					<input type="text" placeholder="Benutzername" name="people" id="people" />
 				</div>
 				<div class="clearfix">
       				<button type="button" class="cancelbtn" onclick ="window.location = 'terminreservierung.php'">Abbrechen</button>

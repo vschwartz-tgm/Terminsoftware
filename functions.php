@@ -42,7 +42,7 @@ class LoginUser extends UserCommand
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false;
 		// Gibt es diesen User?
-		$slct = "SELECT count(*) FROM users WHERE name = '".$this->uname."';"; 
+		$slct = "SELECT count(*) FROM benutzer WHERE name = '".$this->uname."';"; 
 		$sql = pg_query($dbconn, $slct); 
 		$row = pg_fetch_row($sql); 
 		if($row[0] <= 0) {
@@ -50,7 +50,7 @@ class LoginUser extends UserCommand
 		}
 		// Ist das Passwort richtig für den Benutzer?
 		if ($fehler == false){
-			$pwdselect = "SELECT pw FROM users WHERE name = '".$this->uname."';"; 
+			$pwdselect = "SELECT pw FROM benutzer WHERE name = '".$this->uname."';"; 
 			$sql = pg_query($dbconn, $pwdselect);
 			$row = pg_fetch_row($sql); 
 			if ($this->psw != $row[0]){
@@ -96,7 +96,7 @@ class RegisterUser extends UserCommand
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false; 
 		// Uname schon vorhanden?
-		$slct = "SELECT COUNT(*) FROM users WHERE name = '".$this->uname."';"; 
+		$slct = "SELECT COUNT(*) FROM benutzer WHERE name = '".$this->uname."';"; 
 		$sql = pg_query($dbconn, $slct); 
 		$row = pg_fetch_row($sql); 
 		if($row[0] > 0) { 
@@ -105,7 +105,7 @@ class RegisterUser extends UserCommand
 		}
 		// Email schon vorhanden?
 		if ($fehler == false){
-			$sql = "SELECT COUNT(*) FROM users WHERE email = '".$this->email."';"; 
+			$sql = "SELECT COUNT(*) FROM benutzer WHERE email = '".$this->email."';"; 
 			$sql = pg_query($dbconn, $sql);
 			$row = pg_fetch_row($sql);
 			if($row[0] > 0) { 
@@ -131,7 +131,7 @@ class RegisterUser extends UserCommand
 		}
 		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
 		if ($fehler == false){
-			$insert = "INSERT INTO users(name,email,pw) VALUES('$this->uname','$this->email','$this->psw');";
+			$insert = "INSERT INTO benutzer(name,email,pw) VALUES('$this->uname','$this->email','$this->psw');";
 			$i = pg_query($dbconn, $insert);
 			header("Location: index.php");
 		}
