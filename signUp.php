@@ -9,7 +9,6 @@
 		
 		$l = new RegisterUser($uname, $email, $psw, $pswrepeat);
 		$l->execute();
-		//register($uname, $email, $psw, $pswrepeat);
 	}
 ?>
 
@@ -51,6 +50,7 @@
 		</form>
 	</body>
 </html>
+
 
 <?php
 	/*
