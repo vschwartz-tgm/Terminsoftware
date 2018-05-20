@@ -15,7 +15,7 @@
 		$date = $_POST['date'];
 		
 		
-		echo "<script type='text/javascript'>alert('$date');</script>";
+		echo "<script type='text/javascript'>alert('$dates');</script>";
 		echo "<script type='text/javascript'>alert('Hallo');</script>";
 		/*// Funktioniert nicht -> Date = Array
 		$eventName = $_POST['eventName'];
