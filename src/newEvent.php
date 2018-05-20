@@ -89,12 +89,14 @@
 				var dummy = '<input type="datetime-local" name="date'+count_date+'" id="date'+count_date+'">\r\n';
 				document.getElementById('wrapperDate').innerHTML += dummy;
 				count_date++;
+				var test = '<input type="datetime-local" name="date" id="date">\r\n';
 				dates.push(date);
 				for(i = 1; i < count_date; i++){
 					dates.push(date+i);
 				}
 				alert(document.getElementById('wrapperDate').innerHTML += dates);		
 				alert(dummy);
+				document.getElementById('wrapperDate').innerHTML += dates;
 			}
 			
 			function addPeople(){
