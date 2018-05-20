@@ -51,7 +51,7 @@
 		</nav>
 	<body>
 		<br>
-		<form method="get">
+		<form method="post">
 			<div class="container border">
 				<label for="eventName"><b>Eventname</b></label>
     			<input type="text" placeholder="Gib den Eventnamen ein" name="eventName" id="eventName" required />
@@ -72,7 +72,7 @@
 				</div>
 				<div class="clearfix">
       				<button type="button" class="cancelbtn" onclick ="window.location = 'terminreservierung.php'">Abbrechen</button>
-      				<button type="submit" name="submit" class="addbtn">Hinzufügen</button>
+      				<button type="submit" name="submit" id="submit" class="addbtn">Hinzufügen</button>
     			</div>
     		</div>
 		</form>
