@@ -7,7 +7,14 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
-                'functionstest' => '/tests/functionsTest.php'
+                'command' => '/src/functions.php',
+                'createevent' => '/src/functions.php',
+                'eventcommand' => '/src/functions.php',
+                'loginuser' => '/src/functions.php',
+                'organisatorcommand' => '/src/functions.php',
+                'registeruser' => '/src/functions.php',
+                'search' => '/src/functions.php',
+                'usercommand' => '/src/functions.php'
             );
         }
         $cn = strtolower($class);
