@@ -12,6 +12,8 @@
 	}
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
+		$date = $_POST['date'];
+		echo "<script type='text/javascript'>alert($date);</script>";
 		/*// Funktioniert nicht -> Date = Array
 		$eventName = $_POST['eventName'];
 		$users = "Paul";
@@ -88,6 +90,8 @@
 				document.getElementById('wrapperPeople').innerHTML += dummy;
 				count_people ++;
 			}
+			
+			
 		</script>
 	</body>
 </html>
