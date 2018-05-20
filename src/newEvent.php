@@ -12,7 +12,8 @@
 	}
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
-		$date = $_POST['date'];
+		$date = $_POST['date1'];
+		
 		echo "<script type='text/javascript'>alert('$date');</script>";
 		echo "<script type='text/javascript'>alert('Hallo');</script>";
 		/*// Funktioniert nicht -> Date = Array
