@@ -13,8 +13,11 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$date = $_POST['dates'];
+		$countDates = $_POST['count_date'];
+		
 		
 		echo "<script type='text/javascript'>alert('$date');</script>";
+		echo "<script type='text/javascript'>alert('$countDates');</script>";
 		echo "<script type='text/javascript'>alert('Hallo');</script>";
 		/*// Funktioniert nicht -> Date = Array
 		$eventName = $_POST['eventName'];
@@ -88,9 +91,6 @@
 				var dummy = '<input type="datetime-local" name="date'+count_date+'" id="date'+count_date+'">\r\n';
 				document.getElementById('wrapperDate').innerHTML += dummy;
 				count_date++;
-			}
-			
-			function getDates(){
 				dates.push(date);
 				for(i = 1; i < count_date; i++){
 					dates.push(date+i);
