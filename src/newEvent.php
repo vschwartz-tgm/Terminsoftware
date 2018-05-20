@@ -12,7 +12,7 @@
 	}
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
-		$date = $_POST['dates'];
+		$date = $_POST['date'];
 		
 		
 		echo "<script type='text/javascript'>alert('$date');</script>";
@@ -93,6 +93,7 @@
 				for(i = 1; i < count_date; i++){
 					dates.push(date+i);
 				}
+				alert(dates);		
 			}
 			
 			function addPeople(){
