@@ -58,7 +58,7 @@
     			<input type="text" placeholder="Gib den Eventnamen ein" name="eventName" id="eventName" required />
 				<div id="wrapperDate">
     				<label for="date"><b>Datum & Uhrzeit</b></label>
-    				<button type="button" class="btn btn-outline-success" onclick="addDate()" style="float: right;">+</button>
+    				<button type="button" class="btn btn-outline-success" onclick="addDate()" onclick="getDates()" style="float: right;">+</button>
     				<input type="datetime-local" name="date" id="date">
 				</div>
     			<label for="location"><b>Ort</b></label>
@@ -84,15 +84,19 @@
 			var count_people = 1;
 			var dates = [];
 			var i;
-			dates.push(date);
-			for(i = 1; i < count_date; i++){
-				dates.push(date+i);
-			}
 			function addDate(){
 				var dummy = '<input type="datetime-local" name="date'+count_date+'" id="date'+count_date+'">\r\n';
 				document.getElementById('wrapperDate').innerHTML += dummy;
 				count_date++;
 			}
+			
+			function getDates(){
+				dates.push(date);
+				for(i = 1; i < count_date; i++){
+					dates.push(date+i);
+				}
+			}
+			
 			function addPeople(){
 				var dummy = '<input type="text" placeholder="Benutzername" name="people'+count_people+'" id="people'+count_people+'">\r\n';
 				document.getElementById('wrapperPeople').innerHTML += dummy;
