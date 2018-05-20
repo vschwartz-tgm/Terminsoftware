@@ -1,14 +1,14 @@
 <?php
 	session_start();
 	if(!isset($_SESSION['uname'])) {
-		die('Bitte zuerst <a href="index.php">einloggen</a>');
+		die('Bitte zuerst <a href="login.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();
-		header("Location: index.php");
+		header("Location: login.php");
 	}
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
