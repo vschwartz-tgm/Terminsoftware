@@ -100,8 +100,22 @@
 								echo "<tr><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
 							}
 						
+						?>
+					</table>
+    			</div>
+    			<div class="col-sm border">
+      				<h4>Meine Events:</h4>
+					<table class="table">
+						<tr>
+							<th>Eventname:</th><th>Ort:</th>
+						</tr>
+						<tr>
+							<?php?>
+							<td>Event A</td><td>Unfixed</td>
+						</tr>
+						<?php 
 						
-							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+						$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 							
 							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
 							$sql = pg_query($dbconn, $userid); 
@@ -119,23 +133,9 @@
 								$sqlort = pg_query($dbconn, $eventort); 
 								$ergort = pg_fetch_row($sqlort);
 								
-								echo "<tr><td><td>$ergname[0]</td><td>$ergort[0]</td></td></tr>";
 							}
 						
-						
 						?>
-					</table>
-    			</div>
-    			<div class="col-sm border">
-      				<h4>Meine Events:</h4>
-					<table class="table">
-						<tr>
-							<th>Eventname:</th><th>Datum:</th>
-						</tr>
-						<tr>
-							<?php?>
-							<td>Event A</td><td>Unfixed</td>
-						</tr>
 					</table>
       				<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
     			</div>
