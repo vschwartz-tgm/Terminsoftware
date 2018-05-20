@@ -119,7 +119,7 @@
 								$sqlort = pg_query($dbconn, $eventort); 
 								$ergort = pg_fetch_row($sqlort);
 								
-								echo "<tr><td><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
+								echo "<tr><tr><td>$ergname[0]</td><td>$ergort[0]</td></tr></tr>";
 							}
 						
 						
