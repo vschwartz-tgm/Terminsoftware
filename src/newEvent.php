@@ -12,7 +12,7 @@
 	}
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
-		$date = $_POST['date1'];
+		$date = $_POST['dates'];
 		
 		echo "<script type='text/javascript'>alert('$date');</script>";
 		echo "<script type='text/javascript'>alert('Hallo');</script>";
@@ -82,6 +82,12 @@
 			//Adds new input with incrementing id and name
 			var count_date = 1;
 			var count_people = 1;
+			var dates = [];
+			var i;
+			dates.push(date);
+			for(i = 1; i < count_date; i++){
+				dates.push(date+i);
+			}
 			function addDate(){
 				var dummy = '<input type="datetime-local" name="date'+count_date+'" id="date'+count_date+'">\r\n';
 				document.getElementById('wrapperDate').innerHTML += dummy;
