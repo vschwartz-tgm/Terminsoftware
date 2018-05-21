@@ -21,7 +21,6 @@
 		
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false;
-		
 		$userid = "SELECT id FROM benutzer WHERE name = '$username';";
 		$sql = pg_query($dbconn, $userid); 
 		$row = pg_fetch_row($sql);
@@ -29,14 +28,13 @@
 		$insert = "INSERT INTO event(name, ort, descr,usr) VALUES('$eventName', '$ort', '$desc', '$row[0]');";
 		$i = pg_query($dbconn, $insert);
 		// ID von hinzugefügtem Event 
-		$eventId = "SELECT id FROM event WHERE name = '$eventName');";
-		$evid = pg_query($dbconn, $eventId); 
-		$eid = pg_fetch_row($evid);
-		echo "<script type='text/javascript'>alert('$reid[0]');</script>";
-		echo "<script type='text/javascript'>alert('$eventName');</script>";
+		$eventId = "SELECT id FROM event WHERE name = '$eventName';";
+		$sql = pg_query($dbconn, $eventId); 
+		$row = pg_fetch_row($sql);
+		echo "<script type='text/javascript'>alert('$row[0]');</script>";
 		
 		foreach($dates as $date){
-			$insertDates = "INSERT INTO datum VALUES('$eid[0]','$date');";
+			$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
 			$idates = pg_query($dbconn, $insertDates);
 			echo "<script type='text/javascript'>alert('$date');</script>";
 		}
