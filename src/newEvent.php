@@ -17,10 +17,10 @@
 		$dates = $_POST['date'];
 		$ort = $_POST['location'];
 		$desc = $_POST['desc'];
-		
 
 		$e = new CreateEvent($eventName, $user, $dates, $ort, $desc, $username);
 		$e->execute();
+		header("Location: terminreservierung.php");
 	}
 ?>
 

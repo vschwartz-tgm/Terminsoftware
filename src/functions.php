@@ -209,6 +209,7 @@ class CreateEvent extends OrganisatorCommand
 			$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 			$sql = pg_query($dbconn, $userid); 
 			$row = pg_fetch_row($sql);
+			echo "<script type='text/javascript'>alert('$row[0]');</script>";
 			// Event hinzufügen
 			$insert = "INSERT INTO event(name, ort, descr,usr) VALUES('$this->eventName', '$this->ort', '$this->desc', '$row[0]');";
 			$i = pg_query($dbconn, $insert);
@@ -216,6 +217,7 @@ class CreateEvent extends OrganisatorCommand
 			$eventId = "SELECT id FROM event WHERE name = '$this->eventName';";
 			$sql = pg_query($dbconn, $eventId); 
 			$row = pg_fetch_row($sql);
+			echo "<script type='text/javascript'>alert('$row[0]');</script>";
 
 			foreach($this->dates as $date){
 				$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
