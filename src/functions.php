@@ -162,6 +162,41 @@ class Search extends UserCommand
 		$fehler = false; 
 		
 		//ToDo
+		// Suchbebriff vorhanden?
+		if ($fehler == false){
+			if (strlen($this->text) = 0) {
+				$fehler = true;
+				echo "<script type='text/javascript'>alert('Leerer Suchbegriff!');</script>";
+			}
+			
+		}
+		// Richtiger Type
+		if ($fehler == false){
+			if ($this->type == "user" || $this->type == "event"){
+				//kein Fehler
+			} else {
+				$fehler = true;
+				echo "<script type='text/javascript'>alert('Ungültiger Typ!');</script>";
+			}
+		}
+		if ($fehler == false){
+			if ($this->type == "user"){
+				// Zur nächsten Seite
+				session_start();
+				$_SESSION['uname'] = $this->text;
+				$_SESSION['eventName'] = "";
+				header("Location: searchView.php");
+			}
+			elseif ($this->type == "event"){
+				// Zur nächsten Seite
+				session_start();
+				$_SESSION['uname'] = "";
+				$_SESSION['eventName'] = $this->text;
+				header("Location: searchView.php");
+			}
+		}
+		
+		
 	}
 }
 ?>
