@@ -14,10 +14,14 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$dates = $_POST['date'];
         foreach($dates as $date){
-            echo "<script type='text/javascript'>alert('$date');</script>";
+            echo "<script type='text/javascript'>alert('".$date."');</script>";
         }
-		
-		/*
+
+        $user = $_POST['people'];
+        foreach($user as $people){
+            echo "<script type='text/javascript'>alert('".$people."');</script>";
+        }
+        /*
 		echo "<script type='text/javascript'>alert('$date');</script>";
 		echo "<script type='text/javascript'>alert('Hallo');</script>";*/
 		/*// Funktioniert nicht -> Date = Array
