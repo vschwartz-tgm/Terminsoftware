@@ -163,7 +163,7 @@ class Search extends UserCommand
 		
 		// Suchbebriff vorhanden?
 		if ($fehler == false){
-			if (strlen($this->text) = 0) {
+			if (strlen($this->text) == 0) {
 				$fehler = true;
 				echo "<script type='text/javascript'>alert('Leerer Suchbegriff!');</script>";
 			}

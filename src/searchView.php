@@ -43,10 +43,10 @@
     		<table class="table table-bordered">
 				<thead>
 					<?php
-						if (strlen($username) = 0) {
+						if (strlen($username) == 0) {
 							//events
 							echo "<tr><th scope='col'>Name</th><th scope='col'>Ort</th><th scope='col'>Beschreibung</th></tr>";
-						}elseif(strlen($eventName) = 0){
+						}elseif(strlen($eventName) == 0){
 							//users
 							echo "<tr><th scope='col'>Name</th><th scope='col'>email</th></tr>";
 						}
@@ -57,7 +57,7 @@
 						$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 						
 						// entscheiden ob nach event oder user gesucht wird
-						if (strlen($username) = 0) {
+						if (strlen($username) == 0) {
 							//events
 							$eventid = "SELECT id FROM event WHERE name = '%$eventName%';";
 							$sql = pg_query($dbconn, $eventid); 
@@ -86,7 +86,7 @@
 								
 								echo "<td>$erdeventname[0]</td></tr><tr><td>$erdeventlocation[0]</td><tr><td>$erdeventdescription[0]</td>";	
 							}
-						}elseif(strlen($eventName) = 0){
+						}elseif(strlen($eventName) == 0){
 							//user
 							$userid = "SELECT id FROM benutzer WHERE name = '%$username%';";
 							$sql = pg_query($dbconn, $userid); 
