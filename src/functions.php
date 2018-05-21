@@ -186,13 +186,13 @@ class CreateEvent extends OrganisatorCommand
 	
 	
 	
-	function __construct($eventName, $users, $dates, $ort, $desc, $uname){
-		$this->eventName = $evN;
-		$this->user = $users;
+	function __construct($eventName, $user, $dates, $ort, $desc, $username){
+		$this->eventName = $eventName;
+		$this->user = $user;
 		$this->dates = $dates;
 		$this->ort = $ort;
 		$this->desc = $desc;
-		$this->uname = $uname;
+		$this->uname = $username;
 
 	}
 	
@@ -203,37 +203,37 @@ class CreateEvent extends OrganisatorCommand
 		//ToDo
 		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
 		if ($fehler == false){
+			
+		
+			$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+			$fehler = false;
 			$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 			$sql = pg_query($dbconn, $userid); 
 			$row = pg_fetch_row($sql);
-			echo "<script type='text/javascript'>alert('$row[0]');</script>";
 			// Event hinzufügen
 			$insert = "INSERT INTO event(name, ort, descr,usr) VALUES('$this->eventName', '$this->ort', '$this->desc', '$row[0]');";
 			$i = pg_query($dbconn, $insert);
-			$row = pg_fetch_row($i);
 			// ID von hinzugefügtem Event 
-			$eventId = "SELECT id FROM event WHERE name = '$this->eventName');";
+			$eventId = "SELECT id FROM event WHERE name = '$this->eventName';";
 			$sql = pg_query($dbconn, $eventId); 
 			$row = pg_fetch_row($sql);
-			/*
+
 			foreach($this->dates as $date){
 				$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
 				$idates = pg_query($dbconn, $insertDates);
-				echo "<script type='text/javascript'>alert('".$date."');</script>";
 			}
 
-			
-			$userId = "SELECT id FROM benutzer WHERE name = '$this->user');";
 
-			
-
-			
 			foreach($this->user as $people){
-				$userId = "SELECT id FROM benutzer WHERE name = '$this->user');";
-				$insertUsers = "INSERT INTO teilnehmer VALUES('$userId','$this->eventId');";
+				$userId = "SELECT id FROM benutzer WHERE name = '$people';";
+				$userID = pg_query($dbconn, $userId); 
+				$uID = pg_fetch_row($userID);
+				echo "<script type='text/javascript'>alert('$uID[0]');</script>";
+				$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0]','$row[0]');";
 				$iuser = pg_query($dbconn, $insertUsers);
-				echo "<script type='text/javascript'>alert('".$people."');</script>";
-			}*/
+				echo "<script type='text/javascript'>alert('$row[0]');</script>";
+				echo "<script type='text/javascript'>alert('$people');</script>";
+			}
 		}
 	}
 }
