@@ -42,10 +42,11 @@
 			$userId = "SELECT id FROM benutzer WHERE name = '$people');";
 			$userID = pg_query($dbconn, $userId); 
 			$uID = pg_fetch_row($userID);
+			echo "<script type='text/javascript'>alert('$uID[0]');</script>";
 			$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0],'$row[0]');";
 			$iuser = pg_query($dbconn, $insertUsers);
-			echo "<script type='text/javascript'>alert('$uID[0]');</script>";
 			echo "<script type='text/javascript'>alert('$row[0]');</script>";
+			echo "<script type='text/javascript'>alert('$people');</script>";
 		}
 		
 		/*
