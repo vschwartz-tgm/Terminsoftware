@@ -238,16 +238,19 @@ class CreateEvent extends OrganisatorCommand
 		//ToDo
 		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
 		if ($fehler == false){
-			$userid = "SELECT id FROM benutzer WHERE name = '$username';";
+			$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 			$sql = pg_query($dbconn, $userid); 
 			$row = pg_fetch_row($sql);
+			echo "<script type='text/javascript'>alert('$row[0]');</script>";
 			// Event hinzufügen
-			$insert = "INSERT INTO event(name, place, descr,usr) VALUES('$this->eventName', '$this->ort', '$this->desc', '$row[0]');";
+			$insert = "INSERT INTO event(name, ort, descr,usr) VALUES('$this->eventName', '$this->ort', '$this->desc', '$row[0]');";
 			$i = pg_query($dbconn, $insert);
+			$row = pg_fetch_row($i);
+			// ID von hinzugefügtem Event 
 			$eventId = "SELECT id FROM event WHERE name = '$this->eventName');";
 			$sql = pg_query($dbconn, $eventId); 
 			$row = pg_fetch_row($sql);
-			
+			/*
 			foreach($this->dates as $date){
 				$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
 				$idates = pg_query($dbconn, $insertDates);
@@ -265,7 +268,7 @@ class CreateEvent extends OrganisatorCommand
 				$insertUsers = "INSERT INTO teilnehmer VALUES('$userId','$this->eventId');";
 				$iuser = pg_query($dbconn, $insertUsers);
 				echo "<script type='text/javascript'>alert('".$people."');</script>";
-			}
+			}*/
 		}
 	}
 }
