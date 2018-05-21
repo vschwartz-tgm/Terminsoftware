@@ -40,11 +40,8 @@
 		}
 
 
-
-
-
-		foreach($this->user as $people){
-			$userId = "SELECT id FROM benutzer WHERE name = '$people');";
+		foreach($user as $people){
+			$userId = "SSELECT id FROM benutzer WHERE name = '$people');";
 			$userID = pg_query($dbconn, $userId); 
 			$uID = pg_fetch_row($userID);
 			$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0],'$row[0]');";
