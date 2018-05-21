@@ -21,7 +21,6 @@
 
 		$e = new CreateEvent($eventName, $user, $dates, $ort, $desc, $username);
 		$e->execute();
-		header("Location: terminreservierung.php");
 	}
 ?>
 
