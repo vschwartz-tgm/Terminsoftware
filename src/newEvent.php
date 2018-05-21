@@ -34,6 +34,26 @@
 		$sql = pg_query($dbconn, $eventId); 
 		$row = pg_fetch_row($sql);
 		
+		foreach($dates as $date){
+			$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
+			$idates = pg_query($dbconn, $insertDates);
+			echo "<script type='text/javascript'>alert('$row[0]');</script>";
+			echo "<script type='text/javascript'>alert('$date');</script>";
+		}
+/*
+
+		$userId = "SELECT id FROM benutzer WHERE name = '$this->user');";
+
+
+
+
+		foreach($this->user as $people){
+			$userId = "SELECT id FROM benutzer WHERE name = '$this->user');";
+			$insertUsers = "INSERT INTO teilnehmer VALUES('$userId','$this->eventId');";
+			$iuser = pg_query($dbconn, $insertUsers);
+			echo "<script type='text/javascript'>alert('".$people."');</script>";
+		}*/
+		
 		/*
 		$e = new CreateEvent($eventName, $user, $dates, $ort, $desc, $username);
 		$e->execute();*/
