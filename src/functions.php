@@ -161,7 +161,39 @@ class Search extends UserCommand
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false; 
 		
-		//ToDo
+		// Suchbebriff vorhanden?
+		if ($fehler == false){
+			if (strlen($this->text) == 0) {
+				$fehler = true;
+				echo "<script type='text/javascript'>alert('Leerer Suchbegriff!');</script>";
+			}
+			
+		}
+		// Richtiger Type
+		if ($fehler == false){
+			if ($this->type == "user" || $this->type == "event"){
+				//kein Fehler
+			} else {
+				$fehler = true;
+				echo "<script type='text/javascript'>alert('Ungültiger Typ!');</script>";
+			}
+		}
+		if ($fehler == false){
+			if ($this->type == "user"){
+				// Zur nächsten Seite
+				session_start();
+				$_SESSION['uname'] = $this->text;
+				$_SESSION['eventName'] = "";
+				header("Location: searchView.php");
+			}
+			elseif ($this->type == "event"){
+				// Zur nächsten Seite
+				session_start();
+				$_SESSION['uname'] = "";
+				$_SESSION['eventName'] = $this->text;
+				header("Location: searchView.php");
+			}
+		}
 	}
 }
 ?>
