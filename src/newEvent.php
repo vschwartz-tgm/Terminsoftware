@@ -12,11 +12,14 @@
 	}
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
-		$date = $_POST['date'];
+		$dates = $_POST['date'];
+        foreach($dates as $date){
+            echo "<script type='text/javascript'>alert('$date');</script>";
+        }
 		
-		
+		/*
 		echo "<script type='text/javascript'>alert('$date');</script>";
-		echo "<script type='text/javascript'>alert('Hallo');</script>";
+		echo "<script type='text/javascript'>alert('Hallo');</script>";*/
 		/*// Funktioniert nicht -> Date = Array
 		$eventName = $_POST['eventName'];
 		$users = "Paul";
@@ -60,7 +63,7 @@
 				<div id="wrapperDate">
     				<label for="date"><b>Datum & Uhrzeit</b></label>
     				<button type="button" class="btn btn-outline-success" onclick="addDate()" onclick="getDates()" style="float: right;">+</button>
-    				<input type="datetime-local" name="date" id="date">
+    				<input type="datetime-local" name="date[]" id="date">
 				</div>
     			<label for="location"><b>Ort</b></label>
     			<input type="text" placeholder="Gib den Ort ein" name="location" id="location" required />
@@ -70,7 +73,7 @@
 				<div id="wrapperPeople">
 					<label for="people"><b>Teilnehmer</b></label>
 					<button type="button" class="btn btn-outline-success" onclick="addPeople()" style="float: right;">+</button>
-					<input type="text" placeholder="Benutzername" name="people" id="people" />
+					<input type="text" placeholder="Benutzername" name="people[]" id="people[]" />
 				</div>
 				<div class="clearfix">
       				<button type="button" class="cancelbtn" onclick ="window.location = 'terminreservierung.php'">Abbrechen</button>
@@ -86,7 +89,7 @@
 			var i;
 			function addDate(){
 				var dates = [];
-				var dummy = '<input type="datetime-local" name="date'+count_date+'" id="date'+count_date+'">\r\n';
+				var dummy = '<input type="datetime-local" name="date[]" id="date'+count_date+'">\r\n';
 				document.getElementById('wrapperDate').innerHTML += dummy;
 				count_date++;
 				var test = '<input type="datetime-local" name="date" id="date">\r\n';
@@ -100,7 +103,7 @@
 			}
 			
 			function addPeople(){
-				var dummy = '<input type="text" placeholder="Benutzername" name="people'+count_people+'" id="people'+count_people+'">\r\n';
+				var dummy = '<input type="text" placeholder="Benutzername" name="people[]" id="people'+count_people+'">\r\n';
 				document.getElementById('wrapperPeople').innerHTML += dummy;
 				count_people ++;
 			}
