@@ -233,6 +233,16 @@ class CreateEvent extends OrganisatorCommand
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$fehler = false;
 		
+		
+		// Event schon vorhanden?
+		$slct = "SELECT COUNT(*) FROM event WHERE name = '".$this->eventName."';"; 
+		$sql = pg_query($dbconn, $slct); 
+		$row = pg_fetch_row($sql); 
+		if($row[0] > 0) { 
+			$fehler = true;
+			echo "<script type='text/javascript'>alert('Dieses Event existiert bereits!');</script>";
+		}
+		
 		//ToDo
 		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
 		if ($fehler == false){
