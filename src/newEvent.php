@@ -31,17 +31,15 @@
 		$eventId = "SELECT id FROM event WHERE name = '$eventName';";
 		$sql = pg_query($dbconn, $eventId); 
 		$row = pg_fetch_row($sql);
-		echo "<script type='text/javascript'>alert('$row[0]');</script>";
 		
 		foreach($dates as $date){
 			$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
 			$idates = pg_query($dbconn, $insertDates);
-			echo "<script type='text/javascript'>alert('$date');</script>";
 		}
 
 
 		foreach($user as $people){
-			$userId = "SSELECT id FROM benutzer WHERE name = '$people');";
+			$userId = "SELECT id FROM benutzer WHERE name = '$people');";
 			$userID = pg_query($dbconn, $userId); 
 			$uID = pg_fetch_row($userID);
 			$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0],'$row[0]');";
