@@ -30,13 +30,13 @@
 		$i = pg_query($dbconn, $insert);
 		// ID von hinzugefügtem Event 
 		$eventId = "SELECT id FROM event WHERE name = '$eventName');";
-		$sql = pg_query($dbconn, $eventId); 
-		$row = pg_fetch_row($sql);
-		echo "<script type='text/javascript'>alert('$row[0]');</script>";
+		$evid = pg_query($dbconn, $eventId); 
+		$eid = pg_fetch_row($evid);
+		echo "<script type='text/javascript'>alert('$reid[0]');</script>";
 		echo "<script type='text/javascript'>alert('$eventName');</script>";
 		
 		foreach($dates as $date){
-			$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
+			$insertDates = "INSERT INTO datum VALUES('$eid[0]','$date');";
 			$idates = pg_query($dbconn, $insertDates);
 			echo "<script type='text/javascript'>alert('$date');</script>";
 		}
