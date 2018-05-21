@@ -13,25 +13,12 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$dates = $_POST['date'];
-        foreach($dates as $date){
-            echo "<script type='text/javascript'>alert('".$date."');</script>";
-        }
-
         $user = $_POST['people'];
-        foreach($user as $people){
-            echo "<script type='text/javascript'>alert('".$people."');</script>";
-        }
-        /*
-		echo "<script type='text/javascript'>alert('$date');</script>";
-		echo "<script type='text/javascript'>alert('Hallo');</script>";*/
-		/*// Funktioniert nicht -> Date = Array
 		$eventName = $_POST['eventName'];
-		$users = "Paul";
 		$ort = $_POST['location'];
 		$desc = $_POST['desc'];
-		$dates = "2018-05-17 13:30:00";
-		$e = new CreateEvent($eventName, $username, $users, $dates, $ort, $desc);
-		$e->execute();*/
+		$e = new CreateEvent($eventName, $user, $dates, $ort, $desc, $username);
+		$e->execute();
 	}
 ?>
 
