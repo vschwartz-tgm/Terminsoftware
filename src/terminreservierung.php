@@ -72,6 +72,17 @@
 		<div class="container">
   			<div class="row">
     			<div class="col-sm border">
+     				<h4>Einladungen:</h4>
+					<table class="table">
+						<tr>
+							<th>Eventname:</th><th>Annehmen?</th>
+						</tr>
+						<?php
+							
+						?>
+					</table>
+    			</div>
+				<div class="col-sm border">
      				<h4>Eventteilnahmen an:</h4>
 					<table class="table">
 						<tr>
