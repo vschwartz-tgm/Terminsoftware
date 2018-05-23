@@ -21,7 +21,7 @@
 	
 	// Zurückbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
-		header("Location: index.php");
+		header("Location: terminreservierung.php");
 	}
 ?>
 
@@ -90,7 +90,7 @@
 			</div>
 			<div class="row">
 				<form action="" method="post">
-					<input type="submit" name="back" class="addbtn">Zurück</button>
+					<input type="submit" name="back" class="addbtn" value="Zurück" />
 				</form>
 			</div>
 		</div>
