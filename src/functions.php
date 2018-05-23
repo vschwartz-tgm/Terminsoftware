@@ -182,15 +182,8 @@ class Search extends UserCommand
 			if ($this->type == "user"){
 				// Zur nächsten Seite
 				session_start();
-				$_SESSION['uname'] = $this->text;
-				$_SESSION['eventName'] = "";
-				header("Location: searchView.php");
-			}
-			elseif ($this->type == "event"){
-				// Zur nächsten Seite
-				session_start();
-				$_SESSION['uname'] = "";
-				$_SESSION['eventName'] = $this->text;
+				$_SESSION['searchtext'] = $this->text;
+				$_SESSION['searchtype'] = $this->type;
 				header("Location: searchView.php");
 			}
 		}
