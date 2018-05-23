@@ -319,20 +319,20 @@ public function execute(){
 	
 }
 
-class sendMail extends OrganisatorCommand
+class SendMail extends OrganisatorCommand
 {
-	private $eventId;
 	private $uname;
 	private $email;
 	
-	function __construct($eventId, $username){
-		$this->eventId = $eventId;
+	function __construct($email, $username){
 		$this->uname = $username;
+		$this->email = $email;
 
 	}
 	
 public function execute(){
-		$mail             = new PHPMailer();
+	echo "<script type='text/javascript'>alert('send mail!');</script>";
+		$mail = new PHPMailer();
 
 $mail->IsSMTP(); // telling the class to use SMTP
 $mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
@@ -345,11 +345,9 @@ $mail->Port       = 587;                   // SMTP port
 $mail->Username   = "terminreservierungssystem.teamm@gmail.com";  // username
 $mail->Password   = "Admin12$";            // password
 
-$mail->SetFrom('user@gmail.com', 'Test');
-
 $mail->Subject    = "I hope this works!";
 
-$mail->MsgHTML('Blah');
+$mail->MsgHTML('Sie haben sich angemeldet!!');
 
 $address = "$email";
 $mail->AddAddress($address, "Test");
@@ -357,7 +355,7 @@ $mail->AddAddress($address, "Test");
 if(!$mail->Send()) {
   echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-  echo "Message sent!";
+  echo "<script type='text/javascript'>alert('Mail wurde gesendet!');</script>";
 }
 	}
 	

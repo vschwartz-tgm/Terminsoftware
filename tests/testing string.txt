@@ -1,0 +1,2 @@
+In /Terminsoftware
+php phpunit-7.1.5.phar --bootstrap autoload.php tests/*TestFile*.php
