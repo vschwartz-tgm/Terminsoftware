@@ -1,12 +1,12 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['uname'])) {
+	if(!isset($_SESSION['uname'])&&!isset($_SESSION['eventName'])) {
 		die('Bitte zuerst <a href="index.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
 	$eventName = $_SESSION['eventName'];
 	
-	<!--ToDo: ort, date, beschriebung und teilnehmer des events rauslesen und in table <p> reinschreiben-->
+	<!--ToDo: teilnehmer und datum des events rauslesen und in table <p> reinschreiben-->
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
@@ -99,9 +99,9 @@
 								
 								$useremail = "SELECT email FROM benutzer WHERE id = '$row[0]';";
 								$sqluseremail = pg_query($dbconn, $useremail); 
-								$erdguseremail = pg_fetch_row($sqluseremail);
+								$erduseremail = pg_fetch_row($sqluseremail);
 								
-								echo "<td>$erdusername[0]</td></tr><tr><td>$erdguseremail[0]</td>";	
+								echo "<td>$erdusername[0]</td></tr><tr><td>$erduseremail[0]</td>";	
 							}
 						}
 						?>
