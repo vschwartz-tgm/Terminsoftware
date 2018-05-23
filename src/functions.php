@@ -291,13 +291,10 @@ class invitation
 		$sql = pg_query($dbconn, $userid); 
 		$row = pg_fetch_row($sql);
 		$i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventId' AND usr = '$row[0]';";
-<<<<<<< HEAD
 		$sql = pg_query($dbconn, $i);
-=======
 		echo "<script type='text/javascript'>alert('$row[0]');</script>";
 		echo "<script type='text/javascript'>alert('$this->eventId');</script>";
 		$sql = pg_query($dbconn, $i); 
->>>>>>> 193e7503e7a4ea8ca06ee99503d498d936162b07
 		
 	}
 	
