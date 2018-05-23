@@ -208,7 +208,7 @@
 					</table>
 					</div>
 					<div>
-						<button type="button" class="btn btn-outline-dark btn-add" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
+						<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
     				</div>
     			</div>
     		</div>
