@@ -1,3 +1,59 @@
+<?php
+	include ("functions.php");
+	
+	// Ist ein Benuter angemeldet?
+	session_start();
+	if(!isset($_SESSION['uname'])) {
+		die('Bitte zuerst <a href="login.php">einloggen</a>');
+	}
+	$username = $_SESSION['uname'];
+	
+	// Logout-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
+		session_start();
+		session_destroy();
+		header("Location: login.php");
+	}
+	
+	// Suchfunktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['search'])){
+		$searchtext = $_POST['searchtext'];
+		if ($searchtext == ''){
+			echo "<script type='text/javascript'>alert('Bitte geben Sie einen Suchbegriff ein!');</script>";
+		}else{
+			if ($_POST['optradio']) { 
+				$type = $_POST['optradio'];
+				
+				session_start();
+				$_SESSION['searchtext'] = $searchtext;
+				$_SESSION['searchtype'] = $type;
+				header("Location: searchView.php");
+				
+				/*$s = new Search($searchtext, $type);
+				$s->execute();*/
+			}
+		}
+	}
+	
+	// Funktionen für Einladungsbuttons vorbereiten
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");				
+	$userid = "SELECT id FROM benutzer WHERE name = '$username';";
+	$sql = pg_query($dbconn, $userid); 
+	$row = pg_fetch_row($sql);
+	$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='false';";
+	$sql = pg_query($dbconn, $eventid);
+	while ($row = pg_fetch_row($sql)) {
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["anmelden$row[0]"])){
+			$a = new Accept($row[0], $username);
+			$a->execute();
+		}
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["loeschen$row[0]"])){
+			$d = new Decline($row[0], $username);
+			$d->execute();
+		}
+	}
+
+?>
 
 <html>
 	<head>
@@ -17,7 +73,7 @@
 				<div class="navbar-text px-sm-2 pt-sm-3">
 					<p id="usr"><?php echo "Hallo, $username"; ?></p>
 				</div>
-				<button type="submit" name="submit" class="btn btn-outline-light" method="">Logout</button>
+				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>
 		<br>
@@ -27,7 +83,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">&#x1F50D;</div>
 					</div>
-					<input type="text" class="form-control" name="searchtext" placeholder="search">
+					<input type="text" class="form-control" name="searchtext" placeholder="search" />
 				</div>
 				<br>
 				<div>
@@ -39,17 +95,93 @@
 				</div>
 			</div>
 		</form>
+		<br>
 		<div class="container">
   			<div class="row">
     			<div class="col-sm border scroll">
-     				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+     				<h4>Einladungen:</h4>
+					<table class="table">
+						<tr>
+							<th>Eventname:</th><th>Annehmen?</th>
+						</tr>
+						<?php
+							// Vom aktuellen Benutzer alle Einladungen in die Tabelle schreiben
+							
+							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+							
+							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
+							$sql = pg_query($dbconn, $userid); 
+							$row = pg_fetch_row($sql);
+							
+							$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='false';";
+							$sql = pg_query($dbconn, $eventid);
+							
+							while ($row = pg_fetch_row($sql)) {
+								$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
+								$sqlname = pg_query($dbconn, $eventname); 
+								$ergname = pg_fetch_row($sqlname);
+								
+								$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
+								$sqlort = pg_query($dbconn, $eventort); 
+								$ergort = pg_fetch_row($sqlort);
+								
+								echo "<tr>
+										<td>$ergname[0]</td>
+										<td>
+											<form action='' method='post'>
+												<input type='submit' class='btn btn-outline-dark' name='anmelden$row[0]' value='Ja' />
+												<input type='submit' class='btn btn-outline-dark' name='loeschen$row[0]' value='Nein' />
+											</form>
+										</td>
+									</tr>";
+							}
+							
+						?>
+					</table>
     			</div>
-    			<div class="col-sm border scroll">
-      				One of two columns
-      				<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.html'">Add Event</button>
+				<div class="col-sm border scroll">
+     				<h4>Teilnahmen:</h4>
+					<table class="table">
+						<tr>
+							<th>Eventname:</th><th>Ort:</th>
+						</tr>
+						<?php
+							// Vom aktuellen Benutzer alle Events auslesen, an denen dieser Teilnimmt, und in die Tabelle schreiben
+							
+							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+							
+							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
+							$sql = pg_query($dbconn, $userid); 
+							$row = pg_fetch_row($sql);
+							
+							$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='true';;";
+							$sql = pg_query($dbconn, $eventid);
+							
+							while ($row = pg_fetch_row($sql)) {
+								$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
+								$sqlname = pg_query($dbconn, $eventname); 
+								$ergname = pg_fetch_row($sqlname);
+								
+								$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
+								$sqlort = pg_query($dbconn, $eventort); 
+								$ergort = pg_fetch_row($sqlort);
+								
+								echo "<tr><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
+							}
+						
+						?>
+					</table>
+    			</div>
+    			<div class="col-sm border">
+    				<div class="scroll">
+      					<h4>Erstellungen:</h4>
+						<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer</p>
+					</div>
+					<div>
+						<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
+    				</div>
     			</div>
     		</div>
 		</div>
-		
 	</body>
 </html>
