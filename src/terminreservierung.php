@@ -37,12 +37,12 @@
 	$sql = pg_query($dbconn, $eventid);
 	
 	while ($row = pg_fetch_row($sql)) {
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['anmelden.$row[0]'])){
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['$row[0]'])){
 			echo "<script type='text/javascript'>alert('$row[0]');</script>";
 		}
 		
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['loeschen.$row[0]'])){
-			echo "<script type='text/javascript'>alert('$row[0]');</script>";
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['$row[0]'])){
+			echo "<script type='text/javascript'>alert('delete.$row[0]');</script>";
 		}
 	}
 	
@@ -144,8 +144,8 @@
 										<td>$ergname[0]</td>
 										<td>
 											<form action='' method='post'>
-											<input type='submit' class='btn btn-outline-dark' name='anmelden.$row[0]' value='Ja' />
-											<input type='submit' class='btn btn-outline-dark' name='loeschen.$row[0]' value='Nein' />
+											<input type='submit' class='btn btn-outline-dark' name='".$row[0]."' value='Ja' />
+											<input type='submit' class='btn btn-outline-dark' name='delete".$row[0]."' value='Nein' />
 											</form>
 										</td>
 									</tr>";
