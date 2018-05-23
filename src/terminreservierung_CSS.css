@@ -4,3 +4,9 @@ body{
 	margin-left: 10px;
 }
 
+.scroll{
+	height:360px;
+  	overflow-y:scroll;
+  	width:100%;
+}
+
