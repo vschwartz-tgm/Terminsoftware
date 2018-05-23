@@ -291,7 +291,7 @@ class invitation
 		$sql = pg_query($dbconn, $userid); 
 		$row = pg_fetch_row($sql);
 		$i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventId' AND usr = '$row[0]';";
-		$sql = pg_query($dbconn, $i); 
+		$sql = pg_query($dbconn, $i);
 		
 	}
 	
