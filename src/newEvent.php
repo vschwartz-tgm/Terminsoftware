@@ -90,8 +90,8 @@
 				for(i = 1; i < count_date; i++){
 					dates.push(date+i);
 				}
-				alert(document.getElementById('wrapperDate').innerHTML += dates);		
-				alert(dummy);
+				//alert(document.getElementById('wrapperDate').innerHTML += dates);		
+				//alert(dummy);
 				document.getElementById('wrapperDate').innerHTML += dates;
 			}
 			
