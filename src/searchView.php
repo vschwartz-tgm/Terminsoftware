@@ -3,8 +3,8 @@
 	
 	// Ist ein Benuter angemeldet?
 	session_start();
-	if(!isset($_SESSION['uname'])&&!isset($_SESSION['eventName'])) {
-		die('Bitte zuerst <a href="index.php">einloggen</a>');
+	if(!isset($_SESSION['uname'])&&!isset($_SESSION['searchtext'])) {
+		die('Bitte zuerst <a href="login.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
 	
@@ -16,7 +16,7 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();
-		header("Location: index.php");
+		header("Location: login.php");
 	}
 	
 	// Zurückbutton-Funktionalität
