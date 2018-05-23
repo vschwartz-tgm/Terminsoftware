@@ -98,7 +98,7 @@
 								$sqlort = pg_query($dbconn, $eventort); 
 								$ergort = pg_fetch_row($sqlort);
 								
-								echo "<tr><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
+								echo "<tr><td>$ergname[0]</td><td><button type='button' class='btn btn-outline-dark'>Annehmen</button><button type='button' class='btn btn-outline-dark'>Löschen</button></td></tr>";
 							}
 							
 						?>
