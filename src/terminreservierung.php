@@ -205,8 +205,10 @@
 						
 						?>
 					</table>
-      				<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
     			</div>
+				<div>
+					<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
+				</div>
     		</div>
 		</div>
 	</body>
