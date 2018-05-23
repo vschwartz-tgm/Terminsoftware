@@ -10,3 +10,14 @@ body{
   	width:100%;
 }
 
+.scroll2{
+	height:320px;
+  	overflow-y:scroll;
+  	width:100%;
+}
+
+.btn-add{
+	position: fixed;
+    bottom: 0;
+}
+
