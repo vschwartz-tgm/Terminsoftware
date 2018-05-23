@@ -52,7 +52,7 @@
 		<div class="container">
   			<div class="row">
     			<div class="col-sm border scroll">
-     				<h4>Suchergebnisse:</h4>
+     				<h4>Suchergebnisse für "<?php echo "$searchtext"; ?>" in <?php echo "$searchtype"; ?></h4>
 					<table class="table">
 						<?php
 							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
