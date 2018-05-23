@@ -172,7 +172,8 @@
 						?>
 					</table>
     			</div>
-    			<div class="col-sm border scroll">
+    			<div class="col-sm border">
+    				<div class="scroll2">
       				<h4>Erstellungen:</h4>
 					<table class="table">
 						<tr>
@@ -205,10 +206,11 @@
 						
 						?>
 					</table>
+					</div>
+					<div>
+						<button type="button" class="btn btn-outline-dark btn-add" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
+    				</div>
     			</div>
-				<div>
-					<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
-				</div>
     		</div>
 		</div>
 	</body>
