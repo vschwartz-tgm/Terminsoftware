@@ -27,35 +27,13 @@
 		}
 	}
 	
-	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-							
-	$userid = "SELECT id FROM benutzer WHERE name = '$username';";
-	$sql = pg_query($dbconn, $userid); 
-	$row = pg_fetch_row($sql);
-	
-	$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='false';";
-	$sql = pg_query($dbconn, $eventid);
-	
-	while ($row = pg_fetch_row($sql)) {
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['$row[0]'])){
-			echo "<script type='text/javascript'>alert('$row[0]');</script>";
-		}
-		
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['$row[0]'])){
-			echo "<script type='text/javascript'>alert('delete.$row[0]');</script>";
-		}
-	}
-	
-	/*
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['anmelden'])){
-		$id = $_POST['anmelden'];
-		echo "<script type='text/javascript'>alert('$id');</script>";
+		echo "<script type='text/javascript'>alert('Anmelden');</script>";
 	}
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['loeschen'])){
-		$id = $_POST['loeschen'];
-		echo "<script type='text/javascript'>alert('$id');</script>";
-	}*/
+		echo "<script type='text/javascript'>alert('Löschen');</script>";
+	}
 	
 	/*
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['ja'])){
@@ -144,8 +122,8 @@
 										<td>$ergname[0]</td>
 										<td>
 											<form action='' method='post'>
-											<input type='submit' class='btn btn-outline-dark' name='".$row[0]."' value='Ja' />
-											<input type='submit' class='btn btn-outline-dark' name='delete".$row[0]."' value='Nein' />
+												<input type='submit' class='btn btn-outline-dark' name='anmelden' value='Ja' />
+												<input type='submit' class='btn btn-outline-dark' name='loeschen' value='Nein' />
 											</form>
 										</td>
 									</tr>";
