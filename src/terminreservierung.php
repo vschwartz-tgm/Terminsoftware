@@ -24,6 +24,10 @@
 			if ($_POST['optradio']) { 
 				$type = $_POST['optradio'];
 				
+				session_start();
+				$_SESSION['searchtext'] = $searchtext;
+				$_SESSION['searchtype'] = $type;
+				header("Location: searchView.php");
 				
 				/*$s = new Search($searchtext, $type);
 				$s->execute();*/
@@ -94,7 +98,7 @@
 		<br>
 		<div class="container">
   			<div class="row">
-    			<div class="col-sm border">
+    			<div class="col-sm border scroll">
      				<h4>Einladungen:</h4>
 					<table class="table">
 						<tr>
@@ -135,7 +139,7 @@
 						?>
 					</table>
     			</div>
-				<div class="col-sm border">
+				<div class="col-sm border scroll">
      				<h4>Teilnahmen:</h4>
 					<table class="table">
 						<tr>
@@ -168,7 +172,7 @@
 						?>
 					</table>
     			</div>
-    			<div class="col-sm border">
+    			<div class="col-sm border scroll">
       				<h4>Erstellungen:</h4>
 					<table class="table">
 						<tr>
