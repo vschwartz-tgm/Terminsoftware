@@ -24,6 +24,7 @@
 			if ($_POST['optradio']) { 
 				$type = $_POST['optradio'];
 				
+				
 				/*$s = new Search($searchtext, $type);
 				$s->execute();*/
 			}
