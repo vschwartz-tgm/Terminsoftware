@@ -122,8 +122,8 @@
 										<td>$ergname[0]</td>
 										<td>
 											<form action='' method='post'>
-												<input type='submit' class='btn btn-outline-dark' name='anmelden' value='Ja' />
-												<input type='submit' class='btn btn-outline-dark' name='loeschen' value='Nein' />
+												<input type='submit' class='btn btn-outline-dark' name='anmelden$row[0]' value='Ja' />
+												<input type='submit' class='btn btn-outline-dark' name='loeschen$row[0]' value='Nein' />
 											</form>
 										</td>
 									</tr>";
