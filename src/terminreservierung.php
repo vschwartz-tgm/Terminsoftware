@@ -6,15 +6,16 @@
 	}
 	$username = $_SESSION['uname'];
 	
+	// Logout-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();
 		header("Location: login.php");
 	}
 	
+	// Suchfunktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['search'])){
 		$searchtext = $_POST['searchtext'];
-		
 		if ($searchtext == ''){
 			echo "<script type='text/javascript'>alert('Bitte geben Sie einen Suchbegriff ein!');</script>";
 		}else{
