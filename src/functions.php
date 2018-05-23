@@ -133,7 +133,7 @@ class RegisterUser extends UserCommand
 		if ($fehler == false){
 			$insert = "INSERT INTO benutzer(name,email,pw) VALUES('$this->uname','$this->email','$this->psw');";
 			$i = pg_query($dbconn, $insert);
-			header("Location: index.php");
+			header("Location: login.php");
 		}
 	}
 }
