@@ -266,7 +266,7 @@ class CreateEvent extends OrganisatorCommand
 				$userId = "SELECT id FROM benutzer WHERE name = '$people';";
 				$userID = pg_query($dbconn, $userId); 
 				$uID = pg_fetch_row($userID);
-				$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0]','$row[0]');";
+				$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0]','$row[0]', false);";
 				$iuser = pg_query($dbconn, $insertUsers);
 			}
 			header("Location: terminreservierung.php");
