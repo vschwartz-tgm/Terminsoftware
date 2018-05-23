@@ -273,4 +273,33 @@ class CreateEvent extends OrganisatorCommand
 		}
 	}
 }
+
+class invitation
+{
+	function __construct($eventName, $username){
+		$this->eventName = $eventName;
+		$this->uname = $username;
+
+	}
+	
+	public function accept(){
+		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
+		$sql = pg_query($dbconn, $userid); 
+		$row = pg_fetch_row($sql);
+		$i = "DELETE FROM teilnehmer WHERE event = '$this->eventName' AND usr = '$row[0]';";
+		$sql = pg_query($dbconn, $i); 
+		$uID = pg_fetch_row($sql);
+		
+	}
+	
+	
+	public function decline(){
+		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
+		$sql = pg_query($dbconn, $userid); 
+		$row = pg_fetch_row($sql);
+		$i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventName' AND usr = '$row[0]';";
+		$sql = pg_query($dbconn, $i); 
+		$uID = pg_fetch_row($sql);
+	}
+}
 ?>

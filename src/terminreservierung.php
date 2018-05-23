@@ -26,6 +26,20 @@
 			}
 		}
 	}
+
+
+
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['ja'])){
+		$a = new invitation($eventName, $username);
+		$a->accept;
+	}
+
+
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['ja'])){
+		$a = new invitation($eventName, $username);
+		$a->decline;
+	}
+
 ?>
 
 <html>
