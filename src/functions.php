@@ -278,7 +278,7 @@ class CreateEvent extends OrganisatorCommand
 * @author	Christoph Kern
 * @version  1.0
 */
-class invitation
+class Accept extends OrganisatorCommand
 {
 	private $eventId;
 	private $uname;
@@ -289,7 +289,7 @@ class invitation
 
 	}
 	
-	public function accept(){
+	public function execute(){
 		
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
@@ -301,7 +301,21 @@ class invitation
 		
 	}
 	
-	public function decline(){
+}
+
+
+class Decline extends OrganisatorCommand
+{
+	private $eventId;
+	private $uname;
+	
+	function __construct($eventId, $username){
+		$this->eventId = $eventId;
+		$this->uname = $username;
+
+	}
+	
+public function execute(){
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 		$sql = pg_query($dbconn, $userid); 
@@ -309,5 +323,7 @@ class invitation
 		$i = "DELETE FROM teilnehmer WHERE event = '$this->eventId' AND usr = '$row[0]';";
 		$sql = pg_query($dbconn, $i);
 	}
+	
 }
+
 ?>

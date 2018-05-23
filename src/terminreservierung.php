@@ -44,12 +44,12 @@
 	$sql = pg_query($dbconn, $eventid);
 	while ($row = pg_fetch_row($sql)) {
 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["anmelden$row[0]"])){
-			$a = new invitation($row[0], $username);
-			$a->accept();
+			$a = new Accept($row[0], $username);
+			$a->execute();
 		}
 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["loeschen$row[0]"])){
-			$a = new invitation($row[0], $username);
-			$a->decline();
+			$d = new Decline($row[0], $username);
+			$d->execute();
 		}
 	}
 
