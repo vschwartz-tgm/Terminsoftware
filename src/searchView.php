@@ -75,7 +75,7 @@
 								echo "<tr>
 										<th>Username:</th>
 									</tr>";
-								$searcherg = "SELECT name FROM user WHERE name LIKE '%$searchtext%' OR name LIKE '$searchtext';";
+								$searcherg = "SELECT name FROM benutzer WHERE name LIKE '%$searchtext%' OR name LIKE '$searchtext';";
 								$sql = pg_query($dbconn, $searcherg);
 								while ($row = pg_fetch_row($sql)) {
 									echo "<tr>
