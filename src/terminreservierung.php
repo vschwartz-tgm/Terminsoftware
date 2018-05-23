@@ -26,6 +26,7 @@
 			}
 		}
 	}
+<<<<<<< HEAD
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['anmelden'])){
 		$id = $_POST['anmelden'];
@@ -36,6 +37,22 @@
 		$id = $_POST['loeschen'];
 		echo "<script type='text/javascript'>alert('$id');</script>";
 	}
+=======
+
+
+
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['ja'])){
+		$a = new invitation($eventName, $username);
+		$a->accept;
+	}
+
+
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['ja'])){
+		$a = new invitation($eventName, $username);
+		$a->decline;
+	}
+
+>>>>>>> 6e9681e06c123fa9b8dffb99a2d93aae9224a336
 ?>
 
 <html>
