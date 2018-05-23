@@ -27,14 +27,24 @@
 		}
 	}
 	
-	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['anmelden'])){
-		echo "<script type='text/javascript'>alert('Anmelden');</script>";
-	}
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+							
+	$userid = "SELECT id FROM benutzer WHERE name = '$username';";
+	$sql = pg_query($dbconn, $userid); 
+	$row = pg_fetch_row($sql);
 	
-	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['loeschen'])){
-		echo "<script type='text/javascript'>alert('Löschen');</script>";
-	}
+	$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='false';";
+	$sql = pg_query($dbconn, $eventid);
 	
+	while ($row = pg_fetch_row($sql)) {
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["anmelden$row[0]"])){
+			echo "<script type='text/javascript'>alert('Anmelden$row[0]');</script>";
+		}
+	
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["loeschen$row[0]"])){
+			echo "<script type='text/javascript'>alert('Löschen$row[0]');</script>";
+		}
+	}
 	/*
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['ja'])){
 		$a = new invitation($eventName, $username);
