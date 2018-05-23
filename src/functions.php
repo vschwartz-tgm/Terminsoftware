@@ -276,7 +276,7 @@ class CreateEvent extends OrganisatorCommand
 
 class invitation
 {
-	function __construct($eventName, $username){
+	function __construct($eventId, $username){
 		$this->eventName = $eventName;
 		$this->uname = $username;
 
@@ -286,7 +286,7 @@ class invitation
 		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 		$sql = pg_query($dbconn, $userid); 
 		$row = pg_fetch_row($sql);
-		$i = "DELETE FROM teilnehmer WHERE event = '$this->eventName' AND usr = '$row[0]';";
+		$i = "DELETE FROM teilnehmer WHERE event = '$this->eventId' AND usr = '$row[0]';";
 		$sql = pg_query($dbconn, $i); 
 		$uID = pg_fetch_row($sql);
 		
@@ -297,7 +297,7 @@ class invitation
 		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 		$sql = pg_query($dbconn, $userid); 
 		$row = pg_fetch_row($sql);
-		$i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventName' AND usr = '$row[0]';";
+		$i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventId' AND usr = '$row[0]';";
 		$sql = pg_query($dbconn, $i); 
 		$uID = pg_fetch_row($sql);
 	}
