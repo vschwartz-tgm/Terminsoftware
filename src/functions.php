@@ -278,7 +278,7 @@ class invitation
 {
 	private $eventId;
 	private $uname;
-	
+	echo "<script type='text/javascript'>alert('Hallo');</script>";
 	function __construct($eventId, $username){
 		$this->eventId = $eventId;
 		$this->uname = $username;
@@ -286,6 +286,7 @@ class invitation
 	}
 	
 	public function accept(){
+		echo "<script type='text/javascript'>alert('Hallo');</script>";
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 		$sql = pg_query($dbconn, $userid); 
