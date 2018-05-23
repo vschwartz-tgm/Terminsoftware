@@ -326,4 +326,48 @@ public function execute(){
 	
 }
 
+class sendMail extends OrganisatorCommand
+{
+	private $eventId;
+	private $uname;
+	private $email;
+	
+	function __construct($eventId, $username){
+		$this->eventId = $eventId;
+		$this->uname = $username;
+
+	}
+	
+public function execute(){
+		$mail             = new PHPMailer();
+
+$mail->IsSMTP(); // telling the class to use SMTP
+$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+                                           // 1 = errors and messages
+                                           // 2 = messages only
+$mail->SMTPAuth   = true;                  // enable SMTP authentication
+$mail->SMTPSecure = "tls";                 
+$mail->Host       = "smtp.gmail.com";      // SMTP server
+$mail->Port       = 587;                   // SMTP port
+$mail->Username   = "terminreservierungssystem.teamm@gmail.com";  // username
+$mail->Password   = "Admin12$";            // password
+
+$mail->SetFrom('user@gmail.com', 'Test');
+
+$mail->Subject    = "I hope this works!";
+
+$mail->MsgHTML('Blah');
+
+$address = "$email";
+$mail->AddAddress($address, "Test");
+
+if(!$mail->Send()) {
+  echo "Mailer Error: " . $mail->ErrorInfo;
+} else {
+  echo "Message sent!";
+}
+	}
+	
+}
+
 ?>
