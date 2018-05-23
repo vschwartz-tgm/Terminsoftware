@@ -38,11 +38,15 @@
 	
 	while ($row = pg_fetch_row($sql)) {
 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["anmelden$row[0]"])){
-			echo "<script type='text/javascript'>alert('Anmelden$row[0]');</script>";
+			//echo "<script type='text/javascript'>alert('Anmelden$row[0]');</script>";
+			$a = new invitation($row[0], $username);
+			$a->accept;
 		}
 	
 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["loeschen$row[0]"])){
-			echo "<script type='text/javascript'>alert('Löschen$row[0]');</script>";
+			//echo "<script type='text/javascript'>alert('Löschen$row[0]');</script>";
+			$a = new invitation($row[0], $username);
+			$a->decline;
 		}
 	}
 	/*
