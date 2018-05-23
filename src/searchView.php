@@ -18,6 +18,11 @@
 		session_destroy();
 		header("Location: index.php");
 	}
+	
+	// Zurückbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
+		header("Location: index.php");
+	}
 ?>
 
 <html>
@@ -82,6 +87,11 @@
 						?>
 					</table>
     			</div>
+			</div>
+			<div class="row">
+				<form action="" method="post">
+					<input type="submit" name="back" class="addbtn">Zurück</button>
+				</form>
 			</div>
 		</div>
 	</body>
