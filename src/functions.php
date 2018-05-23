@@ -278,7 +278,6 @@ class invitation
 {
 	private $eventId;
 	private $uname;
-	echo "<script type='text/javascript'>alert('Hallo');</script>";
 	function __construct($eventId, $username){
 		$this->eventId = $eventId;
 		$this->uname = $username;
