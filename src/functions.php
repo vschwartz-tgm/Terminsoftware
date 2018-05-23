@@ -349,7 +349,7 @@ $mail->Subject    = "I hope this works!";
 
 $mail->MsgHTML('Sie haben sich angemeldet!!');
 
-$address = "$email";
+$address = "$this->email";
 $mail->AddAddress($address, "Test");
 
 if(!$mail->Send()) {
