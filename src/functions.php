@@ -285,15 +285,13 @@ class invitation
 	}
 	
 	public function accept(){
-		echo "<script type='text/javascript'>alert('Hallo');</script>";
+		
 		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		$userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
 		$sql = pg_query($dbconn, $userid); 
 		$row = pg_fetch_row($sql);
 		$i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventId' AND usr = '$row[0]';";
 		$sql = pg_query($dbconn, $i);
-		echo "<script type='text/javascript'>alert('$row[0]');</script>";
-		echo "<script type='text/javascript'>alert('$this->eventId');</script>";
 		$sql = pg_query($dbconn, $i); 
 		
 	}
@@ -305,8 +303,6 @@ class invitation
 		$sql = pg_query($dbconn, $userid); 
 		$row = pg_fetch_row($sql);
 		$i = "DELETE FROM teilnehmer WHERE event = '$this->eventId' AND usr = '$row[0]';";
-		echo "<script type='text/javascript'>alert('$row[0]');</script>";
-		echo "<script type='text/javascript'>alert('$this->eventId');</script>";
 		$sql = pg_query($dbconn, $i);
 	}
 }
