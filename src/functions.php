@@ -339,9 +339,9 @@ $mail->SMTPDebug  = 2;                     // enables SMTP debug information (fo
                                            // 1 = errors and messages
                                            // 2 = messages only
 $mail->SMTPAuth   = true;                  // enable SMTP authentication
-$mail->SMTPSecure = "tls";                 
+$mail->SMTPSecure = "ssl";                 
 $mail->Host       = "smtp.gmail.com";      // SMTP server
-$mail->Port       = 587;                   // SMTP port
+$mail->Port       = 465;                   // SMTP port
 $mail->Username   = "terminreservierungssystem.teamm@gmail.com";  // username
 $mail->Password   = "Admin12$";            // password
 
