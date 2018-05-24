@@ -351,12 +351,12 @@ public function execute(){
 
 			$mail->isHTML(true);                                 
 			$mail->Subject = 'Anmeldung';
-			$mail->Body    = 'Liebe/r ' . $this->username . '.\n Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
-			$mail->AltBody = 'Liebe/r ' . $this->username . '.\n Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
+			$mail->Body    = 'Lieber user Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
+			$mail->AltBody = 'Lieber user Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
 			$mail->send();
-			echo 'Message has been sent';
+			echo "<script type='text/javascript'>alert('Message sent!!');</script>";
 		} catch (Exception $e) {
-			echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+			echo "<script type='text/javascript'>alert('Message NOT sent!!');</script>";
 		}
 
 	}
