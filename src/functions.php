@@ -321,6 +321,10 @@ public function execute(){
 
 class SendMail extends OrganisatorCommand
 {
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+	require './vendor/autoload.php';
+	
 	private $uname;
 	private $email;
 	
@@ -331,34 +335,38 @@ class SendMail extends OrganisatorCommand
 	}
 	
 public function execute(){
-	echo "<script type='text/javascript'>alert('send mail!');</script>";
-		$mail = new PHPMailer();
 
-$mail->IsSMTP(); // telling the class to use SMTP
-$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
-                                           // 1 = errors and messages
-                                           // 2 = messages only
-$mail->SMTPAuth   = true;                  // enable SMTP authentication
-$mail->SMTPSecure = "ssl";                 
-$mail->Host       = "smtp.gmail.com";      // SMTP server
-$mail->Port       = 465;                   // SMTP port
-$mail->Username   = "terminreservierungssystem.teamm@gmail.com";  // username
-$mail->Password   = "Admin12$";            // password
+		$mail = new PHPMailer(true);                              
+		try {
+			$mail->SMTPDebug = 4;                                
+			$mail->isSMTP();                                     
+			$mail->Host = 'smtp.gmail.com';  
+			$mail->SMTPAuth = true;                               
+			$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+			$mail->Password = 'Admin12$';                          
+			$mail->SMTPSecure = 'ssl';                           
+			$mail->Port = 465;                                    
 
-$mail->Subject    = "I hope this works!";
+			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+			$mail->addAddress($this->email);            
+			$mail->addReplyTo('chris10.kern@gmail.com', 'Information');
 
-$mail->MsgHTML('Sie haben sich angemeldet!!');
+			$mail->isHTML(true);                                 
+			$mail->Subject = 'Anmeldung';
+			$mail->Body    = 'Liebe/r ' . $this->username . '.\n Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
+			$mail->AltBody = 'Liebe/r ' . $this->username . '.\n Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
+			$mail->send();
+			echo 'Message has been sent';
+		} catch (Exception $e) {
+			echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+		}
 
-$address = "$this->email";
-$mail->AddAddress($address, "Test");
-
-if(!$mail->Send()) {
-  echo "Mailer Error: " . $mail->ErrorInfo;
-} else {
-  echo "<script type='text/javascript'>alert('Mail wurde gesendet!');</script>";
-}
 	}
 	
 }
 
+
 ?>
+
+
+
