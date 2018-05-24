@@ -13,11 +13,11 @@ include ("functions.php");
 		$psw = $_POST['psw'];
 		$pswrepeat = $_POST['psw-repeat'];
 		
-		$m = new SendMail($email, $uname);
-		$m->execute();
-		
 		$l = new RegisterUser($uname, $email, $psw, $pswrepeat);
 		$l->execute();
+		
+		$m = new SendMail($email, $uname);
+		$m->execute();
 	}
 ?>
 
