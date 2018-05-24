@@ -334,9 +334,10 @@ class SendMail extends OrganisatorCommand
 	}
 	
 public function execute(){
-
+		echo "<script type='text/javascript'>alert('begin');</script>";
 		$mail = new PHPMailer(true);                              
 		try {
+			echo "<script type='text/javascript'>alert('Hallo');</script>";
 			$mail->SMTPDebug = 4;                                
 			$mail->isSMTP();                                     
 			$mail->Host = 'smtp.gmail.com';  
@@ -344,10 +345,13 @@ public function execute(){
 			$mail->Username = 'terminreservierung.teamm@gmail.com';                 
 			$mail->Password = 'Admin12$';                          
 			$mail->SMTPSecure = 'ssl';                           
-			$mail->Port = 465;                                    
+			$mail->Port = 465;
+			echo "<script type='text/javascript'>alert('eigene Angaben');</script>";
 
 			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
 			$mail->addAddress($this->email);
+			echo "<script type='text/javascript'>alert('an Mail: ');</script>";
+			echo "<script type='text/javascript'>alert($this->email);</script>";
 
 			$mail->isHTML(true);                                 
 			$mail->Subject = 'Anmeldung';
