@@ -1,7 +1,10 @@
 <?php
+include './vendor/phpmailer/phpmailer/src/PHPMailer.php';
+//require './vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-include ("functions.php");
+
+include ("functions.php");	
 
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){

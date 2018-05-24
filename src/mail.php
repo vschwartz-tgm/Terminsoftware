@@ -1,8 +1,9 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require ("./vendor/autoload.php");
+
+require './vendor/autoload.php';
+
 $mail = new PHPMailer(true);                              
 try {
     $mail->SMTPDebug = 4;                                
@@ -20,7 +21,7 @@ try {
 
     $mail->isHTML(true);                                 
     $mail->Subject = 'Angemeldet';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Body    = '<b>require in php programm geht nicht aber wenn ich es Hier in der VIM ausführe mit php mail.php funktioniert es?! Files sind im gleichen Ordner und der Pfad wäre der gleiche ich verstehe es nicht. Nebenbei der Fehler den ich gester hatte war ich hab mich bei smtp.gmail.com verschrieben dadurch konnte keine Connection aufgebaut werden.</b>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     $mail->send();
     echo 'Message has been sent';
