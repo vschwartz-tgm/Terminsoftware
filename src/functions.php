@@ -337,32 +337,31 @@ class SendMailRegister extends OrganisatorCommand
 	}
 	
 public function execute(){
-	$mail = new PHPMailer(true);
-	try {
-		$mail->SMTPDebug = 4;                                
-		$mail->isSMTP();                                     
-		$mail->Host = 'smtp.gmail.com';  
-		$mail->SMTPAuth = true;                               
-		$mail->Username = 'terminreservierung.teamm@gmail.com';                 
-		$mail->Password = 'Admin12$';                          
-		$mail->SMTPSecure = 'ssl';                           
-		$mail->Port = 465;
+		$mail = new PHPMailer(true);
+		try {
+			$mail->SMTPDebug = 4;                                
+			$mail->isSMTP();                                     
+			$mail->Host = 'smtp.gmail.com';  
+			$mail->SMTPAuth = true;                               
+			$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+			$mail->Password = 'Admin12$';                          
+			$mail->SMTPSecure = 'ssl';                           
+			$mail->Port = 465;
 
-		$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-		$mail->addAddress($this->email);
+			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+			$mail->addAddress($this->email);
 
-		$mail->isHTML(true);                                 
-		$mail->Subject = 'Anmeldung';
-		$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
-		$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
-		$mail->send();
+			$mail->isHTML(true);                                 
+			$mail->Subject = 'Anmeldung';
+			$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
+			$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
+			$mail->send();
+
+		} catch (Exception $e) {
+			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+		}
 		header("Location: login.php");
-
-	} catch (Exception $e) {
-		echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
 	}
-
-}
 	
 }
 
@@ -404,16 +403,16 @@ class SendMailInvitation extends OrganisatorCommand
 
 				$mail->isHTML(true);                                 
 				$mail->Subject = 'Einladung';
-				$mail->Body    = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
-				$mail->AltBody = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
+				$mail->Body    = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+				$mail->AltBody = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 				$mail->send();
-				header("Location: login.php");
 
 				echo "<script type='text/javascript'>alert('Sent!');</script>";
 			} catch (Exception $e) {
 				echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
 			}
 		}
+		header("Location: login.php");
 
 	}
 	
