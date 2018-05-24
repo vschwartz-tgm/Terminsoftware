@@ -22,8 +22,8 @@ abstract class EventCommand implements Command
 
 
 <?php
-include 'PHPMailer\PHPMailer\PHPMailer';
-include 'PHPMailer\PHPMailer\Exception';
+include './PHPMailer/PHPMailer/PHPMailer';
+include './PHPMailer/PHPMailer/Exception';
 require './vendor/autoload.php';
 /**
 * Klasse LoginUser, zum Einloggen des Users
