@@ -347,8 +347,7 @@ public function execute(){
 			$mail->Port = 465;                                    
 
 			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-			$mail->addAddress($this->email);            
-			$mail->addReplyTo('chris10.kern@gmail.com', 'Information');
+			$mail->addAddress($this->email);
 
 			$mail->isHTML(true);                                 
 			$mail->Subject = 'Anmeldung';

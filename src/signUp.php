@@ -1,8 +1,9 @@
 <?php
 	include ("functions.php");
-	include ("./PHPMailer/PHPMailer/PHPMailer");
-	include ("./PHPMailer/PHPMailer/Exception");
-	require ("./vendor/autoload.php");
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+	require './vendor/autoload.php';
+
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$uname = $_POST['uname'];
@@ -10,9 +11,8 @@
 		$psw = $_POST['psw'];
 		$pswrepeat = $_POST['psw-repeat'];
 		
-		/*
 		$m = new SendMail($email, $uname);
-		$m->execute();*/
+		$m->execute();
 		
 		$l = new RegisterUser($uname, $email, $psw, $pswrepeat);
 		$l->execute();
