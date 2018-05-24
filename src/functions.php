@@ -1,7 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require './vendor/autoload.php';
 interface Command
 {
 	public function execute();
@@ -25,6 +22,9 @@ abstract class EventCommand implements Command
 
 
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require './vendor/autoload.php';
 /**
 * Klasse LoginUser, zum Einloggen des Users
 *
@@ -321,7 +321,7 @@ public function execute(){
 	}
 	
 }
-/*
+
 class SendMail extends OrganisatorCommand
 {
 	
@@ -363,7 +363,7 @@ public function execute(){
 
 	}
 	
-}*/
+}
 
 
 ?>
