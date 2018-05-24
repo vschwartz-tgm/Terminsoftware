@@ -76,7 +76,7 @@
 				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>
-		<br>
+		<br />
 		<form method="post">
 			<div class="container" align="center">
 				<div class="input-group col-md-6">
@@ -85,7 +85,7 @@
 					</div>
 					<input type="text" class="form-control" name="searchtext" placeholder="search" />
 				</div>
-				<br>
+				<br />
 				<div>
 					<label class="radio-inline"><input type="radio" name="optradio" value="event" checked>Event</label>
 					&nbsp;&nbsp;
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 		</form>
-		<br>
+		<br />
 		<div class="container">
   			<div class="row">
     			<div class="col-sm border scroll">
@@ -179,7 +179,6 @@
 						<tr>
 							<th>Eventname:</th><th>Ort:</th>
 						</tr>
-						<tr>
 						<?php 
 							// Alle vom User erstellten Events anzeigen
 							

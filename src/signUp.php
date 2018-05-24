@@ -31,7 +31,7 @@ include ("functions.php");
 		<form action="" method="post" style="border:1px solid #ccc">
 		  <div class="container">
 			<h1>Sign Up</h1>
-			<hr>
+			<hr />
 			
 			<label for="uname"><b>Username</b></label>
 			<input type="text" placeholder="Enter Username" name="uname" id="uname" required />

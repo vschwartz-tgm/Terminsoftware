@@ -23,7 +23,7 @@
 		  <div class="container">
 			<h1>Login</h1>&nbsp;&nbsp;&nbsp;
 			<a href="signUp.php"><h1>Sign Up</h1></a>
-			<hr>
+			<hr />
 			
 			<label for="uname"><b>Username</b></label>
 			<input type="text" placeholder="Enter Username" name="uname" required />
@@ -33,7 +33,7 @@
 
 			<button type="submit" class="loginbtn" name="submit">Login</button>
 			<label>
-			  <input type="checkbox" checked="checked" name="remember"> Remember me
+			  <input type="checkbox" checked="checked" name="remember" /> Remember me
 			</label>
 		  </div>
 
