@@ -324,7 +324,7 @@ public function execute(){
 }
 
 
-class SendMail extends OrganisatorCommand
+class SendMailRegister extends OrganisatorCommand
 {
 	
 	private $uname;
@@ -337,32 +337,79 @@ class SendMail extends OrganisatorCommand
 	}
 	
 public function execute(){
-		$mail = new PHPMailer(true);
-		try {
-			$mail->SMTPDebug = 4;                                
-			$mail->isSMTP();                                     
-			$mail->Host = 'smtp.gmail.com';  
-			$mail->SMTPAuth = true;                               
-			$mail->Username = 'terminreservierung.teamm@gmail.com';                 
-			$mail->Password = 'Admin12$';                          
-			$mail->SMTPSecure = 'ssl';                           
-			$mail->Port = 465;
+	$mail = new PHPMailer(true);
+	try {
+		$mail->SMTPDebug = 4;                                
+		$mail->isSMTP();                                     
+		$mail->Host = 'smtp.gmail.com';  
+		$mail->SMTPAuth = true;                               
+		$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+		$mail->Password = 'Admin12$';                          
+		$mail->SMTPSecure = 'ssl';                           
+		$mail->Port = 465;
 
-			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-			$mail->addAddress($this->email);
+		$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+		$mail->addAddress($this->email);
 
-			$mail->isHTML(true);                                 
-			$mail->Subject = 'Anmeldung';
-			$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
-			$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
-			$mail->send();
-			header("Location: login.php");
-			
-		} catch (Exception $e) {
-			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
-		}
+		$mail->isHTML(true);                                 
+		$mail->Subject = 'Anmeldung';
+		$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
+		$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
+		$mail->send();
+		header("Location: login.php");
+
+	} catch (Exception $e) {
+		echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+	}
+
+}
+	
+}
+
+class SendMailInvitation extends OrganisatorCommand
+{
+	
+	private $uname;
+	private $eventName;
+	
+	function __construct($username, $eventName){
+		$this->eventName = $eventName;
+		$this->uname = $username;
 
 	}
+	
+public function execute(){
+	$mail = new PHPMailer(true);
+	try {
+		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		$userMail = "SELECT email FROM benutzer WHERE name = '$this->uname';";
+		$sql = pg_query($dbconn, $userMail); 
+		$email = pg_fetch_row($sql);
+		
+		$mail->SMTPDebug = 4;                                
+		$mail->isSMTP();                                     
+		$mail->Host = 'smtp.gmail.com';  
+		$mail->SMTPAuth = true;                               
+		$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+		$mail->Password = 'Admin12$';                          
+		$mail->SMTPSecure = 'ssl';                           
+		$mail->Port = 465;
+
+		$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+		$mail->addAddress($email);
+
+		$mail->isHTML(true);                                 
+		$mail->Subject = 'Einladung';
+		$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
+		$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
+		$mail->send();
+		header("Location: login.php");
+
+	} catch (Exception $e) {
+		echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+	}
+
+}
 	
 }
 

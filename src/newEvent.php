@@ -19,6 +19,9 @@
 		$dates = $_POST['date'];
 		$ort = $_POST['location'];
 		$desc = $_POST['desc'];
+		
+		$m = new SendMailInvitation($user, $eventName);
+		$m->execute();
 
 		$e = new CreateEvent($eventName, $user, $dates, $ort, $desc, $username);
 		$e->execute();
