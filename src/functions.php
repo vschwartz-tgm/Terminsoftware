@@ -318,7 +318,7 @@ public function execute(){
 	}
 	
 }
-
+/*
 class SendMail extends OrganisatorCommand
 {
 	use PHPMailer\PHPMailer\PHPMailer;
@@ -363,7 +363,7 @@ public function execute(){
 
 	}
 	
-}
+}*/
 
 
 ?>
