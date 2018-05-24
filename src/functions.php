@@ -194,6 +194,9 @@ class Search extends UserCommand
 
 
 <?php
+require './vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 /**
 * Klasse CreateEvent, zum Erstellen eines Events
 *
@@ -335,8 +338,7 @@ class SendMail extends OrganisatorCommand
 	
 public function execute(){
 		echo "<script type='text/javascript'>alert('begin');</script>";
-		$mail = new PHPMailer(true);  
-		echo "<script type='text/javascript'>alert($mail);</script>";
+		$mail = new PHPMailer(true);
 		try {
 			echo "<script type='text/javascript'>alert('Hallo');</script>";
 			$mail->SMTPDebug = 4;                                
