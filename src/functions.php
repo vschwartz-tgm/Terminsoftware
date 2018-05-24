@@ -356,6 +356,8 @@ public function execute(){
 			$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
 			$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
 			$mail->send();
+			header("Location: login.php");
+			
 		} catch (Exception $e) {
 			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
 		}
