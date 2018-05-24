@@ -1,5 +1,8 @@
 <?php
 	include ("functions.php");
+	include ("./PHPMailer/PHPMailer/PHPMailer");
+	include ("./PHPMailer/PHPMailer/Exception");
+	require ("./vendor/autoload.php");
 	
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$uname = $_POST['uname'];
