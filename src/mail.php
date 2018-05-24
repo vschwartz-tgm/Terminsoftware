@@ -1,8 +1,8 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+include './vendor/phpmailer/phpmailer/src/PHPMailer.php';
 
-require './vendor/autoload.php';
+use PHPMailer\PHPMailer;
+use PHPMailer\Exception;
 
 $mail = new PHPMailer(true);                              
 try {
