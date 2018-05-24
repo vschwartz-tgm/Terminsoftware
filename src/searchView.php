@@ -48,7 +48,7 @@
 				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>
-		<br>
+		<br />
 		<div class="container">
   			<div class="row">
     			<div class="col-sm border scroll">
@@ -88,9 +88,10 @@
 					</table>
     			</div>
 			</div>
+			<br />
 			<div class="row">
 				<form action="" method="post">
-					<input type="submit" name="back" class="addbtn" value="Zurück" />
+					<input type="submit" name="back" class="btn btn-outline-dark" value="Zurück" />
 				</form>
 			</div>
 		</div>
