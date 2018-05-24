@@ -321,7 +321,7 @@ public function execute(){
 	}
 	
 }
-
+/*
 class SendMail extends OrganisatorCommand
 {
 	
@@ -363,7 +363,7 @@ public function execute(){
 
 	}
 	
-}
+}*/
 
 
 ?>
