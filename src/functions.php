@@ -369,50 +369,53 @@ public function execute(){
 class SendMailInvitation extends OrganisatorCommand
 {
 	
-	private $uname;
+	private $user;
 	private $eventName;
 	
 	function __construct($username, $eventName){
 		$this->eventName = $eventName;
-		$this->uname = $username;
+		$this->user = $username;
 
 	}
 	
-public function execute(){
-	$mail = new PHPMailer(true);
-	try {
-		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-		$userMail = "SELECT email FROM benutzer WHERE name = '$this->uname';";
-		$sql = pg_query($dbconn, $userMail); 
-		$email = pg_fetch_row($sql);
-		
-		$mail->SMTPDebug = 4;                                
-		$mail->isSMTP();                                     
-		$mail->Host = 'smtp.gmail.com';  
-		$mail->SMTPAuth = true;                               
-		$mail->Username = 'terminreservierung.teamm@gmail.com';                 
-		$mail->Password = 'Admin12$';                          
-		$mail->SMTPSecure = 'ssl';                           
-		$mail->Port = 465;
+	public function execute(){
+		$mail = new PHPMailer(true);
+		foreach($this->user as $people){
+			try {
+				$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
+				$sql = pg_query($dbconn, $userMail); 
+				$email = pg_fetch_row($sql);
 
-		$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-		$mail->addAddress($email[0]);
-		echo "<script type='text/javascript'>alert($email[0]);</script>";
-						  
+				$mail->SMTPDebug = 4;                                
+				$mail->isSMTP();                                     
+				$mail->Host = 'smtp.gmail.com';  
+				$mail->SMTPAuth = true;                               
+				$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+				$mail->Password = 'Admin12$';                          
+				$mail->SMTPSecure = 'ssl';                           
+				$mail->Port = 465;
+				echo "<script type='text/javascript'>alert('Vor addUser');</script>";
+				
+				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+				$mail->addAddress($email[0]);
+				echo "<script type='text/javascript'>alert($email[0]);</script>";
 
-		$mail->isHTML(true);                                 
-		$mail->Subject = 'Einladung';
-		$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
-		$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
-		$mail->send();
-		header("Location: login.php");
 
-		echo "<script type='text/javascript'>alert('Sent!');</script>";
-	} catch (Exception $e) {
-		echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+				$mail->isHTML(true);                                 
+				$mail->Subject = 'Einladung';
+				$mail->Body    = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
+				$mail->AltBody = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> können Sie auf die Einladung antworten.';
+				$mail->send();
+				header("Location: login.php");
+
+				echo "<script type='text/javascript'>alert('Sent!');</script>";
+			} catch (Exception $e) {
+				echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+			}
+		}
+
 	}
-
-}
 	
 }
 
