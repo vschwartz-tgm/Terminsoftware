@@ -335,7 +335,8 @@ class SendMail extends OrganisatorCommand
 	
 public function execute(){
 		echo "<script type='text/javascript'>alert('begin');</script>";
-		$mail = new PHPMailer(true);                              
+		$mail = new PHPMailer(true);  
+		echo "<script type='text/javascript'>alert($mail);</script>";
 		try {
 			echo "<script type='text/javascript'>alert('Hallo');</script>";
 			$mail->SMTPDebug = 4;                                
