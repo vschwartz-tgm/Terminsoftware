@@ -337,10 +337,8 @@ class SendMail extends OrganisatorCommand
 	}
 	
 public function execute(){
-		echo "<script type='text/javascript'>alert('begin');</script>";
 		$mail = new PHPMailer(true);
 		try {
-			echo "<script type='text/javascript'>alert('Hallo');</script>";
 			$mail->SMTPDebug = 4;                                
 			$mail->isSMTP();                                     
 			$mail->Host = 'smtp.gmail.com';  
@@ -349,21 +347,17 @@ public function execute(){
 			$mail->Password = 'Admin12$';                          
 			$mail->SMTPSecure = 'ssl';                           
 			$mail->Port = 465;
-			echo "<script type='text/javascript'>alert('eigene Angaben');</script>";
 
 			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
 			$mail->addAddress($this->email);
-			echo "<script type='text/javascript'>alert('an Mail: ');</script>";
-			echo "<script type='text/javascript'>alert($this->email);</script>";
 
 			$mail->isHTML(true);                                 
 			$mail->Subject = 'Anmeldung';
-			$mail->Body    = 'Lieber user Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
-			$mail->AltBody = 'Lieber user Sie haben sich erfolgreich bei unserem Terminreservierungssystem angemeldet!';
+			$mail->Body    = 'Liebe/r ' . $this->uname '.  <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie können sich nun unter https://terminreservierungssystem.herokuapp.com anmelden';
+			$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie können sich nun unter https://terminreservierungssystem.herokuapp.com anmelden';
 			$mail->send();
-			echo "<script type='text/javascript'>alert('Message sent!!');</script>";
 		} catch (Exception $e) {
-			echo "<script type='text/javascript'>alert('Message NOT sent!!');</script>";
+			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
 		}
 
 	}
