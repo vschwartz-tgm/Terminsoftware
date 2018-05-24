@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require './vendor/autoload.php';
 interface Command
 {
 	public function execute();
@@ -318,12 +321,9 @@ public function execute(){
 	}
 	
 }
-/*
+
 class SendMail extends OrganisatorCommand
 {
-	use PHPMailer\PHPMailer\PHPMailer;
-	use PHPMailer\PHPMailer\Exception;
-	require './vendor/autoload.php';
 	
 	private $uname;
 	private $email;
@@ -363,7 +363,7 @@ public function execute(){
 
 	}
 	
-}*/
+}
 
 
 ?>
