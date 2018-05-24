@@ -396,7 +396,7 @@ public function execute(){
 		$mail->Port = 465;
 
 		$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-		$mail->addAddress($email);
+		$mail->addAddress($email[0]);
 
 		$mail->isHTML(true);                                 
 		$mail->Subject = 'Einladung';
@@ -405,6 +405,7 @@ public function execute(){
 		$mail->send();
 		header("Location: login.php");
 
+		echo "<script type='text/javascript'>alert('Sent!');</script>";
 	} catch (Exception $e) {
 		echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
 	}
