@@ -353,7 +353,7 @@ public function execute(){
 
 			$mail->isHTML(true);                                 
 			$mail->Subject = 'Anmeldung';
-			$mail->Body    = 'Liebe/r ' . $this->uname '.  <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie können sich nun unter https://terminreservierungssystem.herokuapp.com anmelden';
+			$mail->Body    = 'Liebe/r ' . $this->uname . '.  <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie können sich nun unter https://terminreservierungssystem.herokuapp.com anmelden';
 			$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie können sich nun unter https://terminreservierungssystem.herokuapp.com anmelden';
 			$mail->send();
 		} catch (Exception $e) {
