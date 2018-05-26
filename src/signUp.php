@@ -11,9 +11,6 @@ include ("functions.php");
 		
 		$l = new RegisterUser($uname, $email, $psw, $pswrepeat);
 		$l->execute();
-		
-		$m = new SendMailRegister($email, $uname);
-		$m->execute();
 	}
 ?>
 

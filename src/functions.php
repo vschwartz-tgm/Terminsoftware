@@ -134,6 +134,8 @@ class RegisterUser extends UserCommand
 		if ($fehler == false){
 			$insert = "INSERT INTO benutzer(name,email,pw) VALUES('$this->uname','$this->email','$this->psw');";
 			$i = pg_query($dbconn, $insert);
+			$m = new SendMailRegister($this->email, $this->uname);
+			$m->execute();
 			header("Location: login.php");
 		}
 	}
@@ -261,6 +263,8 @@ class CreateEvent extends OrganisatorCommand
 				$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0]','$row[0]', false);";
 				$iuser = pg_query($dbconn, $insertUsers);
 			}
+			$m = new SendMailInvitation($this->user, $this->eventName);
+			$m->execute();
 			header("Location: terminreservierung.php");
 		}
 	}

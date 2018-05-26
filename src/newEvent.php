@@ -22,9 +22,6 @@
 
 		$e = new CreateEvent($eventName, $user, $dates, $ort, $desc, $username);
 		$e->execute();
-		
-		$m = new SendMailInvitation($user, $eventName);
-		$m->execute();
 	}
 ?>
 
