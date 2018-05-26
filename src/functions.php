@@ -343,7 +343,7 @@ class SendMailRegister extends OrganisatorCommand
 public function execute(){
 		$mail = new PHPMailer(true);
 		try {
-			$mail->SMTPDebug = 4;                                
+			$mail->SMTPDebug = 0;                                
 			$mail->isSMTP();                                     
 			$mail->Host = 'smtp.gmail.com';  
 			$mail->SMTPAuth = true;                               
@@ -390,7 +390,7 @@ class SendMailInvitation extends OrganisatorCommand
 				$sql = pg_query($dbconn, $userMail); 
 				$email = pg_fetch_row($sql);
 
-				$mail->SMTPDebug = 4;                                
+				$mail->SMTPDebug = 0;                                
 				$mail->isSMTP();                                     
 				$mail->Host = 'smtp.gmail.com';  
 				$mail->SMTPAuth = true;                               
@@ -409,9 +409,8 @@ class SendMailInvitation extends OrganisatorCommand
 				$mail->AltBody = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 				$mail->send();
 
-				echo "<script type='text/javascript'>alert('Sent!');</script>";
 			} catch (Exception $e) {
-				echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+				
 			}
 		}
 		header("Location: login.php");
