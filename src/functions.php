@@ -394,11 +394,9 @@ class SendMailInvitation extends OrganisatorCommand
 				$mail->Password = 'Admin12$';                          
 				$mail->SMTPSecure = 'ssl';                           
 				$mail->Port = 465;
-				echo "<script type='text/javascript'>alert('Vor addUser');</script>";
 				
 				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
 				$mail->addAddress($email[0]);
-				echo "<script type='text/javascript'>alert($email[0]);</script>";
 
 
 				$mail->isHTML(true);                                 
