@@ -389,27 +389,26 @@ class SendMailInvitation extends OrganisatorCommand
 			foreach($this->user as $people){
 				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
 				$sql = pg_query($dbconn, $userMail); 
-				$email = pg_fetch_row($sql);
+				while ($row = pg_fetch_row($sql)) {
+					$mail->SMTPDebug = 0;                                
+					$mail->isSMTP();                                     
+					$mail->Host = 'smtp.gmail.com';  
+					$mail->SMTPAuth = true;                               
+					$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+					$mail->Password = 'Admin12$';                          
+					$mail->SMTPSecure = 'ssl';                           
+					$mail->Port = 465;
 
-				$mail->SMTPDebug = 0;                                
-				$mail->isSMTP();                                     
-				$mail->Host = 'smtp.gmail.com';  
-				$mail->SMTPAuth = true;                               
-				$mail->Username = 'terminreservierung.teamm@gmail.com';                 
-				$mail->Password = 'Admin12$';                          
-				$mail->SMTPSecure = 'ssl';                           
-				$mail->Port = 465;
+					$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+					$mail->addAddress($row[0]);
 
-				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-				for($i = 1; $i < count($people); $i++){
-					$mail->addAddress($email[$i]);
+
+					$mail->isHTML(true); 
+					$mail->Subject = 'Einladung';
+					$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+					$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+					$mail->send();
 				}
-				
-				$mail->isHTML(true); 
-				$mail->Subject = 'Einladung';
-				$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-				$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-				$mail->send();
 			}
 			
 
