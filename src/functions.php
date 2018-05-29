@@ -412,6 +412,7 @@ class SendMailInvitation extends OrganisatorCommand
 					$mail->Body    = 'Liebe/r ' . $this->user[$i] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 					$mail->AltBody = 'Liebe/r ' . $this->user[$i] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 					$mail->send();
+					echo "<script type='text/javascript'>alert($this->user[$i]);</script>";
 				}
 
 			} catch (Exception $e) {
