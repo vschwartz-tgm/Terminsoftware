@@ -400,7 +400,7 @@ class SendMailInvitation extends OrganisatorCommand
 					$mail->Port = 465;
 
 					$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-					$mail->addAddress($row[0]);
+					$mail->addAddress($row);
 
 
 					$mail->isHTML(true); 
