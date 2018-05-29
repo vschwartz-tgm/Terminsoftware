@@ -403,16 +403,18 @@ class SendMailInvitation extends OrganisatorCommand
 					$mail->addAddress($email[0]);
 					
 					array_push($this->user, $people[0]);
+					$mail->isHTML(true); 
+					for($j = 0; $j < count($this->user); $j++){
+						
+						for($i = 0; $i < count($this->user); $i++){                                
+							$mail->Subject = 'Einladung';
+							$mail->Body    = 'Liebe/r ' . $this->user[$i] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+							$mail->AltBody = 'Liebe/r ' . $this->user[$i] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+						}
+					}
 				}
 
-				for($i = 0; $i < count($this->user); $i++){
-					$mail->isHTML(true);                                 
-					$mail->Subject = 'Einladung';
-					$mail->Body    = 'Liebe/r ' . $this->user[$i] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-					$mail->AltBody = 'Liebe/r ' . $this->user[$i] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-				}
 				$mail->send();
-				
 
 			} catch (Exception $e) {
 				
