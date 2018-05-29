@@ -416,7 +416,9 @@ class SendMailInvitation extends OrganisatorCommand
 						echo "<script type='text/javascript'>alert($this->user[$i]);</script>";
 					}
 				}
-				$mail->send();
+				for($j = 0; $j < count($this->user); $j++){
+					$mail->send();
+				}
 
 			} catch (Exception $e) {
 				
