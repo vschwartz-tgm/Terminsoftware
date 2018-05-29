@@ -401,11 +401,7 @@ class SendMailInvitation extends OrganisatorCommand
 				$mail->Port = 465;
 
 				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-				$mail->addAddress($email[0]);
-				
-				$userMail = "SELECT name FROM benutzer WHERE email = '$email';";
-				$sql = pg_query($dbconn, $userMail); 
-				$name = pg_fetch_row($sql);
+				$mail->addAddress($email);
 				
 				$mail->isHTML(true); 
 				$mail->Subject = 'Einladung';
