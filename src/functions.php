@@ -400,7 +400,7 @@ class SendMailInvitation extends OrganisatorCommand
 				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
 				$sql = pg_query($dbconn, $userMail); 
 				while ($row = pg_fetch_row($sql)) {
-					$mail->addAddress($row[count(people)]);
+					$mail->addAddress($row[0]);
 				}
 
 				$mail->isHTML(true); 
