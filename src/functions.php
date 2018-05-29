@@ -3,17 +3,14 @@ interface Command
 {
 	public function execute();
 }
-
 abstract class UserCommand implements Command
 {
 	public function execute(){}
 }
-
 abstract class OrganisatorCommand implements Command
 {
 	public function execute(){}
 }
-
 abstract class EventCommand implements Command
 {
 	public function execute(){}
@@ -22,7 +19,6 @@ abstract class EventCommand implements Command
 
 
 <?php
-
 /**
 * Klasse LoginUser, zum Einloggen des Users
 *
@@ -221,7 +217,6 @@ class CreateEvent extends OrganisatorCommand
 		$this->ort = $ort;
 		$this->desc = $desc;
 		$this->uname = $username;
-
 	}
 	
 	public function execute(){
@@ -249,13 +244,10 @@ class CreateEvent extends OrganisatorCommand
 			$eventId = "SELECT id FROM event WHERE name = '$this->eventName';";
 			$sql = pg_query($dbconn, $eventId); 
 			$row = pg_fetch_row($sql);
-
 			foreach($this->dates as $date){
 				$insertDates = "INSERT INTO datum VALUES('$row[0]','$date');";
 				$idates = pg_query($dbconn, $insertDates);
 			}
-
-
 			foreach($this->user as $people){
 				$userId = "SELECT id FROM benutzer WHERE name = '$people';";
 				$userID = pg_query($dbconn, $userId); 
@@ -287,7 +279,6 @@ class Accept extends OrganisatorCommand
 	function __construct($eventId, $username){
 		$this->eventId = $eventId;
 		$this->uname = $username;
-
 	}
 	
 	public function execute(){
@@ -303,8 +294,6 @@ class Accept extends OrganisatorCommand
 	}
 	
 }
-
-
 class Decline extends OrganisatorCommand
 {
 	private $eventId;
@@ -313,7 +302,6 @@ class Decline extends OrganisatorCommand
 	function __construct($eventId, $username){
 		$this->eventId = $eventId;
 		$this->uname = $username;
-
 	}
 	
 public function execute(){
@@ -326,8 +314,6 @@ public function execute(){
 	}
 	
 }
-
-
 class SendMailRegister extends OrganisatorCommand
 {
 	
@@ -337,7 +323,6 @@ class SendMailRegister extends OrganisatorCommand
 	function __construct($email, $username){
 		$this->uname = $username;
 		$this->email = $email;
-
 	}
 	
 public function execute(){
@@ -351,16 +336,13 @@ public function execute(){
 			$mail->Password = 'Admin12$';                          
 			$mail->SMTPSecure = 'ssl';                           
 			$mail->Port = 465;
-
 			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
 			$mail->addAddress($this->email);
-
 			$mail->isHTML(true);                                 
 			$mail->Subject = 'Anmeldung';
 			$mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
 			$mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
 			$mail->send();
-
 		} catch (Exception $e) {
 			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
 		}
@@ -368,7 +350,6 @@ public function execute(){
 	}
 	
 }
-
 class SendMailInvitation extends OrganisatorCommand
 {
 	
@@ -385,41 +366,31 @@ class SendMailInvitation extends OrganisatorCommand
 		$mail = new PHPMailer(true);
 		try {
 			$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-			$mail->SMTPDebug = 0;                                
-			$mail->isSMTP();                                     
-			$mail->Host = 'smtp.gmail.com';  
-			$mail->SMTPAuth = true;                               
-			$mail->Username = 'terminreservierung.teamm@gmail.com';                 
-			$mail->Password = 'Admin12$';                          
-			$mail->SMTPSecure = 'ssl';                           
-			$mail->Port = 465;
-
-			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-			$mail->addAddress($this->email);
 			foreach($this->user as $people){
 				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
 				$sql = pg_query($dbconn, $userMail); 
 				while ($row = pg_fetch_row($sql)) {
-					$mail->addAddress($row[0]);
+					$mail->SMTPDebug = 0;                                
+					$mail->isSMTP();                                     
+					$mail->Host = 'smtp.gmail.com';  
+					$mail->SMTPAuth = true;                               
+					$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+					$mail->Password = 'Admin12$';                          
+					$mail->SMTPSecure = 'ssl';                           
+					$mail->Port = 465;
+					$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+					$mail->addAddress($row[count($people));
+					$mail->isHTML(true); 
+					$mail->Subject = 'Einladung';
+					$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+					$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+					$mail->send();
 				}
-
-				$mail->isHTML(true); 
-				$mail->Subject = 'Einladung';
-				$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-				$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-				$mail->send();
 			}
 			
-
 		} catch (Exception $e) {
-
 		}
 	}
 	
 }
-
-
 ?>
-
-
-
