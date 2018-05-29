@@ -403,7 +403,7 @@ class SendMailInvitation extends OrganisatorCommand
 					$mail->addAddress($email[0]);
 					
 					for($i = 0; $i < count($people); $i++){
-						$this->user = array($people[i]);
+						array_push($this->user, $people[0]);
 					}
 				}
 				for($i = 0; $i < count($this->user); $i++){
