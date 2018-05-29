@@ -401,13 +401,13 @@ class SendMailInvitation extends OrganisatorCommand
 
 				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
 				$mail->addAddress($email[0]);
-
-				$mail->isHTML(true);                                 
-				$mail->Subject = 'Einladung';
-				$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-				$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-
+				
+				$this->user = $people
 				}
+			$mail->isHTML(true);                                 
+			$mail->Subject = 'Einladung';
+			$mail->Body    = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+			$mail->AltBody = 'Liebe/r ' . $this->user . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 			$mail->send();
 
 		} catch (Exception $e) {
