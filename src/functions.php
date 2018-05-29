@@ -389,6 +389,12 @@ class SendMailInvitation extends OrganisatorCommand
 					$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
 					$sql = pg_query($dbconn, $userMail); 
 					$email = pg_fetch_row($sql);
+					$userId = "SELECT id FROM benutzer WHERE name = '$people';";
+					$userID = pg_query($dbconn, $userId); 
+					$uID = pg_fetch_row($userID);
+					$insertUsers = "SELECT name FROM benutzer where id = '$uID[0]';";
+					$iuser = pg_query($dbconn, $insertUsers);
+					$person = pg_fetch_row($iuser);
 
 
 					$mail->SMTPDebug = 0;                                
@@ -404,8 +410,8 @@ class SendMailInvitation extends OrganisatorCommand
 					$mail->addAddress($email[0]);
 					$mail->isHTML(true);                                 
 					$mail->Subject = 'Einladung';
-					$mail->Body    = 'Liebe/r ' . $people[0] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-					$mail->AltBody = 'Liebe/r ' . $people[0] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+					$mail->Body    = 'Liebe/r ' . $person[0] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+					$mail->AltBody = 'Liebe/r ' . $person[0] . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 				}
 				$mail->send();
 
