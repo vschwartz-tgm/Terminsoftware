@@ -402,12 +402,20 @@ class SendMailInvitation extends OrganisatorCommand
 
 				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
 				$mail->addAddress($email[0]);
+				
+				$userMail = "SELECT name FROM benutzer WHERE email = '$email[0]';";
+				$sql = pg_query($dbconn, $userMail); 
+				$name = pg_fetch_row($sql);
+				
 				$mail->isHTML(true); 
 				$mail->Subject = 'Einladung';
 				$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 				$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+				if($people == $name[0]){
+					$mail->send();
+				}
 			}
-			$mail->send();
+			
 
 		} catch (Exception $e) {
 
