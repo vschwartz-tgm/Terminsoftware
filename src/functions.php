@@ -400,8 +400,10 @@ class SendMailInvitation extends OrganisatorCommand
 				$mail->SMTPSecure = 'ssl';                           
 				$mail->Port = 465;
 
-				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-				$mail->addAddress($email);
+				for($i = 0; $i < count($people); $i++){
+					$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+					$mail->addAddress($email[$i]);
+				}
 				
 				$mail->isHTML(true); 
 				$mail->Subject = 'Einladung';
