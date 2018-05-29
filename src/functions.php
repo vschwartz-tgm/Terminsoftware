@@ -386,29 +386,29 @@ class SendMailInvitation extends OrganisatorCommand
 		$mail = new PHPMailer(true);
 		try {
 			$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+			$mail->SMTPDebug = 0;                                
+			$mail->isSMTP();                                     
+			$mail->Host = 'smtp.gmail.com';  
+			$mail->SMTPAuth = true;                               
+			$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+			$mail->Password = 'Admin12$';                          
+			$mail->SMTPSecure = 'ssl';                           
+			$mail->Port = 465;
+
+			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
 			foreach($this->user as $people){
 				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
 				$sql = pg_query($dbconn, $userMail); 
 				while ($row = pg_fetch_row($sql)) {
-					$mail->SMTPDebug = 0;                                
-					$mail->isSMTP();                                     
-					$mail->Host = 'smtp.gmail.com';  
-					$mail->SMTPAuth = true;                               
-					$mail->Username = 'terminreservierung.teamm@gmail.com';                 
-					$mail->Password = 'Admin12$';                          
-					$mail->SMTPSecure = 'ssl';                           
-					$mail->Port = 465;
-
-					$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-					$mail->addAddress($row);
-
-
-					$mail->isHTML(true); 
-					$mail->Subject = 'Einladung';
-					$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-					$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-					$mail->send();
+					$mail->addAddress($row[0]);
 				}
+
+
+				$mail->isHTML(true); 
+				$mail->Subject = 'Einladung';
+				$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+				$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+				$mail->send();
 			}
 			
 
