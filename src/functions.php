@@ -213,6 +213,7 @@ class CreateEvent extends OrganisatorCommand
 	private $ort;
 	private $desc;
 	private $uname;
+	private email;
 	
 	function __construct($eventName, $user, $dates, $ort, $desc, $username){
 		$this->eventName = $eventName;
@@ -257,13 +258,18 @@ class CreateEvent extends OrganisatorCommand
 
 
 			foreach($this->user as $people){
+				$email = "SELECT email FROM benutzer WHERE name = '$people';";
+				$m = pg_query($dbconn, $email); 
+				$this->email = pg_fetch_row($m);
+				
+				
 				$userId = "SELECT id FROM benutzer WHERE name = '$people';";
 				$userID = pg_query($dbconn, $userId); 
 				$uID = pg_fetch_row($userID);
 				$insertUsers = "INSERT INTO teilnehmer VALUES('$uID[0]','$row[0]', false);";
 				$iuser = pg_query($dbconn, $insertUsers);
 			}
-			$m = new SendMailInvitation($this->user, $this->eventName);
+			$m = new SendMailInvitation($this->user, $this->eventName, $this->email[0]);
 			$m->execute();
 			header("Location: terminreservierung.php");
 		}
@@ -374,10 +380,12 @@ class SendMailInvitation extends OrganisatorCommand
 	
 	private $user;
 	private $eventName;
+	private $email;
 	
-	function __construct($username, $eventName){
+	function __construct($username, $eventName, $email){
 		$this->eventName = $eventName;
 		$this->user = $username;
+		$this->email = $email;
 
 	}
 	
@@ -396,13 +404,14 @@ class SendMailInvitation extends OrganisatorCommand
 			$mail->Port = 465;
 
 			$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+			$mail->addAddress($this->email);
+			/*
+			$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
+			$sql = pg_query($dbconn, $userMail); 
+			while ($row = pg_fetch_row($sql)) {
+				$mail->addAddress($row[0]);
+			}*/
 			foreach($this->user as $people){
-				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
-				$sql = pg_query($dbconn, $userMail); 
-				while ($row = pg_fetch_row($sql)) {
-					$mail->addAddress($row[0]);
-				}
-
 
 				$mail->isHTML(true); 
 				$mail->Subject = 'Einladung';
