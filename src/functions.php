@@ -369,7 +369,7 @@ class SendMailInvitation extends OrganisatorCommand
 			foreach($this->user as $people){
 				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
 				$sql = pg_query($dbconn, $userMail); 
-				$row = pg_fetch_row($sql)
+				$row = pg_fetch_row($sql);
 				$mail->SMTPDebug = 0;                                
 				$mail->isSMTP();                                     
 				$mail->Host = 'smtp.gmail.com';  
