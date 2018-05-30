@@ -21,6 +21,11 @@
 		session_destroy();
 		header("Location: index.php");
 	}
+	
+	// Zurückbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
+		header("Location: terminreservierung.php");
+	}
 ?>
 
 <html>
@@ -69,6 +74,12 @@
 					</tr>
 				</tbody>
 			</table>
+			<br />
+			<div class="row">
+				<form action="" method="post">
+					<input type="submit" name="back" class="btn btn-outline-dark" value="Zurück" />
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
