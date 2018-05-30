@@ -51,9 +51,11 @@
 			$d = new Decline($row[0], $username);
 			$d->execute();
 		}
-		if (isset($_GET["ergname"]) and $_GET["ergname"] == $row[0]){
-			echo "<script type='text/javascript'>alert('$_GET["ergname"]');</script>";
-		}
+	}
+	
+	if (isset($_GET["eName"])){
+		// $_GET("eName")
+		echo "<script type='text/javascript'>alert('Hallo');</script>";
 	}
 
 ?>
@@ -169,7 +171,7 @@
 								$sqlort = pg_query($dbconn, $eventort); 
 								$ergort = pg_fetch_row($sqlort);
 								
-								echo "<tr><td><a href ='terminreservierung.php?ergname=$ergname[0]'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
+								echo "<tr><td><a href ='terminreservierung.php?eName=$ergname[0]'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
 							}
 						
 						?>
