@@ -57,7 +57,7 @@
 	if (isset($_GET["teilnEvent"])){
 		// echo "<script type='text/javascript'>alert(\"".$_GET["teilnEvent"]."\");</script>";7
 		session_start();
-		$_SESSION['teilnEvent'] = $_GET("teilnEvent");
+		$_SESSION['teilnehmerEvent'] = $_GET("teilnEvent");
 		header("Location: eventView_Teilnehmer.php");
 	}
 

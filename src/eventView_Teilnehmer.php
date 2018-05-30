@@ -7,10 +7,10 @@
 	$username = $_SESSION['uname'];
 	
 	// Wurde ein Event angeklickt?
-	if(!isset($_SESSION['teilnEvent'])) {
+	/*if(!isset($_SESSION['teilnehmerEvent'])) {
 		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
-	}
-	$eventName = $_SESSION['teilnEvent'];
+	}*/
+	$eventName = $_SESSION['teilnehmerEvent'];
 	
 	// <!--ToDo: ort, date, beschriebung und teilnehmer des events rauslesen und in table <p> reinschreiben-->
 	
