@@ -7,6 +7,7 @@
 	$username = $_SESSION['uname'];
 	
 	// Wurde ein Event angeklickt?
+	session_start();
 	if(!isset($_SESSION['teilnehmerEvent'])) {
 		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
 	}
@@ -36,7 +37,7 @@
 	<body>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
-				<h2>Terminreservierung / <?php echo $eventname; ?></h2>
+				<h2>Terminreservierung / <?php echo "$eventname"; ?></h2>
 			</div>
 			<form class="nav navbar-right" method="post">
 				<div class="navbar-text px-sm-2 pt-sm-3">
