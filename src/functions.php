@@ -414,6 +414,13 @@ class DeleteEvent extends OrganisatorCommand
 
     public function execute(){
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d")     ;	
+        $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
+        $sql = pg_query($dbconn, $eid);
+        $row = pg_fetch_row($sql);
+        
+        $rmT = "DELETE FROM teilnehmer WHERE event = '$row[0]';";
+        $sql = pg_query($dbconn, $rmT);
+
         $rm = "DELETE FROM event WHERE name = '$this->event'; ";
         $sql = pg_query($dbconn, $rm);
     }
