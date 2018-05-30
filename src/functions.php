@@ -429,9 +429,6 @@ class DeleteEvent extends OrganisatorCommand
         $sql = pg_query($dbconn, $eid);
         $row = pg_fetch_row($sql);
 
-        $rmT = "DELETE FROM teilnehmer WHERE event = '$row[0]';";
-        $sql = pg_query($dbconn, $rmT);
-
         $rmD = "DELETE FROM datum WHERE eventid = '$row[0]';";
         $sql = pg_query($dbconn, $rmD);
 
