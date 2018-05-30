@@ -87,7 +87,7 @@
 			</table>
 			<div align="center">
 				<button type="submit" name="change" class="btn btn-outline-success" >Änderungen übernehmen</button>
-				<button type="submit" name="delete" class="btn btn-outline-danger" >Änderungen übernehmen</button>
+				<button type="submit" name="delete" class="btn btn-outline-danger" >Event löschen</button>
 			</div>
 		</div>
 	</body>
