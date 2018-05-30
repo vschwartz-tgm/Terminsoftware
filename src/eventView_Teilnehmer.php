@@ -1,13 +1,20 @@
 <?php
+	// Ist ein Benuter angemeldet?
 	session_start();
 	if(!isset($_SESSION['uname'])) {
 		die('Bitte zuerst <a href="index.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
-	$eventName = $_SESSION['eventName'];
 	
-	<!--ToDo: ort, date, beschriebung und teilnehmer des events rauslesen und in table <p> reinschreiben-->
+	// Wurde ein Event angeklickt?
+	if(!isset($_SESSION['teilnEvent'])) {
+		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
+	}
+	$eventName = $_SESSION['teilnEvent'];
 	
+	// <!--ToDo: ort, date, beschriebung und teilnehmer des events rauslesen und in table <p> reinschreiben-->
+	
+	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();

@@ -53,9 +53,12 @@
 		}
 	}
 	
-	if (isset($_GET["eName"])){
-		// $_GET("eName")
-		echo "<script type='text/javascript'>alert(\"".$_GET["eName"]."\");</script>";
+	// Link zur Eventanzeige (Teilnehmer)
+	if (isset($_GET["teilnEvent"])){
+		// echo "<script type='text/javascript'>alert(\"".$_GET["teilnEvent"]."\");</script>";7
+		session_start();
+		$_SESSION['teilnEvent'] = $_GET("teilnEvent");
+		header("Location: eventView_Teilnehmer.php");
 	}
 
 ?>
@@ -171,7 +174,7 @@
 								$sqlort = pg_query($dbconn, $eventort); 
 								$ergort = pg_fetch_row($sqlort);
 								
-								echo "<tr><td><a href ='terminreservierung.php?eName=$ergname[0]'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
+								echo "<tr><td><a href ='terminreservierung.php?teilnEvent=$ergname[0]'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
 							}
 						
 						?>
