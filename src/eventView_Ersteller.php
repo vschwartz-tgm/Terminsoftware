@@ -69,7 +69,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<input name="eventname" value="<?php echo $eventName; ?>" />
+							<input name="eventname" value="<?php echo $eventname; ?>" />
 						</td>
 						<td>
 							<select id="date">
