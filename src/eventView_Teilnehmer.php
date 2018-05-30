@@ -26,8 +26,6 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
 		header("Location: terminreservierung.php");
 	}
-	
-	
 ?>
 
 <html>
