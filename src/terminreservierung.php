@@ -52,7 +52,7 @@
 			$d->execute();
 		}
 		if (isset($_GET["ergname"]) and $_GET["ergname"] == $row[0]){
-			echo $_GET["ergname"];
+			echo "<script type='text/javascript'>alert('$_GET["ergname"]');</script>";
 		}
 	}
 
