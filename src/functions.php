@@ -369,23 +369,22 @@ class SendMailInvitation extends OrganisatorCommand
 			foreach($this->user as $people){
 				$userMail = "SELECT email FROM benutzer WHERE name = '$people';";
 				$sql = pg_query($dbconn, $userMail); 
-				while ($row = pg_fetch_row($sql)) {
-					$mail->SMTPDebug = 0;                                
-					$mail->isSMTP();                                     
-					$mail->Host = 'smtp.gmail.com';  
-					$mail->SMTPAuth = true;                               
-					$mail->Username = 'terminreservierung.teamm@gmail.com';                 
-					$mail->Password = 'Admin12$';                          
-					$mail->SMTPSecure = 'ssl';                           
-					$mail->Port = 465;
-					$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-					$mail->addAddress($row[count($people)-1]);
-					$mail->isHTML(true); 
-					$mail->Subject = 'Einladung';
-					$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-					$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-					$mail->send();
-				}
+				$row = pg_fetch_row($sql)
+				$mail->SMTPDebug = 0;                                
+				$mail->isSMTP();                                     
+				$mail->Host = 'smtp.gmail.com';  
+				$mail->SMTPAuth = true;                               
+				$mail->Username = 'terminreservierung.teamm@gmail.com';                 
+				$mail->Password = 'Admin12$';                          
+				$mail->SMTPSecure = 'ssl';                           
+				$mail->Port = 465;
+				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+				$mail->addAddress($row[count($people)-1]);
+				$mail->isHTML(true); 
+				$mail->Subject = 'Einladung';
+				$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+				$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+				$mail->send();
 			}
 			
 		} catch (Exception $e) {
