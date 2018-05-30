@@ -80,7 +80,8 @@
 				</tbody>
 			</table>
 			<div align="center">
-				<button type="button" class="btn btn-outline-success" onclick="">Änderungen übernehmen</button>
+				<button type="submit" name="change" class="btn btn-outline-success" >Änderungen übernehmen</button>
+				<button type="submit" name="delete" class="btn btn-outline-danger" >Änderungen übernehmen</button>
 			</div>
 		</div>
 	</body>

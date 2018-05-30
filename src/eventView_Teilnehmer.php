@@ -56,11 +56,6 @@
 		<br />
 		<h1 align="center">Event <?php echo "$eventname"; ?></h1>
 		<div class="container">
-			<div align="right">
-				<form action="" method="post">
-					<input type="submit" name="delete" class="btn btn-outline-dark" value="Event löschen" />
-				</form>
-			</div>
     		<table class="table table-bordered">
 				<thead>
 					<tr>
