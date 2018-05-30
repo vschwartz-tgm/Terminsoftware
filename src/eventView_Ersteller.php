@@ -22,7 +22,7 @@
 	$row = pg_fetch_row($sql);
 	$ort = $row[0];
 	$descQuery = "SELECT descr FROM event WHERE name = '$eventname';";
-	$sql = pg_query($dbconn, $descrQuery); 
+	$sql = pg_query($dbconn, $descQuery); 
 	$row = pg_fetch_row($sql);
 	$desc = $row[0];
 	
