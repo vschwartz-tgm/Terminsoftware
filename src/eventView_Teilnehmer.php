@@ -51,7 +51,9 @@
 				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>	
-		<br>
+		<br />
+		<h1 align="center">Event <?php echo "$eventname"; ?></h1>
+		<br />
 		<div class="container">
     		<table class="table table-bordered">
 				<thead>
