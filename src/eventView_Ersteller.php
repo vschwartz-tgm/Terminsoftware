@@ -15,6 +15,15 @@
 	}
 	$eventname = $_SESSION['erstellerEvent'];
 	
+	// Werte des Events herauslesen
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+	$ortQuery = "SELECT ort FROM event WHERE name = '$eventname';";
+	$sql = pg_query($dbconn, $ortQuery); 
+	$ort = pg_fetch_row($sql);
+	$descQuery = "SELECT descr FROM event WHERE name = '$eventname';";
+	$sql = pg_query($dbconn, $descrQuery); 
+	$desc = pg_fetch_row($sql);
+	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
@@ -24,8 +33,8 @@
 	
 	// Löschbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete'])){
-		$l = new DeleteEvent($eventname);
-		$l->execute();
+		$d = new DeleteEvent($eventname);
+		$d->execute();
 		header("Location: terminreservierung.php");
 	}
 	
@@ -85,9 +94,11 @@
 							<button type="button" class="btn btn-outline-success" onclick="">Hinzufügen</button>
 						</td>
 						<td>
-							<textarea><?php echo $eventname; ?></textarea>
+							<input name="ort" value="<?php echo $ort; ?>" />
 						</td>
-						<td> <p id="desc"></p></td>
+						<td>
+							<input name="desc" value="<?php echo $desc; ?>" />
+						</td>
 						<td><p id="people"></p></td>
 					</tr>
 				</tbody>
