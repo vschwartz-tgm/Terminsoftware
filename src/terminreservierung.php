@@ -51,6 +51,9 @@
 			$d = new Decline($row[0], $username);
 			$d->execute();
 		}
+		if (isset($_GET["ergname"]) and $_GET["ergname"] === $row[0]){
+			echo $_GET["ergname"];
+		}
 	}
 
 ?>
@@ -126,7 +129,7 @@
 								$ergort = pg_fetch_row($sqlort);
 								
 								echo "<tr>
-										<td>$ergname[0]</td>
+										<td><a href ='#'> $ergname[0] </a></td>
 										<td>
 											<form action='' method='post'>
 												<input type='submit' class='btn btn-outline-dark' name='anmelden$row[0]' value='Ja' />
@@ -166,7 +169,7 @@
 								$sqlort = pg_query($dbconn, $eventort); 
 								$ergort = pg_fetch_row($sqlort);
 								
-								echo "<tr><td><a href ='#'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
+								echo "<tr><td><a href ='terminreservierung.php?ergname=$ergname[0]'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
 							}
 						
 						?>
