@@ -70,9 +70,27 @@
 							<p id="date"></p>
 							<button type="button" class="btn btn-outline-success" onclick="">Abstimmen</button>
 						</td>
-						<td><p id="location"></p></td>
-						<td> <p id="desc"></p></td>
-						<td><p id="people"></p></td>
+						<td>
+							<?php
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$userid = "SELECT place FROM event WHERE name = '$eventname';";
+								$sql = pg_query($dbconn, $userid); 
+								$row = pg_fetch_row($sql);
+								echo "$row[0]";
+							?>
+						</td>
+						<td>
+							<?php
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$userid = "SELECT descr FROM event WHERE name = '$eventname';";
+								$sql = pg_query($dbconn, $userid); 
+								$row = pg_fetch_row($sql);
+								echo "$row[0]";
+							?>
+						</td>
+						<td>
+							<p id="people"></p>
+						</td>
 					</tr>
 				</tbody>
 			</table>
