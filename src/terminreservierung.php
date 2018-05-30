@@ -55,7 +55,7 @@
 	
 	if (isset($_GET["eName"])){
 		// $_GET("eName")
-		echo "<script type='text/javascript'>alert('Hallo');</script>";
+		echo "<script type='text/javascript'>alert('$_GET('eName')');</script>";
 	}
 
 ?>
