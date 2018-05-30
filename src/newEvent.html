@@ -1,5 +1,6 @@
 <?php
 	include ("functions.php");
+
 	session_start();
 	if(!isset($_SESSION['uname'])) {
 		die('Bitte zuerst <a href="login.php">einloggen</a>');
@@ -55,6 +56,7 @@
     			<input type="text" placeholder="Gib den Eventnamen ein" name="eventName" id="eventName" required />
 				<div id="wrapperDate">
     				<label for="date"><b>Datum & Uhrzeit</b></label>
+    				<button type="button" class="btn btn-outline-danger" onclick="removeDate('date'+count_date)" style="float: right; margin-left: 2px;">-</button>
     				<button type="button" class="btn btn-outline-success" onclick="addDate()" onclick="getDates()" style="float: right;">+</button>
     				<input type="datetime-local" name="date[]" id="date">
 				</div>
@@ -65,6 +67,7 @@
 				<input type="text" placeholder="Füge eine Beschreibung hinzu" name="desc" id="desc" />
 				<div id="wrapperPeople">
 					<label for="people"><b>Teilnehmer</b></label>
+					<button type="button" class="btn btn-outline-danger" onclick="removePeople('people'+count_people)" onclick="" style="float: right; margin-left: 2px;">-</button>
 					<button type="button" class="btn btn-outline-success" onclick="addPeople()" style="float: right;">+</button>
 					<input type="text" placeholder="Benutzername" name="people[]" id="people[]" />
 				</div>
@@ -78,34 +81,44 @@
 		<script>
 			//Adds new input with incrementing id and name
 			var count_date = 1;
+			var dates = [];
 			var count_people = 1;
-			var i;
-			function addDate(){
-				var dates = [];
-				var dummy = '<input type="datetime-local" name="date[]" id="date'+count_date+'">\r\n';
-				document.getElementById('wrapperDate').innerHTML += dummy;
+			var all_people = [];
+			
+			function addElement(parentId, elementTag, elementId, html) {
+    			// Adds an element to the document
+    			var p = document.getElementById(parentId);
+    			var newElement = document.createElement(elementTag);
+    			newElement.setAttribute('id', elementId);
+    			newElement.innerHTML = html;
+    			p.appendChild(newElement);
+			}
+
+			function removeDate(elementId) {
+   				// Removes an element from the document
+   				var element = document.getElementById(elementId);
+    			element.parentNode.removeChild(element);
+    			count_date--;
+			}
+
+			function removePeople(elementId) {
+   				// Removes an element from the document
+   				var element = document.getElementById(elementId);
+    			element.parentNode.removeChild(element);
+    			count_people--;
+			}
+
+			function addDate() {
 				count_date++;
-				var test = '<input type="datetime-local" name="date" id="date">\r\n';
-				dates.push(date);
-				for(i = 1; i < count_date; i++){
-					dates.push(date+i);
-				}
-				//alert(document.getElementById('wrapperDate').innerHTML += dates);		
-				//alert(dummy);
-				document.getElementById('wrapperDate').innerHTML += dates;
+				var html = '<input type="datetime-local" name="date[]" required />';
+				addElement('wrapperDate', 'datetime-local', 'date'+count_date, html);
 			}
-			
+
 			function addPeople(){
-				var mul_people = [];
-				var dummy = '<input type="text" placeholder="Benutzername" name="people[]" id="people'+count_people+'">\r\n';
-				document.getElementById('wrapperPeople').innerHTML += dummy;
-				count_people ++;
-				mul_people.push(people);
-				for(i = 1; i < count_people; i++){
-					mul_people.push(people+i);
-				}
+				count_people++;
+				var html = '<input type="text" placeholder="Benutzername" name="people[]" required />';
+				addElement('wrapperPeople', 'text', 'people'+count_people, html);
 			}
-			
 			
 		</script>
 	</body>
