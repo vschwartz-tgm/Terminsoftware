@@ -19,10 +19,12 @@
 	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 	$ortQuery = "SELECT ort FROM event WHERE name = '$eventname';";
 	$sql = pg_query($dbconn, $ortQuery); 
-	$ort = pg_fetch_row($sql);
+	$row = pg_fetch_row($sql);
+	$ort = $row[0];
 	$descQuery = "SELECT descr FROM event WHERE name = '$eventname';";
 	$sql = pg_query($dbconn, $descrQuery); 
-	$desc = pg_fetch_row($sql);
+	$row = pg_fetch_row($sql);
+	$desc = $row[0];
 	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
