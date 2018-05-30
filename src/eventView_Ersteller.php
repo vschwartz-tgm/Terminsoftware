@@ -37,7 +37,6 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete'])){
 		$d = new DeleteEvent($eventname);
 		$d->execute();
-		header("Location: terminreservierung.php");
 	}
 	
 	// Zurückbutton-Funktionalität

@@ -439,7 +439,7 @@ class DeleteEvent extends OrganisatorCommand
 
         $rm = "DELETE FROM event WHERE name = '$this->event'; ";
         $sql = pg_query($dbconn, $rm);
-
+        header("Location: terminreservierung.php");
     }
 }
 ?>
