@@ -379,13 +379,13 @@ class SendMailInvitation extends OrganisatorCommand
 				$mail->SMTPSecure = 'ssl';                           
 				$mail->Port = 465;
 				$mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-				$mail->addAddress($row[count($people)-1]);
+				$mail->addAddress($row[0]);
 				$mail->isHTML(true); 
 				$mail->Subject = 'Einladung';
 				$mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 				$mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
 				
-				echo "<script type='text/javascript'>alert('$row[count($people)-1]');</script>";
+				echo "<script type='text/javascript'>alert($row[0]);</script>";
 				
 				$mail->send();
 			}
