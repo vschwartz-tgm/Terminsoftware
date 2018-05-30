@@ -7,7 +7,13 @@
 		die('Bitte zuerst <a href="index.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
-	//$eventName = $_SESSION['eventName'];
+	
+	// Wurde ein Event angeklickt?
+	session_start();
+	if(!isset($_SESSION['erstellerEvent'])) {
+		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
+	}
+	$eventname = $_SESSION['erstellerEvent'];
 	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
@@ -63,7 +69,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<?php echo '<input type="text" id="eventname" value="$eventName"/>';?>
+							<?php echo "<input type='text' id='eventname' value='$eventName'/>";?>
 						</td>
 						<td>
 							<select id="date">
