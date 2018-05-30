@@ -69,7 +69,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<input name="eventname" value="<?php echo $eventName; ?>" />
+							<input name="name" value="<?php echo $eventname; ?>" />
 						</td>
 						<td>
 							<select id="date">
@@ -79,7 +79,9 @@
 							<button type="button" class="btn btn-outline-danger" onclick="">Löschen</button>
 							<button type="button" class="btn btn-outline-success" onclick="">Hinzufügen</button>
 						</td>
-						<td><p id="location"></p></td>
+						<td>
+							<textarea><?php echo $eventname; ?></textarea>
+						</td>
 						<td> <p id="desc"></p></td>
 						<td><p id="people"></p></td>
 					</tr>
