@@ -28,6 +28,11 @@
 		$l->execute();
 		header("Location: terminreservierung.php");
 	}
+	
+	// Zurückbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
+		header("Location: terminreservierung.php");
+	}
 ?>
 
 <html>
@@ -90,6 +95,12 @@
 			<div align="center">
 				<button type="submit" name="change" class="btn btn-outline-success" >Änderungen übernehmen</button>
 				<button type="submit" name="delete" class="btn btn-outline-danger" >Event löschen</button>
+			</div>
+			<br />
+			<div class="row">
+				<form action="" method="post">
+					<input type="submit" name="back" class="btn btn-outline-dark" value="Zurück" />
+				</form>
 			</div>
 		</div>
 	</body>
