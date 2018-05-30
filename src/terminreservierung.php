@@ -51,7 +51,7 @@
 			$d = new Decline($row[0], $username);
 			$d->execute();
 		}
-		if (isset($_GET["ergname"]) and $_GET["ergname"] === $row[0]){
+		if (isset($_GET["ergname"]) and $_GET["ergname"] == $row[0]){
 			echo $_GET["ergname"];
 		}
 	}
