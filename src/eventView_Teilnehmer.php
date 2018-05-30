@@ -1,4 +1,6 @@
 <?php
+	include ("functions.php");
+	
 	// Ist ein Benuter angemeldet?
 	session_start();
 	if(!isset($_SESSION['uname'])) {
@@ -13,8 +15,6 @@
 	}
 	$eventname = $_SESSION['teilnehmerEvent'];
 	
-	// <!--ToDo: ort, date, beschriebung und teilnehmer des events rauslesen und in table <p> reinschreiben-->
-	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
@@ -26,6 +26,8 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
 		header("Location: terminreservierung.php");
 	}
+	
+	
 ?>
 
 <html>
@@ -53,8 +55,12 @@
 		</nav>	
 		<br />
 		<h1 align="center">Event <?php echo "$eventname"; ?></h1>
-		<br />
 		<div class="container">
+			<div align="right">
+				<form action="" method="post">
+					<input type="submit" name="delete" class="btn btn-outline-dark" value="Event löschen" />
+				</form>
+			</div>
     		<table class="table table-bordered">
 				<thead>
 					<tr>

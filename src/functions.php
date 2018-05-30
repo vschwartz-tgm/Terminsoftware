@@ -396,3 +396,24 @@ class SendMailInvitation extends OrganisatorCommand
 	
 }
 ?>
+
+<?php
+/**
+* Klasse DeleteEvent, zum Löschen von Events
+*
+* @author	Paul Mazzolini
+* @version  1.0
+*/
+class DeleteEvent extends OrganisatorCommand
+{
+	private $event;
+	
+	function __construct($event){
+		$this->event = $event;
+	}
+	
+	public function execute(){
+		
+	}
+}
+?>

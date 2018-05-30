@@ -1,17 +1,26 @@
 <?php
+	include ("functions.php");
+	
+	// Ist ein Benuter angemeldet?
 	session_start();
 	if(!isset($_SESSION['uname'])) {
 		die('Bitte zuerst <a href="index.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
-	$eventName = $_SESSION['eventName'];
+	//$eventName = $_SESSION['eventName'];
 	
-	<!--ToDo: ort, date, beschriebung und teilnehmer des events rauslesen und in table <p> reinschreiben-->
-	
+	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();
 		header("Location: index.php");
+	}
+	
+	// Löschbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete'])){
+		$l = new DeleteEvent($eventname);
+		$l->execute();
+		header("Location: terminreservierung.php");
 	}
 ?>
 
@@ -29,7 +38,7 @@
 	<body>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
-				<h2>Terminreservierung / <?php echo $eventname; ?></h2>
+				<h2>Terminreservierung / <?php echo "$eventname"; ?></h2>
 			</div>
 			<form class="nav navbar-right" method="post">
 				<div class="navbar-text px-sm-2 pt-sm-3">
@@ -38,7 +47,8 @@
 				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
 		</nav>	
-		<br>
+		<br />
+		<h1 align="center">Event <?php echo "$eventname"; ?></h1>
 		<div class="container">
     		<table class="table table-bordered">
 				<thead>
@@ -52,7 +62,9 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><?php echo '<input type="text" id="eventname" value="'$eventName'"/>';?></td>
+						<td>
+							<?php echo '<input type="text" id="eventname" value="$eventName"/>';?>
+						</td>
 						<td>
 							<select id="date">
 								<option value="">stuff</option>
