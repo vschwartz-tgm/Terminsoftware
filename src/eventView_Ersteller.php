@@ -4,7 +4,7 @@
 	// Ist ein Benuter angemeldet?
 	session_start();
 	if(!isset($_SESSION['uname'])) {
-		die('Bitte zuerst <a href="index.php">einloggen</a>');
+		die('Bitte zuerst <a href="login.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
 	
