@@ -130,7 +130,12 @@
 								$descr = "SELECT usr FROM event WHERE name = '$eventname';";
 								$sql = pg_query($dbconn, $descr); 
 								$row = pg_fetch_row($sql);
-								echo "$row[0]";
+								
+								$username = "SELECT name FROM benutzer WHERE id = '$row[0]';";
+								$sqlname = pg_query($dbconn, $username); 
+								$name = pg_fetch_row($sqlname);
+								
+								echo "$name[0]";
 							?>
 						</td>
 					</tr>
