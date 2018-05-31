@@ -100,7 +100,11 @@
 								$userid = "SELECT usr FROM teilnehmer WHERE event = '$id[0]';";
 								$sql = pg_query($dbconn, $userid); 
 								while ($row = pg_fetch_row($sql)) {
-									echo "$row[0]";
+									$username = "SELECT name FROM benutzer WHERE id = '$row[0]';";
+									$sqlname = pg_query($dbconn, $username); 
+									$name = pg_fetch_row($sqlname);
+									
+									echo "$name[0]";
 									echo "<br />";
 								}
 							?>
