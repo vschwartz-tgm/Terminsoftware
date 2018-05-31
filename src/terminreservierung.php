@@ -53,6 +53,13 @@
 		}
 	}
 	
+	// Link zur Eventanzeige (Einladung)
+	if (isset($_GET["einlEvent"])){
+		session_start();
+		$_SESSION['einladungsEvent'] = $_GET["einlEvent"];
+		header("Location: eventView_Einladung.php");
+	}
+	
 	// Link zur Eventanzeige (Teilnehmer)
 	if (isset($_GET["teilnEvent"])){
 		// echo "<script type='text/javascript'>alert(\"".$_GET["teilnEvent"]."\");</script>";
@@ -141,7 +148,7 @@
 								$ergort = pg_fetch_row($sqlort);
 								
 								echo "<tr>
-										<td><a href ='#'> $ergname[0] </a></td>
+										<td><a href ='terminreservierung.php?einlEvent=$ergname[0]'> $ergname[0] </a></td>
 										<td>
 											<form action='' method='post'>
 												<input type='submit' class='btn btn-outline-dark' name='anmelden$row[0]' value='Ja' />
