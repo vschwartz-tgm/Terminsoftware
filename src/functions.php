@@ -523,8 +523,6 @@ class DeleteEingeladener extends OrganisatorCommand
         $sql = pg_query($dbconn, $acc);
         $ang = pg_fetch_row($sql);
         
-        echo "<script type='text/javascript'>alert('$ang[0]');</script>";
-        
         if($ang[0] == 'f'){
 		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
