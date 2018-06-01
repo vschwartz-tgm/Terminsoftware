@@ -39,6 +39,15 @@
 		$d->execute();
 	}
 	
+	// Änderungsbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['change'])){
+		$eventidselect = "SELECT id FROM event WHERE name = '$eventname';";
+		$sql = pg_query($dbconn, $eventidselect); 
+		$eventid = pg_fetch_row($sql);
+		$c = new ChangeEvent($eventid[0], $_POST['newName'], $_POST['newOrt'], $_POST['newDesc']);
+		$c->execute();
+	}
+	
 	// Zurückbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
 		header("Location: terminreservierung.php");
@@ -118,7 +127,9 @@
 				<tbody>
 					<tr>
 						<td>
-							<input name="name" value="<?php echo $eventname; ?>" />
+							<form action="" method="post">
+								<input name="newName" value="<?php echo $eventname; ?>" />
+							</form>
 						</td>
 						<td>
 							<?php
@@ -141,10 +152,14 @@
 							?>
 						</td>
 						<td>
-							<input name="ort" value="<?php echo $ort; ?>" />
+							<form action="" method="post">
+								<input name="newOrt" value="<?php echo $ort; ?>" />
+							</form>
 						</td>
 						<td>
-							<input name="desc" value="<?php echo $desc; ?>" />
+							<form action="" method="post">
+								<input name="newDesc" value="<?php echo $desc; ?>" />
+							</form>
 						</td>
 						<td>
 							<?php
