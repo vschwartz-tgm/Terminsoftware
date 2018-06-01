@@ -434,7 +434,6 @@ class SendMailInvitation extends EventCommand
 
                 $mail->send();
             }
-
         } catch (Exception $e) {
 			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
         }
