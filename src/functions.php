@@ -576,4 +576,29 @@ class DeleteDate extends OrganisatorCommand
 		header("Location: eventView_Ersteller.php");
     }
 }
+
+/**
+ * Klasse DeleteDate, zum Löschen eines Datums eines Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class AddUser extends OrganisatorCommand
+{
+    private $eventname;
+	private $username;
+
+    function __construct($eventname, $username){
+        $this->eventname = $eventname;
+		$this->username = $username;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		// ToDo: User zu Event hinzufügen (Wenn es den User gibt)
+		
+		header("Location: eventView_Ersteller.php");
+    }
+}
 ?>
