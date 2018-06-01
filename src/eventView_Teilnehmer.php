@@ -84,7 +84,12 @@
 									echo "<br />";
 								}
 							?>
-							<!--<button type="button" class="btn btn-outline-success" onclick="">Abstimmen</button>-->
+							<br />
+							<div align="center">
+								<form action="" method="post">
+									<input type="submit" name="save" class="btn btn-outline-dark" value="Auswahl speichern" />
+								</form>
+							</div>
 						</td>
 						<td>
 							<?php
