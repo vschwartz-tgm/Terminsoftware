@@ -139,8 +139,6 @@
 									echo "<br />";
 								}
 							?>
-							<!--<button type="button" class="btn btn-outline-danger" onclick="">Löschen</button>
-							<!--<button type="button" class="btn btn-outline-success" onclick="">Hinzufügen</button>-->
 						</td>
 						<td>
 							<input name="ort" value="<?php echo $ort; ?>" />
