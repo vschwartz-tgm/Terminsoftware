@@ -471,7 +471,7 @@ class DeleteEvent extends OrganisatorCommand
         $ang = pg_fetch_row($sql);
         
         echo "<script type='text/javascript'>alert($ang[0]);</script>";
-        /*if($ang[0] == 0){
+        if($ang[0] == 0){
             $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
             $sql = pg_query($dbconn, $eid);
             $row = pg_fetch_row($sql);
@@ -487,7 +487,7 @@ class DeleteEvent extends OrganisatorCommand
 			echo "<script type='text/javascript'>alert('Event wurde erfolgreich gelöscht.');</script>";
         }else{
             echo "<script type='text/javascript'>alert('Event kann nicht gelöscht werden, da Teilnehmer bereits beigetreten sind.');</script>";
-        }*/
+        }
     }
 }
 
