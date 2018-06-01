@@ -183,6 +183,10 @@
 									echo "<br />";
 								}
 							?>
+							<form action="" method="post">
+								<input name="newUser" value="" />
+								<input type="submit" name="addUser" class="btn btn-outline-dark" value="Benutzer hinzufügen" />
+							</form>
 						</td>
 					</tr>
 				</tbody>
