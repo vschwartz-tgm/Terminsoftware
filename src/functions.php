@@ -465,12 +465,12 @@ class DeleteEvent extends OrganisatorCommand
         $sql = pg_query($dbconn, $id);
         $row = pg_fetch_row($sql);
 
-        $acc = "SELECT usr FROM teilnehmer WHERE angenommen = 'true';";
+        $acc = "SELECT count(usr) FROM teilnehmer WHERE angenommen = 'true';";
         $sql = pg_query($dbconn, $acc);
         $ang = pg_fetch_row($sql);
         
         echo "<script type='text/javascript'>alert($ang);</script>";
-        if($ang == ""){
+        if($ang == 0){
             $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
             $sql = pg_query($dbconn, $eid);
             $row = pg_fetch_row($sql);
@@ -520,7 +520,7 @@ class DeleteEingeladener extends OrganisatorCommand
 		$sql = pg_query($dbconn, $userselect);
 		$userid = pg_fetch_row($sql);
 		
-		$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid[0]' AND event = '$eventid[0]';";
+		$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid[0]' AND event = '$eventid[0]' AND angenommen='false';";
 		$sql = pg_query($dbconn, $deletequery);
 		
 		header("Location: eventView_Ersteller.php");
