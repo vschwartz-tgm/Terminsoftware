@@ -438,6 +438,7 @@ class DeleteEvent extends OrganisatorCommand
             $rm = "DELETE FROM event WHERE name = '$this->event'; ";
             $sql = pg_query($dbconn, $rm);
             header("Location: terminreservierung.php");
+			echo "<script type='text/javascript'>alert('Event wurde erfolgreich gelöscht.');</script>";
         }else{
             echo "<script type='text/javascript'>alert('Event kann nicht gelöscht werden, da Teilnehmer bereits beigetreten sind.');</script>";
         }
