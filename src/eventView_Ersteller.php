@@ -39,6 +39,12 @@
 		$d->execute();
 	}
 	
+	// UserAddbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addUser'])){
+		$a = new AddUser($eventname, $_POST['newUser']);
+		$a->execute();
+	}
+	
 	// Änderungsbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['change'])){
 		$eventidselect = "SELECT id FROM event WHERE name = '$eventname';";
@@ -183,6 +189,10 @@
 									echo "<br />";
 								}
 							?>
+							<form action="" method="post">
+								<input name="newUser" value="" />
+								<input type="submit" name="addUser" class="btn btn-outline-dark" value="Benutzer hinzufügen" />
+							</form>
 						</td>
 					</tr>
 				</tbody>
