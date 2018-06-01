@@ -134,7 +134,9 @@
 									$name = pg_fetch_row($sqlname);
 									
 									echo "$name[0]";
-									echo "<input type='submit' class='btn btn-outline-dark' name='delete$name[0]' value='Entfernen' />";
+									echo "<form action='' method='post'>
+											<input type='submit' class='btn btn-outline-dark' name='delete$name[0]' value='Entfernen' />
+										  </form>";
 									echo "<br />";
 								}
 							?>
