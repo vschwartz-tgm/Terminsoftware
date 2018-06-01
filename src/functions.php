@@ -523,7 +523,7 @@ class DeleteEingeladener extends OrganisatorCommand
         $sql = pg_query($dbconn, $acc);
         $ang = pg_fetch_row($sql);
         
-        echo "<script type='text/javascript'>alert('$ang');</script>";
+        echo "<script type='text/javascript'>alert('$ang[0]');</script>";
         
         if($ang[0] == false){
 		
@@ -540,7 +540,7 @@ class DeleteEingeladener extends OrganisatorCommand
 		
 		header("Location: eventView_Ersteller.php");
         }else{
-            echo "<script type='text/javascript'>alert('Event kann nicht gelöscht werden, da Teilnehmer bereits beigetreten sind.');</script>";
+            echo "<script type='text/javascript'>alert('User kann nicht gelöscht werden, da er bereits angenommen hat.');</script>";
         }
     }
 }
