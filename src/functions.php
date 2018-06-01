@@ -483,6 +483,7 @@ class DeleteEvent extends OrganisatorCommand
             $rm = "DELETE FROM event WHERE name = '$this->event'; ";
             $sql = pg_query($dbconn, $rm);
 			echo "<script type='text/javascript'>alert('Event wurde erfolgreich gelöscht.');</script>";
+            header("Location: terminreservierung.php");
         }else{
             echo "<script type='text/javascript'>alert('Event kann nicht gelöscht werden, da Teilnehmer bereits beigetreten sind.');</script>";
         }
@@ -509,6 +510,22 @@ class DeleteEingeladener extends OrganisatorCommand
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		
 		// ToDo: Zum Laufen bringen
+        
+        $uid = "SELECT id FROM benutzer WHERE name = '$this->username';";
+        $sql = pg_query($dbconn, $uid);
+        $row = pg_fetch_row($sql);
+        
+        $eid = "SELECT id FROM event WHERE name = '$this->eventname';";
+        $sql = pg_query($dbconn, $eid);
+        $ide = pg_fetch_row($sql);
+
+        $acc = "SELECT angenommen FROM teilnehmer WHERE usr = '$row[0]' AND event ='$ide[0]';";
+        $sql = pg_query($dbconn, $acc);
+        $ang = pg_fetch_row($sql);
+        
+        echo "<script type='text/javascript'>alert('$ang');</script>";
+        
+        if($ang[0] == false){
 		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
 		$sql = pg_query($dbconn, $eventselect);
@@ -522,6 +539,9 @@ class DeleteEingeladener extends OrganisatorCommand
 		$sql = pg_query($dbconn, $deletequery);
 		
 		header("Location: eventView_Ersteller.php");
+        }else{
+            echo "<script type='text/javascript'>alert('Event kann nicht gelöscht werden, da Teilnehmer bereits beigetreten sind.');</script>";
+        }
     }
 }
 
