@@ -23,6 +23,13 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
 		header("Location: terminreservierung.php");
 	}
+	
+	// Link zur Eventanzeige (Einladung)
+	if (isset($_GET["einlEvent"])){
+		session_start();
+		$_SESSION['einladungsEvent'] = $_GET["einlEvent"];
+		header("Location: eventView_Einladung.php");
+	}
 ?>
 
 <html>
@@ -66,7 +73,7 @@
 								$sql = pg_query($dbconn, $searcherg);
 								while ($row = pg_fetch_row($sql)) {
 									echo "<tr>
-											<td>$row[0]</td>
+											<td><a href ='searchView.php?einlEvent=$row[0]'> $row[0] </a></td>
 										</tr>";
 								}
 								
@@ -79,7 +86,7 @@
 								$sql = pg_query($dbconn, $searcherg);
 								while ($row = pg_fetch_row($sql)) {
 									echo "<tr>
-											<td>$row[0]</td>
+											<td><a href ='searchView.php?einlEvent=$row[0]'> $row[0] </a></td>
 										</tr>";
 								}
 								
