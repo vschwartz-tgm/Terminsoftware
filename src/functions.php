@@ -424,21 +424,23 @@ class DeleteEvent extends OrganisatorCommand
         $sql = pg_query($dbconn, $acc);
         $ang = pg_fetch_row($sql);
 
+        if($ang == true){
+            $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
+            $sql = pg_query($dbconn, $eid);
+            $row = pg_fetch_row($sql);
 
+            $rmT = "DELETE FROM teilnehmer WHERE event = '$row[0]';";
+            $sql = pg_query($dbconn, $rmT);
 
-        $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
-        $sql = pg_query($dbconn, $eid);
-        $row = pg_fetch_row($sql);
+            $rmD = "DELETE FROM datum WHERE eventid = '$row[0]';";
+            $sql = pg_query($dbconn, $rmD);
 
-        $rmT = "DELETE FROM teilnehmer WHERE event = '$row[0]';";
-        $sql = pg_query($dbconn, $rmT);
-
-        $rmD = "DELETE FROM datum WHERE eventid = '$row[0]';";
-        $sql = pg_query($dbconn, $rmD);
-
-        $rm = "DELETE FROM event WHERE name = '$this->event'; ";
-        $sql = pg_query($dbconn, $rm);
-        header("Location: terminreservierung.php");
+            $rm = "DELETE FROM event WHERE name = '$this->event'; ";
+            $sql = pg_query($dbconn, $rm);
+            header("Location: terminreservierung.php");
+        }else{
+            echo "<script type='text/javascript'>alert('Event kann nicht gelöscht werden, da Teilnehmer bereits beigetreten sind.');</script>";
+        }
     }
 }
 
