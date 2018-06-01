@@ -52,12 +52,12 @@
 	$userid = "SELECT usr FROM teilnehmer WHERE event = '$id[0]';";
 	$sql = pg_query($dbconn, $userid); 
 	while ($row = pg_fetch_row($sql)) {
-		$username = "SELECT name FROM benutzer WHERE id = '$row[0]';";
-		$sqlname = pg_query($dbconn, $username); 
-		$name = pg_fetch_row($sqlname);
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete$name[0]"])){
+		$usernameselect = "SELECT name FROM benutzer WHERE id = '$row[0]';";
+		$sqlname = pg_query($dbconn, $usernameselect); 
+		$nameteiln = pg_fetch_row($sqlname);
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete$nameteiln[0]"])){
 			echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
-			$d = new DeleteTeilnehmer($eventname, $name[0]);
+			$d = new DeleteTeilnehmer($eventname, $nameteiln[0]);
 			$d->execute();
 		}
 	}
