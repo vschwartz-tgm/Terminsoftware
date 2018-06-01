@@ -288,17 +288,20 @@ class ChangeEvent extends OrganisatorCommand
         $fehler = false;
 		
 		// Eventname schon vorhanden?
-		$slct = "SELECT id FROM event WHERE name = '$this->nameNew';"; 
-		$sql = pg_query($dbconn, $slct); 
-        $row = pg_fetch_row($sql);
-		if ($row[0]!=$this->eventId){
-			$slct = "SELECT COUNT(*) FROM event WHERE name = '$this->nameNew';"; 
+		try{
+			$slct = "SELECT id FROM event WHERE name = '$this->nameNew';"; 
 			$sql = pg_query($dbconn, $slct); 
-			$row = pg_fetch_row($sql); 
-			if($row[0] > 0) { 
-				$fehler = true;
-				echo "<script type='text/javascript'>alert('Dieser Eventname existiert bereits!');</script>";
+			$row = pg_fetch_row($sql);
+			if ($row[0]!=$this->eventId){
+				$slct = "SELECT COUNT(*) FROM event WHERE name = '$this->nameNew';"; 
+				$sql = pg_query($dbconn, $slct); 
+				$row = pg_fetch_row($sql); 
+				if($row[0] > 0) { 
+					$fehler = true;
+					echo "<script type='text/javascript'>alert('Dieser Eventname existiert bereits!');</script>";
+				}
 			}
+		} catch (Exception $e) {
 		}
 		
 		// Werte updaten
