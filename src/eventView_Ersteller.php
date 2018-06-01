@@ -113,8 +113,7 @@
 								$id = pg_fetch_row($sql);
 								
 								$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
-								$sql = pg_query($dbconn, $userid); 
-								echo "<p>Wählen Sie ihren Wunschtermin:</p>";
+								$sql = pg_query($dbconn, $userid);
 								while ($row = pg_fetch_row($sql)) {
 									echo "$row[0]";
 									echo "  ";
