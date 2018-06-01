@@ -56,8 +56,7 @@
 		$sqlname = pg_query($dbconn, $usernameselect); 
 		$nameteiln = pg_fetch_row($sqlname);
 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete$nameteiln[0]"])){
-			echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
-			$username ="try";
+			// echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
 			$d = new DeleteTeilnehmer($eventname, $nameteiln[0]);
 			$d->execute();
 		}
