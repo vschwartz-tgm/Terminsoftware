@@ -44,7 +44,7 @@
 		header("Location: terminreservierung.php");
 	}
 	
-	// Funktionen für Deletebuttons vorbereiten
+	// Funktionen für EingeladeneDeleteButtons vorbereiten
 	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 	$eventid = "SELECT id FROM event WHERE name = '$eventname';";
 	$sql = pg_query($dbconn, $eventid);
@@ -58,6 +58,22 @@
 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteTeiln$nameteiln[0]"])){
 			// echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
 			$d = new DeleteEingeladener($eventname, $nameteiln[0]);
+			$d->execute();
+		}
+	}
+	
+	// Funktionen für DateDeleteButtons vorbereiten
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+	$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+	$sql = pg_query($dbconn, $eventid);
+	$id = pg_fetch_row($sql);
+	
+	$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
+	$sql = pg_query($dbconn, $userid);
+	while ($row = pg_fetch_row($sql)) {
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteDate$row[0]"])){
+			// echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
+			$d = new DeleteDate($eventname, $row[0]);
 			$d->execute();
 		}
 	}

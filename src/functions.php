@@ -446,7 +446,7 @@ class DeleteEvent extends OrganisatorCommand
 }
 
 /**
- * Klasse DeleteUser, zum Löschen von Usern von Events
+ * Klasse DeleteEingelander, zum Löschen von Usern von Events
  *
  * @author	Paul Mazzolini
  * @version  1.0
@@ -474,6 +474,35 @@ class DeleteEingeladener extends OrganisatorCommand
 		
 		$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid' AND event = '$eventid';";
 		$sql = pg_query($dbconn, $deletequery);
+		
+		header("Location: eventView_Ersteller.php");
+    }
+}
+
+/**
+ * Klasse DeleteDate, zum Löschen eines Datums eines Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class DeleteDate extends OrganisatorCommand
+{
+    private $eventname;
+	private $datename;
+
+    function __construct($event, $datename){
+        $this->eventname = $event;
+		$this->datename = $datename;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+		$sql = pg_query($dbconn, $eventselect);
+		$eventid = pg_fetch_row($sql);
+		
+		// ToDo: Date aus der DB löschen
 		
 		header("Location: eventView_Ersteller.php");
     }
