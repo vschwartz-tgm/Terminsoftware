@@ -465,12 +465,12 @@ class DeleteEvent extends OrganisatorCommand
         $sql = pg_query($dbconn, $id);
         $row = pg_fetch_row($sql);
 
-        $acc = "SELECT angenommen FROM teilnehmer WHERE event = '$row[0]';";
+        $acc = "SELECT usr FROM teilnehmer WHERE angenommen = 'true';";
         $sql = pg_query($dbconn, $acc);
         $ang = pg_fetch_row($sql);
         
         echo "<script type='text/javascript'>alert($ang);</script>";
-        if($ang == true){
+        if($ang == ""){
             $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
             $sql = pg_query($dbconn, $eid);
             $row = pg_fetch_row($sql);
