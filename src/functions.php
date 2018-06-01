@@ -436,7 +436,7 @@ class DeleteTeilnehmer extends OrganisatorCommand
 
     public function execute(){
         
-		header("Location: eventView_Ersteller.php");
+		//header("Location: eventView_Ersteller.php");
     }
 }
 ?>
