@@ -55,7 +55,7 @@
 		$usernameselect = "SELECT name FROM benutzer WHERE id = '$row[0]';";
 		$sqlname = pg_query($dbconn, $usernameselect); 
 		$nameteiln = pg_fetch_row($sqlname);
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete$nameteiln[0]"])){
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteTeiln$nameteiln[0]"])){
 			// echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
 			$d = new DeleteTeilnehmer($eventname, $nameteiln[0]);
 			$d->execute();
@@ -105,12 +105,27 @@
 							<input name="name" value="<?php echo $eventname; ?>" />
 						</td>
 						<td>
-							<select id="date">
-								<option value="">stuff</option>
-							</select>
-							<br><br>
-							<button type="button" class="btn btn-outline-danger" onclick="">Löschen</button>
-							<button type="button" class="btn btn-outline-success" onclick="">Hinzufügen</button>
+							<?php
+								// Dates in die Tabelle schreiben
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+								$sql = pg_query($dbconn, $eventid);
+								$id = pg_fetch_row($sql);
+								
+								$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
+								$sql = pg_query($dbconn, $userid); 
+								echo "<p>Wählen Sie ihren Wunschtermin:</p>";
+								while ($row = pg_fetch_row($sql)) {
+									echo "$row[0]";
+									echo "  ";
+									echo "<form action='' method='post'>
+											<input type='submit' class='btn btn-outline-dark' name='deleteDate$row[0]' value='Entfernen' />
+										  </form>";
+									echo "<br />";
+								}
+							?>
+							<!--<button type="button" class="btn btn-outline-danger" onclick="">Löschen</button>
+							<!--<button type="button" class="btn btn-outline-success" onclick="">Hinzufügen</button>-->
 						</td>
 						<td>
 							<input name="ort" value="<?php echo $ort; ?>" />
@@ -135,7 +150,7 @@
 									
 									echo "$name[0]";
 									echo "<form action='' method='post'>
-											<input type='submit' class='btn btn-outline-dark' name='delete$name[0]' value='Entfernen' />
+											<input type='submit' class='btn btn-outline-dark' name='deleteTeiln$name[0]' value='Entfernen' />
 										  </form>";
 									echo "<br />";
 								}
