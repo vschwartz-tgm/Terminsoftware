@@ -145,8 +145,10 @@
 				</tbody>
 			</table>
 			<div align="center">
-				<button type="submit" name="change" class="btn btn-outline-success" >Änderungen übernehmen</button>
-				<button type="submit" name="delete" class="btn btn-outline-danger" >Event löschen</button>
+				<form action="" method="post">
+					<input type="submit" name="change" class="btn btn-outline-success" value="Änderungen übernehmen" />
+					<input type="submit" name="delete" class="btn btn-outline-danger" value="Event löschen" />
+				</form>
 			</div>
 			<br />
 			<div class="row">
