@@ -43,6 +43,24 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
 		header("Location: terminreservierung.php");
 	}
+	
+	// Funktionen für Deletebuttons vorbereiten
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+	$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+	$sql = pg_query($dbconn, $eventid);
+	$id = pg_fetch_row($sql);
+	$userid = "SELECT usr FROM teilnehmer WHERE event = '$id[0]';";
+	$sql = pg_query($dbconn, $userid); 
+	while ($row = pg_fetch_row($sql)) {
+		$username = "SELECT name FROM benutzer WHERE id = '$row[0]';";
+		$sqlname = pg_query($dbconn, $username); 
+		$name = pg_fetch_row($sqlname);
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete$name[0]"])){
+			echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
+			$d = new DeleteTeilnehmer($eventname, $name[0]);
+			$d->execute();
+		}
+	}
 ?>
 
 <html>
@@ -100,7 +118,27 @@
 						<td>
 							<input name="desc" value="<?php echo $desc; ?>" />
 						</td>
-						<td><p id="people"></p></td>
+						<td>
+							<?php
+								// Teilnehmer in die Tabelle schreiben
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+								$sql = pg_query($dbconn, $eventid);
+								$id = pg_fetch_row($sql);
+								
+								$userid = "SELECT usr FROM teilnehmer WHERE event = '$id[0]';";
+								$sql = pg_query($dbconn, $userid); 
+								while ($row = pg_fetch_row($sql)) {
+									$username = "SELECT name FROM benutzer WHERE id = '$row[0]';";
+									$sqlname = pg_query($dbconn, $username); 
+									$name = pg_fetch_row($sqlname);
+									
+									echo "$name[0]";
+									echo "<input type='submit' class='btn btn-outline-dark' name='delete$name[0]' value='Entfernen' />";
+									echo "<br />";
+								}
+							?>
+						</td>
 					</tr>
 				</tbody>
 			</table>

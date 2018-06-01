@@ -271,7 +271,7 @@ class CreateEvent extends OrganisatorCommand
  * @author	Christoph Kern
  * @version  1.0
  */
-class Accept extends OrganisatorCommand
+class Accept extends UserCommand
 {
     private $eventId;
     private $uname;
@@ -294,7 +294,7 @@ class Accept extends OrganisatorCommand
     }
 
 }
-class Decline extends OrganisatorCommand
+class Decline extends UserCommand
 {
     private $eventId;
     private $uname;
@@ -314,7 +314,7 @@ class Decline extends OrganisatorCommand
     }
 
 }
-class SendMailRegister extends OrganisatorCommand
+class SendMailRegister extends EventCommand
 {
 
     private $uname;
@@ -350,7 +350,7 @@ class SendMailRegister extends OrganisatorCommand
     }
 
 }
-class SendMailInvitation extends OrganisatorCommand
+class SendMailInvitation extends EventCommand
 {
 
     private $user;
@@ -440,6 +440,28 @@ class DeleteEvent extends OrganisatorCommand
         $rm = "DELETE FROM event WHERE name = '$this->event'; ";
         $sql = pg_query($dbconn, $rm);
         header("Location: terminreservierung.php");
+    }
+}
+
+/**
+ * Klasse DeleteUser, zum Löschen von Usern von Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class DeleteTeilnehmer extends OrganisatorCommand
+{
+    private $event;
+	private $user;
+
+    function __construct($event, $user){
+        $this->event = $event;
+		$this->user = $user;
+    }
+
+    public function execute(){
+        
+		header("Location: eventView_Ersteller.php");
     }
 }
 ?>
