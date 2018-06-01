@@ -316,8 +316,6 @@ class ChangeEvent extends OrganisatorCommand
 			$update = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId';";
 			$sql = pg_query($dbconn, $update);*/
 		}
-		
-		header("Location: eventView_Ersteller.php");
     }
 }
 ?>
