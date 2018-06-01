@@ -86,7 +86,7 @@
 								$sql = pg_query($dbconn, $searcherg);
 								while ($row = pg_fetch_row($sql)) {
 									echo "<tr>
-											<td><a href ='searchView.php?einlEvent=$row[0]'> $row[0] </a></td>
+											<td>$row[0]</td>
 										</tr>";
 								}
 								
