@@ -79,6 +79,7 @@
 								echo "<p>Wählen Sie ihren Wunschtermin:</p>";
 								while ($row = pg_fetch_row($sql)) {
 									echo "$row[0]";
+									echo "  ";
 									echo "<input type='radio' name='date' value='$row[0]'>";
 									echo "<br />";
 								}
