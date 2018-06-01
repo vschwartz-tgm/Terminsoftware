@@ -310,10 +310,11 @@ class ChangeEvent extends OrganisatorCommand
 			// ToDo: Funktioniert noch nicht ganz
 			$update = "UPDATE event SET name = '$this->nameNew' WHERE id = '$this->eventId';";
 			$sql = pg_query($dbconn, $update);
+            /*
 			$update = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId';";
 			$sql = pg_query($dbconn, $update);
 			$update = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId';";
-			$sql = pg_query($dbconn, $update);
+			$sql = pg_query($dbconn, $update);*/
 		}
 		
 		header("Location: eventView_Ersteller.php");
