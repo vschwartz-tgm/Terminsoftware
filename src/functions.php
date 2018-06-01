@@ -302,7 +302,7 @@ class ChangeEvent extends OrganisatorCommand
 			$sql = pg_query($dbconn, $update);
 			$update = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId'";
 			$sql = pg_query($dbconn, $update);
-			$update = "UPDATE event SET desc = '$this->descNew' WHERE id = '$this->eventId'";
+			$update = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId'";
 			$sql = pg_query($dbconn, $update);
 		}
 		
