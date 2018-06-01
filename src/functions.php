@@ -288,17 +288,20 @@ class ChangeEvent extends OrganisatorCommand
         $fehler = false;
 		
 		// Eventname schon vorhanden?
-		$slct = "SELECT id FROM event WHERE name = '$this->nameNew';"; 
-		$sql = pg_query($dbconn, $slct); 
-        $row = pg_fetch_row($sql);
-		if ($row[0]!=$this->eventId){
-			$slct = "SELECT COUNT(*) FROM event WHERE name = '$this->nameNew';"; 
+		try{
+			$slct = "SELECT id FROM event WHERE name = '$this->nameNew';"; 
 			$sql = pg_query($dbconn, $slct); 
-			$row = pg_fetch_row($sql); 
-			if($row[0] > 0) { 
-				$fehler = true;
-				echo "<script type='text/javascript'>alert('Dieser Eventname existiert bereits!');</script>";
+			$row = pg_fetch_row($sql);
+			if ($row[0]!=$this->eventId){
+				$slct = "SELECT COUNT(*) FROM event WHERE name = '$this->nameNew';"; 
+				$sql = pg_query($dbconn, $slct); 
+				$row = pg_fetch_row($sql); 
+				if($row[0] > 0) { 
+					$fehler = true;
+					echo "<script type='text/javascript'>alert('Dieser Eventname existiert bereits!');</script>";
+				}
 			}
+		} catch (Exception $e) {
 		}
 		
 		// Werte updaten
@@ -527,19 +530,18 @@ class DeleteEingeladener extends OrganisatorCommand
         $ang = pg_fetch_row($sql);
         
         if($ang[0] == 'f'){
-		
-		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
-		$sql = pg_query($dbconn, $eventselect);
-		$eventid = pg_fetch_row($sql);
-		
-		$userselect = "SELECT id FROM benutzer WHERE name = '$this->username';";
-		$sql = pg_query($dbconn, $userselect);
-		$userid = pg_fetch_row($sql);
-		
-		$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid[0]' AND event = '$eventid[0]' AND angenommen='false';";
-		$sql = pg_query($dbconn, $deletequery);
-		
-		header("Location: eventView_Ersteller.php");
+			$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+			$sql = pg_query($dbconn, $eventselect);
+			$eventid = pg_fetch_row($sql);
+			
+			$userselect = "SELECT id FROM benutzer WHERE name = '$this->username';";
+			$sql = pg_query($dbconn, $userselect);
+			$userid = pg_fetch_row($sql);
+			
+			$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid[0]' AND event = '$eventid[0]' AND angenommen='false';";
+			$sql = pg_query($dbconn, $deletequery);
+			
+			header("Location: eventView_Ersteller.php");
         }else{
             echo "<script type='text/javascript'>alert('User kann nicht gelöscht werden, da er bereits angenommen hat.');</script>";
         }
