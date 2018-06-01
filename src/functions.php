@@ -520,7 +520,7 @@ class DeleteEingeladener extends OrganisatorCommand
 		$sql = pg_query($dbconn, $userselect);
 		$userid = pg_fetch_row($sql);
 		
-		$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid' AND event = '$eventid';";
+		$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid[0]' AND event = '$eventid[0]';";
 		$sql = pg_query($dbconn, $deletequery);
 		
 		header("Location: eventView_Ersteller.php");
