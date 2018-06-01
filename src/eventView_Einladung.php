@@ -60,7 +60,7 @@
 						<th scope="col">Datum & Uhrzeit</th>
 						<th scope="col">Ort</th>
 						<th scope="col">Beschreibung</th>
-						<th scope="col">Teilnehmerliste</th>
+						<th scope="col">Eingeladene User</th>
 						<th scope="col">Ersteller</th>
 					</tr>
 				</thead>
