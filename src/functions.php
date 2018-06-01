@@ -435,18 +435,18 @@ class DeleteTeilnehmer extends OrganisatorCommand
     }
 
     public function execute(){
-        dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);
 		
 		$userselect = "SELECT id FROM benutzer WHERE name = '$this->username';";
-		$sql = pg_query($dbconn, $userselect); 
+		$sql = pg_query($dbconn, $userselect);
 		$userid = pg_fetch_row($sql);
 		
 		$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid' AND event = '$eventid';";
-		$sql = pg_query($dbconn, $deletequery); 
+		$sql = pg_query($dbconn, $deletequery);
 		
 		header("Location: eventView_Ersteller.php");
     }
