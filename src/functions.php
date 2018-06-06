@@ -587,11 +587,18 @@ class DeleteDate extends OrganisatorCommand
     public function execute(){
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		
+		// ToDo: Date aus der DB löschen
+		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);
 		
-		// ToDo: Date aus der DB löschen
+		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+		$sql = pg_query($dbconn, $eventselect);
+		$eventid = pg_fetch_row($sql);
+		
+		$deletedate = "DELETE date FROM datum WHERE eventid = '$eventid' AND date='$datename';";
+		$sql = pg_query($dbconn, $deletedate);
 		
 		header("Location: eventView_Ersteller.php");
     }
