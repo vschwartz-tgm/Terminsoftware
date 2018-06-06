@@ -595,10 +595,10 @@ class DeleteDate extends OrganisatorCommand
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);
 		
-		$deletedate = "DELETE FROM datum WHERE eventid = '$eventid' AND date='$datename';";
+		$deletedate = "DELETE FROM datum WHERE eventid = '$eventid' AND date='$this->datename';";
 		$sql = pg_query($dbconn, $deletedate);
 		
-		//header("Location: eventView_Ersteller.php");
+		header("Location: eventView_Ersteller.php");
     }
 }
 
