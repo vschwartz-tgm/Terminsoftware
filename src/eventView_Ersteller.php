@@ -149,15 +149,15 @@
 								
 								$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
 								$sql = pg_query($dbconn, $userid);
-								$i = 0;
+								$d = 0;
 								while ($row = pg_fetch_row($sql)) {
 									echo "$row[0]";
 									echo "  ";
 									echo "<form action='' method='post'>
-											<input type='submit' class='btn btn-outline-dark' name='deleteDate$i' value='Entfernen' />
+											<input type='submit' class='btn btn-outline-dark' name='deleteDate$d' value='Entfernen' />
 										  </form>";
 									echo "<br />";
-									$i = $i + 1;
+									$d = $d + 1;
 								}
 							?>
 						</td>
