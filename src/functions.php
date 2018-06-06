@@ -323,7 +323,7 @@ class ChangeEvent extends OrganisatorCommand
 
 <?php
 /**
- * Klasse invitation, zum Beantworten der Einladungen
+ * Klasse Accept, zum Annehmen der Einladungen
  *
  * @author	Christoph Kern
  * @version  1.0
@@ -349,6 +349,12 @@ class Accept extends UserCommand
     }
 }
 
+/**
+ * Klasse Decline, zum Ablehnen der Einladungen
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
 class Decline extends UserCommand
 {
     private $eventId;
@@ -369,7 +375,15 @@ class Decline extends UserCommand
     }
 
 }
+?>
 
+<?
+/**
+ * Klasse SendMailRegister, zum Versenden der Notifications bei der Registrierung
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
 class SendMailRegister extends EventCommand
 {
     private $uname;
@@ -405,6 +419,12 @@ class SendMailRegister extends EventCommand
     }
 }
 
+/**
+ * Klasse SendMailInvitation, zum Versenden der Notifications bei einer neuen Eventeinladung
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
 class SendMailInvitation extends EventCommand
 {
     private $user;
