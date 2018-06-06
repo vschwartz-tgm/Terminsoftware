@@ -595,7 +595,16 @@ class AddUser extends OrganisatorCommand
     public function execute(){
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		
-		// ToDo: User zu Event hinzufügen (Wenn es den User gibt)
+		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+		$sql = pg_query($dbconn, $eventselect);
+		$eventid = pg_fetch_row($sql);
+		
+		$userselect = "SELECT id FROM benutzer WHERE name = '$this->username';";
+		$sql = pg_query($dbconn, $userselect);
+		$userid = pg_fetch_row($sql);
+		
+		$addUser = "INSERT INTO teilnehmer VALUES('$userid','$eventid', false);";
+		$user = pg_query($dbconn, $addUser);
 		
 		header("Location: eventView_Ersteller.php");
     }
