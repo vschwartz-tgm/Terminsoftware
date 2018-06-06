@@ -286,6 +286,9 @@ class ChangeEvent extends OrganisatorCommand
     public function execute(){
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
         $fehler = false;
+		
+		// ToDo: Eventinformationen ändern
+		
 		/*
 		// Eventname schon vorhanden?
 		try{
@@ -306,16 +309,14 @@ class ChangeEvent extends OrganisatorCommand
 		/*
 		// Werte updaten
 		if ($fehler == false){
-			
-			// ToDo: Funktioniert noch nicht ganz
 			$update = "UPDATE event SET name = '$this->nameNew' WHERE id = '$this->eventId';";
 			$sql = pg_query($dbconn, $update);*/
             /*
 			$update = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId';";
 			$sql = pg_query($dbconn, $update);
 			$update = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId';";
-			$sql = pg_query($dbconn, $update);*/
-		}
+			$sql = pg_query($dbconn, $update);
+		}*/
     }
 }
 ?>
