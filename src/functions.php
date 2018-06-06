@@ -635,8 +635,8 @@ class AddUser extends OrganisatorCommand
 		$sql = pg_query($dbconn, $userselect);
 		$userid = pg_fetch_row($sql);
 		
-		$addUser = "INSERT INTO teilnehmer VALUES('$userid','$eventid', false);";
-		$user = pg_query($dbconn, $addUser);
+		$add = "INSERT INTO teilnehmer VALUES('$userid','$eventid', false);";
+		$user = pg_query($dbconn, $add);
 		
 		// header("Location: eventView_Ersteller.php");
     }
