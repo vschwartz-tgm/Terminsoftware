@@ -625,6 +625,8 @@ class AddUser extends OrganisatorCommand
 		
 		// ToDo: User zu bereits erstellten Event einladen
 		
+		echo "<script type='text/javascript'>alert('$this->username');</script>";
+		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);

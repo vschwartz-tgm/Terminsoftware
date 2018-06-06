@@ -185,8 +185,8 @@
 									}
 								?>
 								<br />
-								<input name="newUser" value="" />
-								<input type="submit" name="addUser" class="btn btn-outline-dark" value="Benutzer hinzufügen" />
+								<input name="newUser" id="newUser" value="" />
+								<input type="submit" name="addUser" id="addUser" class="btn btn-outline-dark" value="Benutzer hinzufügen" />
 							</td>
 						</tr>
 					</tbody>
