@@ -85,12 +85,14 @@
 	
 	$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
 	$sql = pg_query($dbconn, $userid);
+	$d = 0;
 	while ($row = pg_fetch_row($sql)) {
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteDate$row[0]"])){
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteDate$d"])){
 			echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
 			$d = new DeleteDate($eventname, $row[0]);
 			$d->execute();
 		}
+		$d = $d + 1;
 	}
 ?>
 
@@ -147,12 +149,14 @@
 								
 								$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
 								$sql = pg_query($dbconn, $userid);
+								$i = 0;
 								while ($row = pg_fetch_row($sql)) {
 									echo "$row[0]";
 									echo "  ";
 									echo "<form action='' method='post'>
-											<input type='submit' class='btn btn-outline-dark' name='deleteDate$row[0]' value='Entfernen' />
+											<input type='submit' class='btn btn-outline-dark' name='deleteDate$i' value='Entfernen' />
 										  </form>";
+									$i = $i + 1;
 								}
 							?>
 						</td>
