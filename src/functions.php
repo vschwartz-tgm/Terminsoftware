@@ -589,9 +589,7 @@ class DeleteDate extends OrganisatorCommand
 		
 		// ToDo: Date aus der DB löschen
 		
-		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
-		$sql = pg_query($dbconn, $eventselect);
-		$eventid = pg_fetch_row($sql);
+		echo "<script type='text/javascript'>alert('$this->datename');</script>";
 		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
 		$sql = pg_query($dbconn, $eventselect);
