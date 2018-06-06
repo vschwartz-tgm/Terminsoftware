@@ -285,8 +285,6 @@ class ChangeEvent extends OrganisatorCommand
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
         $fehler = false;
 		
-		// ToDo: Eventinformationen ändern
-		
 		$updateEvent = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId';";
 		$sql = pg_query($dbconn, $updateEvent);
 		$updateDescr = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId';";
@@ -295,8 +293,7 @@ class ChangeEvent extends OrganisatorCommand
 		header("Location: eventView_Ersteller.php");
 		
 		
-		/*
-		// Eventname schon vorhanden?
+		/*// Eventname schon vorhanden?
 		try{
 			$slct = "SELECT id FROM event WHERE name = '$this->nameNew';"; 
 			$sql = pg_query($dbconn, $slct); 
@@ -311,8 +308,7 @@ class ChangeEvent extends OrganisatorCommand
 				}
 			}
 		} catch (Exception $e) {
-		}*/
-		/*
+		}
 		// Werte updaten
 		if ($fehler == false){
 			$update = "UPDATE event SET name = '$this->nameNew' WHERE id = '$this->eventId';";

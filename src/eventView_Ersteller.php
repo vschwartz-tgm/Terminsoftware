@@ -153,6 +153,7 @@
 										echo "$row[0]";
 										echo "  ";
 										echo "<input type='submit' class='btn btn-outline-dark' name='deleteDate$i' value='Entfernen' />";
+										echo "<br />";
 										$i = $i + 1;
 									}
 								?>
