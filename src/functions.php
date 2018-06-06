@@ -597,7 +597,7 @@ class DeleteDate extends OrganisatorCommand
 }
 
 /**
- * Klasse DeleteDate, zum Löschen eines Datums eines Events
+ * Klasse AddUser, zum Hinzufügen von Usern zu Events
  *
  * @author	Paul Mazzolini
  * @version  1.0
