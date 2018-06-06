@@ -272,13 +272,11 @@ class CreateEvent extends OrganisatorCommand
 class ChangeEvent extends OrganisatorCommand
 {
 	private $eventId;
-	private $nameNew;
     private $ortNew;
 	private $descNew;
 
-    function __construct($eventId, $nameNew, $ortNew, $descNew){
+    function __construct($eventId, $ortNew, $descNew){
         $this->eventId = $eventId;
-		$this->nameNew = $nameNew;
 		$this->ortNew = $ortNew;
         $this->descNew = $descNew;
     }
@@ -288,6 +286,12 @@ class ChangeEvent extends OrganisatorCommand
         $fehler = false;
 		
 		// ToDo: Eventinformationen ändern
+		
+		$updateEvent = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId';";
+		$sql = pg_query($dbconn, $updateEvent);
+		$updateDescr = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId';";
+		$sql = pg_query($dbconn, $updateDescr);
+		
 		
 		/*
 		// Eventname schon vorhanden?

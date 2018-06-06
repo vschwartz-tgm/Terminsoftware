@@ -50,7 +50,7 @@
 		$eventidselect = "SELECT id FROM event WHERE name = '$eventname';";
 		$sql = pg_query($dbconn, $eventidselect); 
 		$eventid = pg_fetch_row($sql);
-		$c = new ChangeEvent($eventid[0], $_POST['newName'], $_POST['newOrt'], $_POST['newDesc']);
+		$c = new ChangeEvent($eventid[0], $_POST['newOrt'], $_POST['newDesc']);
 		$c->execute();
 	}
 	
@@ -135,7 +135,8 @@
 					<tr>
 						<td>
 							<form action="" method="post">
-								<input name="newName" value="<?php echo $eventname; ?>" />
+								<p><?php echo $eventname; ?></p>
+								<!--<input name="newName" value="" />-->
 							</form>
 						</td>
 						<td>
