@@ -184,6 +184,7 @@
 										echo "<br />";
 									}
 								?>
+								<br />
 								<input name="newUser" value="" />
 								<input type="submit" name="addUser" class="btn btn-outline-dark" value="Benutzer hinzufügen" />
 							</td>
