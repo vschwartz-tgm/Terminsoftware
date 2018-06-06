@@ -88,7 +88,6 @@
 	$d = 0;
 	while ($row = pg_fetch_row($sql)) {
 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteDate$d"])){
-			echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
 			$d = new DeleteDate($eventname, $row[0]);
 			$d->execute();
 		}
