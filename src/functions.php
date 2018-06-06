@@ -303,13 +303,13 @@ class ChangeEvent extends OrganisatorCommand
 			}
 		} catch (Exception $e) {
 		}*/
-		
+		/*
 		// Werte updaten
 		if ($fehler == false){
 			
 			// ToDo: Funktioniert noch nicht ganz
 			$update = "UPDATE event SET name = '$this->nameNew' WHERE id = '$this->eventId';";
-			$sql = pg_query($dbconn, $update);
+			$sql = pg_query($dbconn, $update);*/
             /*
 			$update = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId';";
 			$sql = pg_query($dbconn, $update);
