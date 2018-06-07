@@ -180,6 +180,7 @@
 										$name = pg_fetch_row($sqlname);
 										
 										echo "$name[0]";
+										echo " ";
 										echo "<input type='submit' class='btn btn-outline-dark' name='deleteTeiln$name[0]' value='Entfernen' />";
 										echo "<br />";
 									}

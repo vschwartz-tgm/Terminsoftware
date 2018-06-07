@@ -81,7 +81,6 @@
 									echo "<br />";
 								}
 							?>
-							<!--<button type="button" class="btn btn-outline-success" onclick="">Abstimmen</button>-->
 						</td>
 						<td>
 							<?php
