@@ -8,12 +8,12 @@
 	}
 	$username = $_SESSION['uname'];
 	
-	// Wurde ein Event angeclickt?
+	// Wurde ein Event angeklickt?
 	session_start();
-	if(!isset($_SESSION['teilnehmerEvent'])) {
+	if(!isset($_SESSION['einladungsEvent'])) {
 		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
 	}
-	$eventname = $_SESSION['teilnehmerEvent'];
+	$eventname = $_SESSION['einladungsEvent'];
 	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
@@ -76,20 +76,12 @@
 								
 								$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
 								$sql = pg_query($dbconn, $userid); 
-								echo "<p>Wählen Sie ihren Wunschtermin:</p>";
 								while ($row = pg_fetch_row($sql)) {
 									echo "$row[0]";
-									echo "  ";
-									echo "<input type='radio' name='date' value='$row[0]'>";
 									echo "<br />";
 								}
 							?>
-							<br />
-							<div align="center">
-								<form action="" method="post">
-									<input type="submit" name="save" class="btn btn-outline-dark" value="Auswahl speichern" />
-								</form>
-							</div>
+							<!--<button type="button" class="btn btn-outline-success" onclick="">Abstimmen</button>-->
 						</td>
 						<td>
 							<?php
@@ -154,24 +146,6 @@
 				<form action="" method="post">
 					<input type="submit" name="back" class="btn btn-outline-dark" value="Zurück" />
 				</form>
-			</div>
-			<div class="container">
-				<form method="post">
-					<div class="form-group">
-						<input type="text" placeholder="Kommentar" name="commentField" class"form-control" id="commentField" name="commentField" />
-						<button type="submit" class="btn btn-outline-dark" value="Posten" name="commentBtn" id="commentBtn" />
-				<table class="table scroll">
-					<thead>
-						<tr>
-							<th scope="col">User</th>
-							<th scope="col">Schrieb:</th>
-						</tr>
-					</thead>
-					<tbody>
-						<td>paul</td>
-						<td>cool</td>
-					</tbody>
-				</table>
 			</div>
 		</div>
 	</body>

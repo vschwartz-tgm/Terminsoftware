@@ -39,9 +39,59 @@
 		$d->execute();
 	}
 	
+	// UserAddbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addUser'])){
+		$a = new AddUser($eventname, $_POST['newUser']);
+		$a->execute();
+	}
+	
+	// Änderungsbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['change'])){
+		$eventidselect = "SELECT id FROM event WHERE name = '$eventname';";
+		$sql = pg_query($dbconn, $eventidselect); 
+		$eventid = pg_fetch_row($sql);
+		$c = new ChangeEvent($eventid[0], $_POST['newOrt'], $_POST['newDesc']);
+		$c->execute();
+	}
+	
 	// Zurückbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
 		header("Location: terminreservierung.php");
+	}
+	
+	// Funktionen für EingeladeneDeleteButtons vorbereiten
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+	$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+	$sql = pg_query($dbconn, $eventid);
+	$id = pg_fetch_row($sql);
+	$userid = "SELECT usr FROM teilnehmer WHERE event = '$id[0]';";
+	$sql = pg_query($dbconn, $userid); 
+	while ($row = pg_fetch_row($sql)) {
+		$usernameselect = "SELECT name FROM benutzer WHERE id = '$row[0]';";
+		$sqlname = pg_query($dbconn, $usernameselect); 
+		$nameteiln = pg_fetch_row($sqlname);
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteTeiln$nameteiln[0]"])){
+			// echo "<script type='text/javascript'>alert('Delete Button gedrückt!');</script>";
+			$d = new DeleteEingeladener($eventname, $nameteiln[0]);
+			$d->execute();
+		}
+	}
+	
+	// Funktionen für DateDeleteButtons vorbereiten
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+	$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+	$sql = pg_query($dbconn, $eventid);
+	$id = pg_fetch_row($sql);
+	
+	$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
+	$sql = pg_query($dbconn, $userid);
+	$d = 0;
+	while ($row = pg_fetch_row($sql)) {
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteDate$d"])){
+			$d = new DeleteDate($eventname, $row[0]);
+			$d->execute();
+		}
+		$d = $d + 1;
 	}
 ?>
 
@@ -70,50 +120,86 @@
 		</nav>	
 		<br />
 		<h1 align="center">Event <?php echo "$eventname"; ?></h1>
-		<div class="container">
-    		<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th scope="col">Eventname</th>
-						<th scope="col">Datum & Uhrzeit</th>
-						<th scope="col">Ort</th>
-						<th scope="col">Beschreibung</th>
-						<th scope="col">Teilnehmerliste</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<input name="name" value="<?php echo $eventname; ?>" />
-						</td>
-						<td>
-							<select id="date">
-								<option value="">stuff</option>
-							</select>
-							<br><br>
-							<button type="button" class="btn btn-outline-danger" onclick="">Löschen</button>
-							<button type="button" class="btn btn-outline-success" onclick="">Hinzufügen</button>
-						</td>
-						<td>
-							<input name="ort" value="<?php echo $ort; ?>" />
-						</td>
-						<td>
-							<input name="desc" value="<?php echo $desc; ?>" />
-						</td>
-						<td><p id="people"></p></td>
-					</tr>
-				</tbody>
-			</table>
-			<div align="center">
-				<button type="submit" name="change" class="btn btn-outline-success" >Änderungen übernehmen</button>
-				<button type="submit" name="delete" class="btn btn-outline-danger" >Event löschen</button>
-			</div>
-			<br />
-			<div class="row">
-				<form action="" method="post">
+		<form action="" method="post">
+			<div class="container">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">Eventname</th>
+							<th scope="col">Datum & Uhrzeit</th>
+							<th scope="col">Ort</th>
+							<th scope="col">Beschreibung</th>
+							<th scope="col">Eingeladene User</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<p><?php echo $eventname; ?></p>
+								<!--<input name="newName" value="" />-->
+							</td>
+							<td>
+								<?php
+									// Dates in die Tabelle schreiben
+									$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+									$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+									$sql = pg_query($dbconn, $eventid);
+									$id = pg_fetch_row($sql);
+									
+									$userid = "SELECT date FROM datum WHERE eventid = '$id[0]';";
+									$sql = pg_query($dbconn, $userid);
+									$i = 0;
+									while ($row = pg_fetch_row($sql)) {
+										echo "$row[0]";
+										echo "  ";
+										echo "<input type='submit' class='btn btn-outline-dark' name='deleteDate$i' value='Entfernen' />";
+										echo "<br />";
+										$i = $i + 1;
+									}
+								?>
+							</td>
+							<td>
+								<input name="newOrt" id="newOrt" value="<?php echo $ort; ?>" />
+							</td>
+							<td>
+								<input name="newDesc" id="newDesc" value="<?php echo $desc; ?>" />
+							</td>
+							<td>
+								<?php
+									// Teilnehmer in die Tabelle schreiben
+									$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+									$eventid = "SELECT id FROM event WHERE name = '$eventname';";
+									$sql = pg_query($dbconn, $eventid);
+									$id = pg_fetch_row($sql);
+									
+									$userid = "SELECT usr FROM teilnehmer WHERE event = '$id[0]';";
+									$sql = pg_query($dbconn, $userid); 
+									while ($row = pg_fetch_row($sql)) {
+										$username = "SELECT name FROM benutzer WHERE id = '$row[0]';";
+										$sqlname = pg_query($dbconn, $username); 
+										$name = pg_fetch_row($sqlname);
+										
+										echo "$name[0]";
+										echo "<input type='submit' class='btn btn-outline-dark' name='deleteTeiln$name[0]' value='Entfernen' />";
+										echo "<br />";
+									}
+								?>
+								<br />
+								<input name="newUser" id="newUser" value="" />
+								<input type="submit" name="addUser" id="addUser" class="btn btn-outline-dark" value="Benutzer hinzufügen" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div align="center">
+					<input type="submit" name="change" class="btn btn-outline-success" value="Änderungen übernehmen" />
+					<input type="submit" name="delete" class="btn btn-outline-danger" value="Event löschen" />
+				</div>
+				<br />
+				<div class="row">
 					<input type="submit" name="back" class="btn btn-outline-dark" value="Zurück" />
-				</form>
+				</div>
 			</div>
-		</div>
+		</form>
 	</body>
 </html>

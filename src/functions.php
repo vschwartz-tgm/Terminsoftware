@@ -261,17 +261,77 @@ class CreateEvent extends OrganisatorCommand
         }
     }
 }
+
+
+/**
+ * Klasse ChangeEvent, zum Ändern eines Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class ChangeEvent extends OrganisatorCommand
+{
+	private $eventId;
+    private $ortNew;
+	private $descNew;
+
+    function __construct($eventId, $ortNew, $descNew){
+        $this->eventId = $eventId;
+		$this->ortNew = $ortNew;
+        $this->descNew = $descNew;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+        $fehler = false;
+		
+		$updateEvent = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId';";
+		$sql = pg_query($dbconn, $updateEvent);
+		$updateDescr = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId';";
+		$sql = pg_query($dbconn, $updateDescr);
+		
+		header("Location: eventView_Ersteller.php");
+		
+		
+		/*// Eventname schon vorhanden?
+		try{
+			$slct = "SELECT id FROM event WHERE name = '$this->nameNew';"; 
+			$sql = pg_query($dbconn, $slct); 
+			$row = pg_fetch_row($sql);
+			if ($row[0]!=$this->eventId){
+				$slct = "SELECT COUNT(*) FROM event WHERE name = '$this->nameNew';"; 
+				$sql = pg_query($dbconn, $slct); 
+				$row = pg_fetch_row($sql); 
+				if($row[0] > 0) { 
+					$fehler = true;
+					echo "<script type='text/javascript'>alert('Dieser Eventname existiert bereits!');</script>";
+				}
+			}
+		} catch (Exception $e) {
+		}
+		// Werte updaten
+		if ($fehler == false){
+			$update = "UPDATE event SET name = '$this->nameNew' WHERE id = '$this->eventId';";
+			$sql = pg_query($dbconn, $update);*/
+            /*
+			$update = "UPDATE event SET ort = '$this->ortNew' WHERE id = '$this->eventId';";
+			$sql = pg_query($dbconn, $update);
+			$update = "UPDATE event SET descr = '$this->descNew' WHERE id = '$this->eventId';";
+			$sql = pg_query($dbconn, $update);
+		}*/
+    }
+}
 ?>
 
 
 <?php
 /**
- * Klasse invitation, zum Beantworten der Einladungen
+ * Klasse Accept, zum Annehmen der Einladungen
  *
  * @author	Christoph Kern
  * @version  1.0
  */
-class Accept extends OrganisatorCommand
+class Accept extends UserCommand
 {
     private $eventId;
     private $uname;
@@ -282,7 +342,6 @@ class Accept extends OrganisatorCommand
     }
 
     public function execute(){
-
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
         $userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
         $sql = pg_query($dbconn, $userid); 
@@ -290,11 +349,16 @@ class Accept extends OrganisatorCommand
         $i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventId' AND usr = '$row[0]';";
         $sql = pg_query($dbconn, $i);
         $sql = pg_query($dbconn, $i); 
-
     }
-
 }
-class Decline extends OrganisatorCommand
+
+/**
+ * Klasse Decline, zum Ablehnen der Einladungen
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
+class Decline extends UserCommand
 {
     private $eventId;
     private $uname;
@@ -314,9 +378,17 @@ class Decline extends OrganisatorCommand
     }
 
 }
-class SendMailRegister extends OrganisatorCommand
-{
+?>
 
+<?
+/**
+ * Klasse SendMailRegister, zum Versenden der Notifications bei der Registrierung
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
+class SendMailRegister extends EventCommand
+{
     private $uname;
     private $email;
 
@@ -348,11 +420,16 @@ class SendMailRegister extends OrganisatorCommand
         }
         header("Location: login.php");
     }
-
 }
-class SendMailInvitation extends OrganisatorCommand
-{
 
+/**
+ * Klasse SendMailInvitation, zum Versenden der Notifications bei einer neuen Eventeinladung
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
+class SendMailInvitation extends EventCommand
+{
     private $user;
     private $eventName;
 
@@ -389,11 +466,10 @@ class SendMailInvitation extends OrganisatorCommand
 
                 $mail->send();
             }
-
         } catch (Exception $e) {
+			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
         }
     }
-
 }
 ?>
 
@@ -413,33 +489,148 @@ class DeleteEvent extends OrganisatorCommand
     }
 
     public function execute(){
-
-        echo "<script type='text/javascript'>alert('Hallo');</script>";
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d")     ;	
 
         $eid = "SELECT id FROM event WHERE name = '$this->event';";
-        $sql = pg_query($dbconn, $id);
-        $row = pg_fetch_row($sql);
-
-        $acc = "SELECT angenommen FROM teilnehmer WHERE event = '$row[0]';";
-        $sql = pg_query($dbconn, $acc);
-        $ang = pg_fetch_row($sql);
-
-
-
-        $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
         $sql = pg_query($dbconn, $eid);
         $row = pg_fetch_row($sql);
 
-        $rmT = "DELETE FROM teilnehmer WHERE event = '$row[0]';";
-        $sql = pg_query($dbconn, $rmT);
+        $acc = "SELECT count(usr) FROM teilnehmer WHERE angenommen = 'true' AND event ='$row[0]';";
+        $sql = pg_query($dbconn, $acc);
+        $ang = pg_fetch_row($sql);
+        
+        if($ang[0] == 0){
+            $eid = "SELECT id FROM event WHERE name = '$this->event'; ";
+            $sql = pg_query($dbconn, $eid);
+            $row = pg_fetch_row($sql);
 
-        $rmD = "DELETE FROM datum WHERE eventid = '$row[0]';";
-        $sql = pg_query($dbconn, $rmD);
+            $rmT = "DELETE FROM teilnehmer WHERE event = '$row[0]';";
+            $sql = pg_query($dbconn, $rmT);
 
-        $rm = "DELETE FROM event WHERE name = '$this->event'; ";
-        $sql = pg_query($dbconn, $rm);
-        header("Location: terminreservierung.php");
+            $rmD = "DELETE FROM datum WHERE eventid = '$row[0]';";
+            $sql = pg_query($dbconn, $rmD);
+
+            $rm = "DELETE FROM event WHERE name = '$this->event'; ";
+            $sql = pg_query($dbconn, $rm);
+			echo "<script type='text/javascript'>alert('Event wurde erfolgreich gelöscht.');</script>";
+            header("Location: terminreservierung.php");
+        }else{
+            echo "<script type='text/javascript'>alert('Event kann nicht gelöscht werden, da Teilnehmer bereits beigetreten sind.');</script>";
+        }
+    }
+}
+
+/**
+ * Klasse DeleteEingelander, zum Löschen von Usern von Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class DeleteEingeladener extends OrganisatorCommand
+{
+    private $eventname;
+	private $username;
+
+    function __construct($event, $user){
+        $this->eventname = $event;
+		$this->username = $user;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+        
+        $uid = "SELECT id FROM benutzer WHERE name = '$this->username';";
+        $sql = pg_query($dbconn, $uid);
+        $row = pg_fetch_row($sql);
+        
+        $eid = "SELECT id FROM event WHERE name = '$this->eventname';";
+        $sql = pg_query($dbconn, $eid);
+        $ide = pg_fetch_row($sql);
+
+        $acc = "SELECT angenommen FROM teilnehmer WHERE usr = '$row[0]' AND event ='$ide[0]';";
+        $sql = pg_query($dbconn, $acc);
+        $ang = pg_fetch_row($sql);
+        
+        if($ang[0] == 'f'){
+			$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+			$sql = pg_query($dbconn, $eventselect);
+			$eventid = pg_fetch_row($sql);
+			
+			$userselect = "SELECT id FROM benutzer WHERE name = '$this->username';";
+			$sql = pg_query($dbconn, $userselect);
+			$userid = pg_fetch_row($sql);
+			
+			$deletequery = "DELETE FROM teilnehmer WHERE usr = '$userid[0]' AND event = '$eventid[0]' AND angenommen='false';";
+			$sql = pg_query($dbconn, $deletequery);
+			
+			header("Location: eventView_Ersteller.php");
+        }else{
+            echo "<script type='text/javascript'>alert('User kann nicht gelöscht werden, da er bereits angenommen hat.');</script>";
+        }
+    }
+}
+
+/**
+ * Klasse DeleteDate, zum Löschen eines Datums eines Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class DeleteDate extends OrganisatorCommand
+{
+    private $eventname;
+	private $datename;
+
+    function __construct($event, $datename){
+        $this->eventname = $event;
+		$this->datename = $datename;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+		$sql = pg_query($dbconn, $eventselect);
+		$eventid = pg_fetch_row($sql);
+		
+		$deletedate = "DELETE FROM datum WHERE eventid = '$eventid[0]' AND date='$this->datename';";
+		$sql = pg_query($dbconn, $deletedate);
+		
+		header("Location: eventView_Ersteller.php");
+    }
+}
+
+/**
+ * Klasse AddUser, zum Hinzufügen von Usern zu Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class AddUser extends OrganisatorCommand
+{
+    private $eventname;
+	private $username;
+
+    function __construct($eventname, $username){
+        $this->eventname = $eventname;
+		$this->username = $username;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+		$sql = pg_query($dbconn, $eventselect);
+		$eventid = pg_fetch_row($sql);
+		
+		$userselect = "SELECT id FROM benutzer WHERE name = '$this->username';";
+		$sql = pg_query($dbconn, $userselect);
+		$userid = pg_fetch_row($sql);
+		
+		$add = "INSERT INTO teilnehmer VALUES('$userid[0]','$eventid[0]', false);";
+		$user = pg_query($dbconn, $add);
+		
+		header("Location: eventView_Ersteller.php");
     }
 }
 ?>
