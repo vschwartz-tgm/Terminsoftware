@@ -65,10 +65,7 @@ class LoginUser extends UserCommand
         }
     }
 }
-?>
 
-
-<?php
 /**
  * Klasse RegisterUser, zum Registrieren neuer User
  *
@@ -136,10 +133,7 @@ class RegisterUser extends UserCommand
         }
     }
 }
-?>
 
-
-<?php
 /**
  * Klasse Search, zum Suchen von Events oder User
  *
@@ -187,6 +181,60 @@ class Search extends UserCommand
             }
         }
     }
+}
+
+/**
+ * Klasse Accept, zum Annehmen der Einladungen
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
+class Accept extends UserCommand
+{
+    private $eventId;
+    private $uname;
+
+    function __construct($eventId, $username){
+        $this->eventId = $eventId;
+        $this->uname = $username;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+        $userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
+        $sql = pg_query($dbconn, $userid); 
+        $row = pg_fetch_row($sql);
+        $i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventId' AND usr = '$row[0]';";
+        $sql = pg_query($dbconn, $i);
+        $sql = pg_query($dbconn, $i); 
+    }
+}
+
+/**
+ * Klasse Decline, zum Ablehnen der Einladungen
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
+class Decline extends UserCommand
+{
+    private $eventId;
+    private $uname;
+
+    function __construct($eventId, $username){
+        $this->eventId = $eventId;
+        $this->uname = $username;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+        $userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
+        $sql = pg_query($dbconn, $userid); 
+        $row = pg_fetch_row($sql);
+        $i = "DELETE FROM teilnehmer WHERE event = '$this->eventId' AND usr = '$row[0]';";
+        $sql = pg_query($dbconn, $i);
+    }
+
 }
 ?>
 
@@ -262,7 +310,6 @@ class CreateEvent extends OrganisatorCommand
     }
 }
 
-
 /**
  * Klasse ChangeEvent, zum Ändern eines Events
  *
@@ -321,159 +368,7 @@ class ChangeEvent extends OrganisatorCommand
 		}*/
     }
 }
-?>
 
-
-<?php
-/**
- * Klasse Accept, zum Annehmen der Einladungen
- *
- * @author	Christoph Kern
- * @version  1.0
- */
-class Accept extends UserCommand
-{
-    private $eventId;
-    private $uname;
-
-    function __construct($eventId, $username){
-        $this->eventId = $eventId;
-        $this->uname = $username;
-    }
-
-    public function execute(){
-        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-        $userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
-        $sql = pg_query($dbconn, $userid); 
-        $row = pg_fetch_row($sql);
-        $i = "UPDATE teilnehmer SET angenommen = true WHERE event = '$this->eventId' AND usr = '$row[0]';";
-        $sql = pg_query($dbconn, $i);
-        $sql = pg_query($dbconn, $i); 
-    }
-}
-
-/**
- * Klasse Decline, zum Ablehnen der Einladungen
- *
- * @author	Christoph Kern
- * @version  1.0
- */
-class Decline extends UserCommand
-{
-    private $eventId;
-    private $uname;
-
-    function __construct($eventId, $username){
-        $this->eventId = $eventId;
-        $this->uname = $username;
-    }
-
-    public function execute(){
-        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-        $userid = "SELECT id FROM benutzer WHERE name = '$this->uname';";
-        $sql = pg_query($dbconn, $userid); 
-        $row = pg_fetch_row($sql);
-        $i = "DELETE FROM teilnehmer WHERE event = '$this->eventId' AND usr = '$row[0]';";
-        $sql = pg_query($dbconn, $i);
-    }
-
-}
-?>
-
-<?
-/**
- * Klasse SendMailRegister, zum Versenden der Notifications bei der Registrierung
- *
- * @author	Christoph Kern
- * @version  1.0
- */
-class SendMailRegister extends EventCommand
-{
-    private $uname;
-    private $email;
-
-    function __construct($email, $username){
-        $this->uname = $username;
-        $this->email = $email;
-    }
-
-    public function execute(){
-        $mail = new PHPMailer(true);
-        try {
-            $mail->SMTPDebug = 0;                                
-            $mail->isSMTP();                                     
-            $mail->Host = 'smtp.gmail.com';  
-            $mail->SMTPAuth = true;                               
-            $mail->Username = 'terminreservierung.teamm@gmail.com';                 
-            $mail->Password = 'Admin12$';                          
-            $mail->SMTPSecure = 'ssl';                           
-            $mail->Port = 465;
-            $mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-            $mail->addAddress($this->email);
-            $mail->isHTML(true);                                 
-            $mail->Subject = 'Anmeldung';
-            $mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
-            $mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
-            $mail->send();
-        } catch (Exception $e) {
-            echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
-        }
-        header("Location: login.php");
-    }
-}
-
-/**
- * Klasse SendMailInvitation, zum Versenden der Notifications bei einer neuen Eventeinladung
- *
- * @author	Christoph Kern
- * @version  1.0
- */
-class SendMailInvitation extends EventCommand
-{
-    private $user;
-    private $eventName;
-
-    function __construct($username, $eventName){
-        $this->eventName = $eventName;
-        $this->user = $username;
-    }
-
-    public function execute(){
-        $xmail = array();
-        $mail = new PHPMailer(true);
-        try {
-            $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-            foreach($this->user as $people){
-                $userMail = "SELECT email FROM benutzer WHERE name = '$people';";
-                $sql = pg_query($dbconn, $userMail); 
-                $row = pg_fetch_row($sql);
-                $mail->SMTPDebug = 0;                                
-                $mail->isSMTP();                                     
-                $mail->Host = 'smtp.gmail.com';  
-                $mail->SMTPAuth = true;                               
-                $mail->Username = 'terminreservierung.teamm@gmail.com';                 
-                $mail->Password = 'Admin12$';                          
-                $mail->SMTPSecure = 'ssl';                           
-                $mail->Port = 465;
-                $mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
-                $mail->addAddress($row[0]);
-                $mail->isHTML(true); 
-                $mail->Subject = 'Einladung';
-                $mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-                $mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
-
-                echo "<script type='text/javascript'>alert($row[0]);</script>";
-
-                $mail->send();
-            }
-        } catch (Exception $e) {
-			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
-        }
-    }
-}
-?>
-
-<?php
 /**
  * Klasse DeleteEvent, zum Löschen von Events
  *
@@ -631,6 +526,100 @@ class AddUser extends OrganisatorCommand
 		$user = pg_query($dbconn, $add);
 		
 		header("Location: eventView_Ersteller.php");
+    }
+}
+?>
+
+
+<?
+/**
+ * Klasse SendMailRegister, zum Versenden der Notifications bei der Registrierung
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
+class SendMailRegister extends EventCommand
+{
+    private $uname;
+    private $email;
+
+    function __construct($email, $username){
+        $this->uname = $username;
+        $this->email = $email;
+    }
+
+    public function execute(){
+        $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug = 0;                                
+            $mail->isSMTP();                                     
+            $mail->Host = 'smtp.gmail.com';  
+            $mail->SMTPAuth = true;                               
+            $mail->Username = 'terminreservierung.teamm@gmail.com';                 
+            $mail->Password = 'Admin12$';                          
+            $mail->SMTPSecure = 'ssl';                           
+            $mail->Port = 465;
+            $mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+            $mail->addAddress($this->email);
+            $mail->isHTML(true);                                 
+            $mail->Subject = 'Anmeldung';
+            $mail->Body    = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com">hier</a> anmelden';
+            $mail->AltBody = 'Liebe/r ' . $this->uname . '. <br \> Sie haben sich erfolgreich bei unserem Terminreservierungssystem registriert! Sie k&ouml;nnen sich nun <a href="https://terminreservierungssystem.herokuapp.com" >hier</a> anmelden';
+            $mail->send();
+        } catch (Exception $e) {
+            echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+        }
+        header("Location: login.php");
+    }
+}
+
+/**
+ * Klasse SendMailInvitation, zum Versenden der Notifications bei einer neuen Eventeinladung
+ *
+ * @author	Christoph Kern
+ * @version  1.0
+ */
+class SendMailInvitation extends EventCommand
+{
+    private $user;
+    private $eventName;
+
+    function __construct($username, $eventName){
+        $this->eventName = $eventName;
+        $this->user = $username;
+    }
+
+    public function execute(){
+        $xmail = array();
+        $mail = new PHPMailer(true);
+        try {
+            $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+            foreach($this->user as $people){
+                $userMail = "SELECT email FROM benutzer WHERE name = '$people';";
+                $sql = pg_query($dbconn, $userMail); 
+                $row = pg_fetch_row($sql);
+                $mail->SMTPDebug = 0;                                
+                $mail->isSMTP();                                     
+                $mail->Host = 'smtp.gmail.com';  
+                $mail->SMTPAuth = true;                               
+                $mail->Username = 'terminreservierung.teamm@gmail.com';                 
+                $mail->Password = 'Admin12$';                          
+                $mail->SMTPSecure = 'ssl';                           
+                $mail->Port = 465;
+                $mail->setFrom('terminreservierung.teamm@gmail.com', 'Terminreservierungsteam');
+                $mail->addAddress($row[0]);
+                $mail->isHTML(true); 
+                $mail->Subject = 'Einladung';
+                $mail->Body    = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+                $mail->AltBody = 'Liebe/r ' . $people . '. <br \> Sie wurden zu dem Event ' . $this->eventName . ' eingeladen! <a href="https://terminreservierungssystem.herokuapp.com">Hier</a> k&ouml;nnen Sie auf die Einladung antworten.';
+
+                echo "<script type='text/javascript'>alert($row[0]);</script>";
+
+                $mail->send();
+            }
+        } catch (Exception $e) {
+			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
+        }
     }
 }
 ?>
