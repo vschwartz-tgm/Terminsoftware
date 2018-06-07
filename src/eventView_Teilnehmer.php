@@ -158,8 +158,10 @@
 			<div class="container">
 				<form method="post">
 					<div class="form-group">
-						<input type="text" placeholder="Kommentar" name="commentField" class"form-control" id="commentField" name="commentField" />
-						<button type="submit" class="btn btn-outline-dark" value="Posten" name="commentBtn" id="commentBtn" />
+						<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" name="commentField" />
+						<button type="submit" class="btn btn-outline-dark form-control" onclick="" name="commentBtn" id="commentBtn style="float: right;">Posten</button>
+					</div>
+				</form>
 				<table class="table scroll">
 					<thead>
 						<tr>
