@@ -1,4 +1,5 @@
 restartBrowserBetweenSpecFiles: true
+video: true
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from
@@ -272,7 +273,7 @@ describe('Navigating the Sites', function() {
 		
 		cy.get('[id="date"]')
 	})
-	it("Add another people textfield via pressing the add people textfields button", function() {
+	it.skip("Add another people textfield via pressing the add people textfields button", function() {
 		cy.visit('https://terminreservierungssystem.herokuapp.com/src/login.php')
 
 		cy.get('[name="uname"]').first().type('Tester')
@@ -286,7 +287,7 @@ describe('Navigating the Sites', function() {
 		
 		cy.get('[id="people2"]')
 	})
-	it("Add another people textfield via pressing the add people textfield button and then removing it via the remove people textfield button", function() {
+	it.skip("Add another people textfield via pressing the add people textfield button and then removing it via the remove people textfield button", function() {
 		cy.visit('https://terminreservierungssystem.herokuapp.com/src/login.php')
 
 		cy.get('[name="uname"]').first().type('Tester')
@@ -302,7 +303,7 @@ describe('Navigating the Sites', function() {
 		
 		cy.get('[id="people2"]').should('not.exist')
 	})
-	it("pressing the remove people textfield button can not reduce the number of people textfields to 0", function() {
+	it.skip("pressing the remove people textfield button can not reduce the number of people textfields to 0", function() {
 		cy.visit('https://terminreservierungssystem.herokuapp.com/src/login.php')
 
 		cy.get('[name="uname"]').first().type('Tester')
@@ -315,5 +316,66 @@ describe('Navigating the Sites', function() {
 		cy.get('[onclick="removePeople(\'people\'+count_people)"]').click()
 		
 		cy.get('[id="people[]"]')
+	})
+	it("Event appears on the main site once created", function() {
+		cy.visit('https://terminreservierungssystem.herokuapp.com/src/login.php')
+
+		cy.get('[name="uname"]').first().type('Tester')
+		cy.get('[name="psw"]').first().type('tests')
+		
+		cy.get('button').contains('Login').first().click()
+		
+		cy.get('button').contains('Add Event').first().click()
+		
+		cy.get('[id="eventName"]').type('testblabla')
+		cy.get('[id="date"]').type('01.01.2001 10:10')
+		cy.get('[id="location"]').type('testing location')
+		cy.get('[id="desc"]').type('ein test')
+		cy.get('[id="people[]"]').type('tester')
+		
+		cy.get('[id="submit"]').click()
+
+		cy.get('[href ="terminreservierung.php?erstEvent=testblabla"]').contains('testblabla')
+	})
+	it("Can look at Event by klicking on it", function() {
+		cy.visit('https://terminreservierungssystem.herokuapp.com/src/login.php')
+
+		cy.get('[name="uname"]').first().type('Tester')
+		cy.get('[name="psw"]').first().type('tests')
+		
+		cy.get('button').contains('Login').first().click()
+
+		cy.get('[href ="terminreservierung.php?erstEvent=testblabla"]').contains('testblabla').click()
+		
+		cy.url().should('include', '/src/eventView_Ersteller.php')
+	})
+	it("Can leave the event you're currently looking at", function() {
+		cy.visit('https://terminreservierungssystem.herokuapp.com/src/login.php')
+
+		cy.get('[name="uname"]').first().type('Tester')
+		cy.get('[name="psw"]').first().type('tests')
+		
+		cy.get('button').contains('Login').first().click()
+
+		cy.get('[href ="terminreservierung.php?erstEvent=testblabla"]').contains('testblabla').click()
+		
+		cy.get('[value="Zurück"]').click()
+		
+		cy.url().should('include', '/src/terminreservierung.php')
+	})
+	it("Event doesn't show up on main site once deleted", function() {
+		cy.visit('https://terminreservierungssystem.herokuapp.com/src/login.php')
+
+		cy.get('[name="uname"]').first().type('Tester')
+		cy.get('[name="psw"]').first().type('tests')
+		
+		cy.get('button').contains('Login').first().click()
+
+
+		cy.get('[href ="terminreservierung.php?erstEvent=testblabla"]').contains('testblabla ').click()
+		
+		cy.get('[value="Event löschen"]').click()
+		
+		cy.get('[href ="terminreservierung.php?erstEvent=testblabla"]').should('not.exist')
 	})
 })
