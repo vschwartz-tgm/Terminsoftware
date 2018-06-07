@@ -172,13 +172,11 @@ class Search extends UserCommand
             }
         }
         if ($fehler == false){
-            if ($this->type == "user"){
-                // Zur nächsten Seite
-                session_start();
-                $_SESSION['searchtext'] = $this->text;
-                $_SESSION['searchtype'] = $this->type;
-                header("Location: searchView.php");
-            }
+			// Zum Suchergebnis
+			session_start();
+			$_SESSION['searchtext'] = $this->text;
+			$_SESSION['searchtype'] = $this->type;
+			header("Location: searchView.php");
         }
     }
 }
