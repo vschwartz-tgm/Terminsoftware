@@ -597,10 +597,10 @@ class DeleteDate extends OrganisatorCommand
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);
 		
-		$deletedate = "DELETE FROM datum WHERE eventid = '$eventid' AND date='$this->datename';";
+		$deletedate = "DELETE FROM datum WHERE eventid = '$eventid[0]' AND date='$this->datename';";
 		$sql = pg_query($dbconn, $deletedate);
 		
-		// header("Location: eventView_Ersteller.php");
+		header("Location: eventView_Ersteller.php");
     }
 }
 
@@ -638,7 +638,7 @@ class AddUser extends OrganisatorCommand
 		
 		//echo "<script type='text/javascript'>alert('$userid $eventid');</script>";
 		
-		// header("Location: eventView_Ersteller.php");
+		header("Location: eventView_Ersteller.php");
     }
 }
 ?>
