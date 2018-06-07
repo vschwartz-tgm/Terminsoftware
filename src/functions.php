@@ -552,7 +552,7 @@ class AddDate extends OrganisatorCommand
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);
 		
-		$add = "INSERT INTO datum VALUES('$eventid[0]','$datename');";
+		$add = "INSERT INTO datum VALUES('$eventid[0]','$this->datename');";
 		$user = pg_query($dbconn, $add);
 		
 		header("Location: eventView_Ersteller.php");
