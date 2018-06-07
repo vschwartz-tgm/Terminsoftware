@@ -528,6 +528,36 @@ class AddUser extends OrganisatorCommand
 		header("Location: eventView_Ersteller.php");
     }
 }
+
+/**
+ * Klasse AddDate, zum Hinzufügen von Dates zu Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class AddDate extends OrganisatorCommand
+{
+    private $eventname;
+	private $datename;
+
+    function __construct($eventname, $datename){
+        $this->eventname = $eventname;
+		$this->datename = $datename;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
+		$sql = pg_query($dbconn, $eventselect);
+		$eventid = pg_fetch_row($sql);
+		
+		$add = "INSERT INTO datum VALUES('$eventid[0]','$datename');";
+		$user = pg_query($dbconn, $add);
+		
+		header("Location: eventView_Ersteller.php");
+    }
+}
 ?>
 
 

@@ -45,6 +45,12 @@
 		$a->execute();
 	}
 	
+	// DateAddbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addDate'])){
+		$a = new AddDate($eventname, $_POST['newDate']);
+		$a->execute();
+	}
+	
 	// Änderungsbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['change'])){
 		$eventidselect = "SELECT id FROM event WHERE name = '$eventname';";
@@ -157,6 +163,9 @@
 										$i = $i + 1;
 									}
 								?>
+								<br />
+								<input type="datetime-local" name="newDate" id="newDate" value="" />
+								<input type="submit" name="addDate" id="addDate" class="btn btn-outline-dark" value="Termin hinzufügen" />
 							</td>
 							<td>
 								<input name="newOrt" id="newOrt" value="<?php echo $ort; ?>" />
