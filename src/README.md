@@ -1,3 +1,3 @@
 # Sourcecode
 
-[Zurück zur Startseite](../README.md)
+[Zurück zur Startseite](../Terminsoftware)
