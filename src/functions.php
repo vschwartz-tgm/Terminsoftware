@@ -589,10 +589,6 @@ class DeleteDate extends OrganisatorCommand
     public function execute(){
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		
-		// ToDo: Date aus der DB löschen
-		
-		// echo "<script type='text/javascript'>alert('$this->datename');</script>";
-		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);
@@ -623,8 +619,6 @@ class AddUser extends OrganisatorCommand
     public function execute(){
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 		
-		// ToDo: User zu bereits erstellten Event einladen
-		
 		$eventselect = "SELECT id FROM event WHERE name = '$this->eventname';";
 		$sql = pg_query($dbconn, $eventselect);
 		$eventid = pg_fetch_row($sql);
@@ -635,8 +629,6 @@ class AddUser extends OrganisatorCommand
 		
 		$add = "INSERT INTO teilnehmer VALUES('$userid[0]','$eventid[0]', false);";
 		$user = pg_query($dbconn, $add);
-		
-		//echo "<script type='text/javascript'>alert('$userid $eventid');</script>";
 		
 		header("Location: eventView_Ersteller.php");
     }
