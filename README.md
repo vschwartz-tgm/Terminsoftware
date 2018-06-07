@@ -1,10 +1,16 @@
 # Terminsoftware
 
-### Links
+#### Links
 - Google Docs Link: https://docs.google.com/spreadsheets/d/1m88hgYfcnw_MbKKZyBfGvvCjUQMMgaBEKcryi_JUr6o/edit?ts=5ae9afc0<br>
 - Website: https://terminreservierungssystem.herokuapp.com/
 - Code: [hier](src)
 - Planung: [hier](Planung)
+
+#### Projektteam
+- Mazzolini Paul
+- Kern Christoph
+- Schwartz Vincent
+- Wintersperger Michael
 
 #### Beschreibung
 
