@@ -135,7 +135,7 @@ class RegisterUser extends UserCommand
 }
 
 /**
- * Klasse Search, zum Suchen von Events oder User
+ * Klasse Search, zum Suchen von Events oder Usern
  *
  * @author	Paul Mazzolini
  * @version  1.0
@@ -184,7 +184,7 @@ class Search extends UserCommand
 }
 
 /**
- * Klasse Accept, zum Annehmen der Einladungen
+ * Klasse Accept, zum Annehmen der Einladungen, entspricht Klasse TakePartEvent
  *
  * @author	Christoph Kern
  * @version  1.0
@@ -211,7 +211,7 @@ class Accept extends UserCommand
 }
 
 /**
- * Klasse Decline, zum Ablehnen der Einladungen
+ * Klasse Decline, zum Ablehnen der Einladungen, entspricht Klasse TakePartEvent
  *
  * @author	Christoph Kern
  * @version  1.0
@@ -370,7 +370,7 @@ class ChangeEvent extends OrganisatorCommand
 }
 
 /**
- * Klasse DeleteEvent, zum Löschen von Events
+ * Klasse DeleteEvent, zum Löschen von Events (solange möglich, bis ein User die Einladung angenommen hat)
  *
  * @author	Paul Mazzolini
  * @version  1.0
@@ -416,7 +416,7 @@ class DeleteEvent extends OrganisatorCommand
 }
 
 /**
- * Klasse DeleteEingelander, zum Löschen von Usern von Events
+ * Klasse DeleteEingelander, zum Löschen von Usern von Events, deren Einladung noch unbeantwortet ist, entspricht Klasse DeleteUserFromEvent
  *
  * @author	Paul Mazzolini
  * @version  1.0
@@ -496,12 +496,12 @@ class DeleteDate extends OrganisatorCommand
 }
 
 /**
- * Klasse AddUser, zum Hinzufügen von Usern zu Events
+ * Klasse AddUserToEvent, zum Hinzufügen von einem User zu einem Event
  *
  * @author	Paul Mazzolini
  * @version  1.0
  */
-class AddUser extends OrganisatorCommand
+class AddUserToEvent extends OrganisatorCommand
 {
     private $eventname;
 	private $username;
@@ -530,7 +530,7 @@ class AddUser extends OrganisatorCommand
 }
 
 /**
- * Klasse AddDate, zum Hinzufügen von Dates zu Events
+ * Klasse AddDate, zum Hinzufügen von einem Date zu einem Event
  *
  * @author	Paul Mazzolini
  * @version  1.0
@@ -558,10 +558,83 @@ class AddDate extends OrganisatorCommand
 		header("Location: eventView_Ersteller.php");
     }
 }
+
+/**
+ * Klasse SetFixedEventDate, zum setzen eines fixen Event Dates eines Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class SetFixedEventDate extends OrganisatorCommand
+{
+    private $event;
+	private $datename;
+
+    function __construct($event, $datename){
+        $this->event = $event;
+		$this->datename = $datename;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		// ToDo: Fixen Event Date setzen & alle anderen Event-Dates entfernen
+    }
+}
 ?>
 
 
 <?
+/**
+ * Klasse CommentEvent, zum Kommentieren eines Events
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class CommentEvent extends EventCommand
+{
+    private $user;
+	private $event;
+	private $comment;
+
+    function __construct($user, $event, $comment){
+        $this->user = $user;
+		$this->event = $event;
+		$this->comment = $comment;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		// ToDo: Event Command in die DB schreiben
+    }
+}
+
+/**
+ * Klasse ChooseDateEvent, zum wählen eines Wunschdatums von einem Event
+ *
+ * @author	Paul Mazzolini
+ * @version  1.0
+ */
+class ChooseDateEvent extends EventCommand
+{
+    private $user;
+	private $event;
+	private $date;
+
+    function __construct($user, $event, $date){
+        $this->user = $user;
+		$this->event = $event;
+		$this->date = $date;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		
+		// ToDo: Choosed Date von Event in die DB schreiben
+    }
+}
+
 /**
  * Klasse SendMailRegister, zum Versenden der Notifications bei der Registrierung
  *

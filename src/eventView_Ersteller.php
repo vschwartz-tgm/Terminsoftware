@@ -41,7 +41,7 @@
 	
 	// UserAddbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addUser'])){
-		$a = new AddUser($eventname, $_POST['newUser']);
+		$a = new AddUserToEvent($eventname, $_POST['newUser']);
 		$a->execute();
 	}
 	
