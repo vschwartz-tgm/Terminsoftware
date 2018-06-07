@@ -8,66 +8,41 @@
 	}
 	$username = $_SESSION['uname'];
 	
-	// Logout-Funktionalität
+	// Wurde ein Event angeclickt?
+	session_start();
+	if(!isset($_SESSION['teilnehmerEvent'])) {
+		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
+	}
+	$eventname = $_SESSION['teilnehmerEvent'];
+	
+	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();
-		header("Location: login.php");
+		header("Location: index.php");
 	}
 	
-	// Suchfunktionalität
-	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['search'])){
-		$searchtext = $_POST['searchtext'];
-		if ($searchtext == ''){
-			echo "<script type='text/javascript'>alert('Bitte geben Sie einen Suchbegriff ein!');</script>";
-		}else{
-			if ($_POST['optradio']) { 
-				$type = $_POST['optradio'];
-				
-				session_start();
-				$_SESSION['searchtext'] = $searchtext;
-				$_SESSION['searchtype'] = $type;
-				header("Location: searchView.php");
-				
-				/*$s = new Search($searchtext, $type);
-				$s->execute();*/
-			}
-		}
+	// Zurückbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back'])){
+		header("Location: terminreservierung.php");
 	}
-	
-	// Funktionen für Einladungsbuttons vorbereiten
-	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");				
-	$userid = "SELECT id FROM benutzer WHERE name = '$username';";
-	$sql = pg_query($dbconn, $userid); 
-	$row = pg_fetch_row($sql);
-	$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='false';";
-	$sql = pg_query($dbconn, $eventid);
-	while ($row = pg_fetch_row($sql)) {
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["anmelden$row[0]"])){
-			$a = new Accept($row[0], $username);
-			$a->execute();
-		}
-		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["loeschen$row[0]"])){
-			$d = new Decline($row[0], $username);
-			$d->execute();
-		}
-	}
-
 ?>
 
 <html>
 	<head>
+		<meta charset="utf-8">
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<link href="terminreservierung_CSS.css" rel="stylesheet">
 		<link rel="icon" href="kalender.jpg">
+		<link href="eventView_CSS.css" rel="stylesheet">
 		<script src="/node_modules/angular/angular.js"></script>
 		<title>Terminreservierung</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
-				<h2>Terminreservierung</h2>
+				<h2>Terminreservierung / <?php echo "$eventname"; ?></h2>
 			</div>
 			<form class="nav navbar-right" method="post">
 				<div class="navbar-text px-sm-2 pt-sm-3">
@@ -75,113 +50,75 @@
 				</div>
 				<button type="submit" class="btn btn-outline-light" name="logout">Logout</button>
 			</form>
-		</nav>
-		<br>
-		<form method="post">
-			<div class="container" align="center">
-				<div class="input-group col-md-6">
-					<div class="input-group-prepend">
-						<div class="input-group-text">&#x1F50D;</div>
-					</div>
-					<input type="text" class="form-control" name="searchtext" placeholder="search" />
-				</div>
-				<br>
-				<div>
-					<label class="radio-inline"><input type="radio" name="optradio" value="event" checked>Event</label>
-					&nbsp;&nbsp;
-					<label class="radio"><input type="radio" name="optradio" value="user">User</label>
-					&nbsp;&nbsp;
-					<button type="submit" class="btn btn-outline-dark" name="search">Search</button>
-				</div>
-			</div>
-		</form>
-		<br>
+		</nav>	
+		<br />
+		<h1 align="center">Event <?php echo "$eventname"; ?></h1>
 		<div class="container">
-  			<div class="row">
-    			<div class="col-sm border scroll">
-     				<h4>Einladungen:</h4>
-					<table class="table">
-						<tr>
-							<th>Eventname:</th><th>Annehmen?</th>
-						</tr>
-						<?php
-							// Vom aktuellen Benutzer alle Einladungen in die Tabelle schreiben
-							
-							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-							
-							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
-							$sql = pg_query($dbconn, $userid); 
-							$row = pg_fetch_row($sql);
-							
-							$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='false';";
-							$sql = pg_query($dbconn, $eventid);
-							
-							while ($row = pg_fetch_row($sql)) {
-								$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
-								$sqlname = pg_query($dbconn, $eventname); 
-								$ergname = pg_fetch_row($sqlname);
-								
-								$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
-								$sqlort = pg_query($dbconn, $eventort); 
-								$ergort = pg_fetch_row($sqlort);
-								
-								echo "<tr>
-										<td>$ergname[0]</td>
-										<td>
-											<form action='' method='post'>
-												<input type='submit' class='btn btn-outline-dark' name='anmelden$row[0]' value='Ja' />
-												<input type='submit' class='btn btn-outline-dark' name='loeschen$row[0]' value='Nein' />
-											</form>
-										</td>
-									</tr>";
-							}
-							
-						?>
-					</table>
-    			</div>
-				<div class="col-sm border scroll">
-     				<h4>Teilnahmen:</h4>
-					<table class="table">
-						<tr>
-							<th>Eventname:</th><th>Ort:</th>
-						</tr>
-						<?php
-							// Vom aktuellen Benutzer alle Events auslesen, an denen dieser Teilnimmt, und in die Tabelle schreiben
-							
-							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-							
-							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
-							$sql = pg_query($dbconn, $userid); 
-							$row = pg_fetch_row($sql);
-							
-							$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='true';;";
-							$sql = pg_query($dbconn, $eventid);
-							
-							while ($row = pg_fetch_row($sql)) {
-								$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
-								$sqlname = pg_query($dbconn, $eventname); 
-								$ergname = pg_fetch_row($sqlname);
-								
-								$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
-								$sqlort = pg_query($dbconn, $eventort); 
-								$ergort = pg_fetch_row($sqlort);
-								
-								echo "<tr><td>$ergname[0]</td><td>$ergort[0]</td></tr>";
-							}
-						
-						?>
-					</table>
-    			</div>
-    			<div class="col-sm border">
-    				<div class="scroll2">
-      				<h4>Erstellungen:</h4>
-					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer</p>
+    		<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Datum & Uhrzeit</th>
+						<th scope="col">Ort</th>
+						<th scope="col">Beschreibung</th>
+						<th scope="col">Teilnehmerliste</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<p id="date"></p>
+							<button type="button" class="btn btn-outline-success" onclick="">Abstimmen</button>
+						</td>
+						<td>
+							<?php
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$userid = "SELECT ort FROM event WHERE name = '$eventname';";
+								$sql = pg_query($dbconn, $userid); 
+								$row = pg_fetch_row($sql);
+								echo "$row[0]";
+							?>
+						</td>
+						<td>
+							<?php
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+								$userid = "SELECT descr FROM event WHERE name = '$eventname';";
+								$sql = pg_query($dbconn, $userid); 
+								$row = pg_fetch_row($sql);
+								echo "$row[0]";
+							?>
+						</td>
+						<td>
+							<p id="people"></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<br />
+			<div class="row">
+				<form action="" method="post">
+					<input type="submit" name="back" class="btn btn-outline-dark" value="Zurück" />
+				</form>
+			</div>
+			<div class="container">
+				<form method="post">
+					<div class="form-group">
+						<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" name="commentField" />
+						<button type="submit" class="btn btn-outline-dark form-control" onclick="" name="commentBtn" id="commentBtn style="float: right;">Posten</button>
 					</div>
-					<div>
-						<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>
-    				</div>
-    			</div>
-    		</div>
+				</form>
+				<table class="table scroll">
+					<thead>
+						<tr>
+							<th scope="col">User</th>
+							<th scope="col">Schrieb:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<td>paul</td>
+						<td>cool</td>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 </html>
