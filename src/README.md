@@ -13,5 +13,4 @@
 - [Teilnehmer-Page](eventView_Teilnehmer.php)
 - [Ersteller-Page](eventView_Ersteller.php)
 
-<br>
 [Zurück zur Startseite](../README.md)
