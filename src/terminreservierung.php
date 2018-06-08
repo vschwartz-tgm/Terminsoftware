@@ -85,8 +85,10 @@
 		
 		
 		<script type="text/javascript">
+		function poll() {
 			setInterval(setTimeout(function(){ location.reload();},3000);
-			setInterval(setTimeout(function(){ alert("Hallo");},3000);
+		}
+		poll();
 		</script>
 
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
