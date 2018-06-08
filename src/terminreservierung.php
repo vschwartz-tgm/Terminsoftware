@@ -24,13 +24,8 @@
 			if ($_POST['optradio']) { 
 				$type = $_POST['optradio'];
 				
-				session_start();
-				$_SESSION['searchtext'] = $searchtext;
-				$_SESSION['searchtype'] = $type;
-				header("Location: searchView.php");
-				
-				/*$s = new Search($searchtext, $type);
-				$s->execute();*/
+				$s = new Search($searchtext, $type);
+				$s->execute();
 			}
 		}
 	}

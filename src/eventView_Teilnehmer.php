@@ -8,7 +8,7 @@
 	}
 	$username = $_SESSION['uname'];
 	
-	// Wurde ein Event angeklickt?
+	// Wurde ein Event angeclickt?
 	session_start();
 	if(!isset($_SESSION['teilnehmerEvent'])) {
 		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
@@ -155,6 +155,25 @@
 					<input type="submit" name="back" class="btn btn-outline-dark" value="Zurück" />
 				</form>
 			</div>
+		<div class="container">
+			<form method="post">
+				<div class="form-group">
+					<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" name="commentField" />
+					<button type="submit" class="btn btn-outline-dark form-control" onclick="" name="commentBtn" id="commentBtn style="float: right;">Posten</button>
+				</div>
+				<table class="table scroll">
+					<thead>
+						<tr>
+							<th scope="col">User</th>
+							<th scope="col">Schrieb:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<td>paul</td>
+						<td>cool</td>
+					</tbody>
+				</table>
+			</form>
 		</div>
 	</body>
 </html>
