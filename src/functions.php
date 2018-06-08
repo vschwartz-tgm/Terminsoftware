@@ -724,8 +724,8 @@ class SendMailInvitation extends EventCommand
 
 class createComment extends UserCommand{
 
-    private $eventId;
-    private $userId;
+    private $eventname;
+    private $username;
     private $comment;
 
     public function __construct($eventname, $comment, $username) {
