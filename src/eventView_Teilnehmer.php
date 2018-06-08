@@ -21,6 +21,8 @@
 
     $eventid = "SELECT id from event where name = '$eventname'";
 	$userid = "SELECT id from usr where name = '$username'";
+	$c = new createComment($eventid, $commentContent, $userid);
+
 	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
@@ -173,7 +175,7 @@
 			<form method="post">
 				<div class="form-group">
 					<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" />
-					<button type="submit" class="btn btn-outline-dark form-control"  name="commentBtn" id="commentBtn" style="float: right;">Posten</button>
+					<button type="submit" class="btn btn-outline-dark form-control" onclick="<?php $c->execute() ?>" name="commentBtn" id="commentBtn" style="float: right;">Posten</button>
 				</div>
 				<table class="table scroll">
 					<thead>
