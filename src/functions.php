@@ -744,9 +744,8 @@ class createComment extends UserCommand{
         $sqluserid = pg_query($dbconn, $userid);
         $usrid = pg_fetch_row($sqluserid);
 
-        echo "<script type='text/javascript'>alert('$evntid[0]','$this->comment','$usrid[0]');</script>";
         $addComment = "insert into kommentar(event, comment, usr) values('$evntid[0]','$this->comment','$usrid[0]')";
-        $cmnt = pg_query($dbconn, $addComment);
+        pg_query($dbconn, $addComment);
     }
 
 }
