@@ -20,7 +20,7 @@
 
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['commentBtn'])){
 	    $commentContent = $_POST['commentField'];
-        echo "<script type='text/javascript'>alert('$this->eventId, $this->comment, $this->userId');</script>";
+        echo "<script type='text/javascript'>alert('$eventId, $comment, $userId');</script>";
 	    $c = new createComment($eventid, $commentContent, $userid);
 		$c->execute();
     }
