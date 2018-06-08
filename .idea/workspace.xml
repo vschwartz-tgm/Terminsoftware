@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e740a24d-0141-4397-af87-fb38547392d8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/eventView_Teilnehmer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/eventView_Teilnehmer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="eventView_Teilnehmer.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="eventView_Teilnehmer.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/eventView_Teilnehmer.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2924">
@@ -43,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="functions.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="functions.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+            <state relative-caret-position="340">
+              <caret line="738" column="82" selection-start-line="738" selection-start-column="82" selection-end-line="738" selection-end-column="82" />
               <folding>
                 <element signature="e#7532#7566#0#PHP" expanded="true" />
               </folding>
@@ -65,8 +64,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/newEvent.php" />
         <option value="$PROJECT_DIR$/src/newEvent.html" />
-        <option value="$PROJECT_DIR$/src/functions.php" />
         <option value="$PROJECT_DIR$/src/eventView_Teilnehmer.php" />
+        <option value="$PROJECT_DIR$/src/functions.php" />
       </list>
     </option>
   </component>
@@ -158,12 +157,12 @@
       <workItem from="1526930046337" duration="6000" />
       <workItem from="1527684606363" duration="257000" />
       <workItem from="1528438529903" duration="3661000" />
-      <workItem from="1528447268958" duration="3769000" />
+      <workItem from="1528447268958" duration="3816000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10500000" />
+    <option name="totallyTimeSpent" value="10547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1294" height="686" extended-state="0" />
@@ -262,16 +261,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-          <folding>
-            <element signature="e#7532#7566#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/eventView_Einladung.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-153" />
@@ -288,6 +277,16 @@
           <caret line="178" column="155" selection-start-line="178" selection-start-column="155" selection-end-line="178" selection-end-column="155" />
           <folding>
             <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="738" column="82" selection-start-line="738" selection-start-column="82" selection-end-line="738" selection-end-column="82" />
+          <folding>
+            <element signature="e#7532#7566#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
