@@ -86,8 +86,9 @@
 		
 		<script type="text/javascript">
 		function poll() {
-			setInterval(setTimeout(function(){ location.reload();},3000);
+			setTimeout(function(){location.reload();},3000);
 		}
+			
 		poll();
 		</script>
 
