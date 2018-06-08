@@ -26,7 +26,7 @@
         $usrid = pg_fetch_row($sqluserid);
 
 	    $commentContent = $_POST['commentField'];
-        echo "<script type='text/javascript'>alert('$evntid[0], $comment, $usrid[0]');</script>";
+        echo "<script type='text/javascript'>alert('$evntid[0], $commentContent, $usrid[0]');</script>";
 	    //$c = new createComment($eventid, $commentContent, $userid);
 		//$c->execute();
     }
