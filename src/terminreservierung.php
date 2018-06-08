@@ -87,6 +87,16 @@
 		<title>Terminreservierung</title>
 	</head>
 	<body>
+		
+		
+		<script type="text/javascript">
+		function poll() {
+			setInterval(function(){ alert("Hello"); },3000);
+		}
+			
+		poll();
+		</script>
+
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
 				<h2>Terminreservierung</h2>
