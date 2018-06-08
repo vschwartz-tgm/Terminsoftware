@@ -19,8 +19,8 @@
       <file leaf-file-name="eventView_Teilnehmer.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/eventView_Teilnehmer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="21" column="52" lean-forward="true" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+            <state relative-caret-position="323">
+              <caret line="22" column="111" selection-start-line="22" selection-start-column="111" selection-end-line="22" selection-end-column="111" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -159,12 +159,12 @@
       <workItem from="1526930046337" duration="6000" />
       <workItem from="1527684606363" duration="257000" />
       <workItem from="1528438529903" duration="3661000" />
-      <workItem from="1528447268958" duration="4666000" />
+      <workItem from="1528447268958" duration="4788000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11397000" />
+    <option name="totallyTimeSpent" value="11519000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1294" height="686" extended-state="0" />
@@ -287,8 +287,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eventView_Teilnehmer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="52" lean-forward="true" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+        <state relative-caret-position="323">
+          <caret line="22" column="111" selection-start-line="22" selection-start-column="111" selection-end-line="22" selection-end-column="111" />
           <folding>
             <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
