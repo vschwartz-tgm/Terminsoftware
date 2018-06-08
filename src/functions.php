@@ -728,7 +728,7 @@ class createComment extends UserCommand{
     private $userId;
     private $comment;
 
-    function __construct($eventId, $userId, $comment) {
+    function __construct($eventId, $comment, $userId) {
         $this->eventId = $eventId;
         $this->comment = $comment;
         $this->userId = $userId;
