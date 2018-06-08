@@ -41,7 +41,13 @@
 	
 	// UserAddbutton-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addUser'])){
-		$a = new AddUser($eventname, $_POST['newUser']);
+		$a = new AddUserToEvent($eventname, $_POST['newUser']);
+		$a->execute();
+	}
+	
+	// DateAddbutton-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['addDate'])){
+		$a = new AddDate($eventname, $_POST['newDate']);
 		$a->execute();
 	}
 	
@@ -157,6 +163,9 @@
 										$i = $i + 1;
 									}
 								?>
+								<br />
+								<input type="datetime-local" name="newDate" id="newDate" value="" />
+								<input type="submit" name="addDate" id="addDate" class="btn btn-outline-dark" value="Termin hinzufügen" />
 							</td>
 							<td>
 								<input name="newOrt" id="newOrt" value="<?php echo $ort; ?>" />
@@ -180,6 +189,7 @@
 										$name = pg_fetch_row($sqlname);
 										
 										echo "$name[0]";
+										echo " ";
 										echo "<input type='submit' class='btn btn-outline-dark' name='deleteTeiln$name[0]' value='Entfernen' />";
 										echo "<br />";
 									}

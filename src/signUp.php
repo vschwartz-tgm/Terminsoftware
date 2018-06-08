@@ -129,9 +129,6 @@
 			header("Location: index.php");
 		}
 	}*/
-?>
-
-<?php
 /*
 	Erstellen der Tabellen (FUNKTIONIERT)
 

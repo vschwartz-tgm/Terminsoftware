@@ -47,6 +47,13 @@
 		<title>Terminreservierung</title>
 	</head>
 	<body>
+		<script type="text/javascript">
+		function poll() {
+			setTimeout(function(){location.reload();},20000);
+		}
+			
+		poll();
+		</script>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
 				<h2>Terminreservierung / <?php echo "$eventname"; ?></h2>

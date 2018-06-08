@@ -24,13 +24,8 @@
 			if ($_POST['optradio']) { 
 				$type = $_POST['optradio'];
 				
-				session_start();
-				$_SESSION['searchtext'] = $searchtext;
-				$_SESSION['searchtype'] = $type;
-				header("Location: searchView.php");
-				
-				/*$s = new Search($searchtext, $type);
-				$s->execute();*/
+				$s = new Search($searchtext, $type);
+				$s->execute();
 			}
 		}
 	}
@@ -87,6 +82,16 @@
 		<title>Terminreservierung</title>
 	</head>
 	<body>
+		
+		
+		<script type="text/javascript">
+		function poll() {
+			setTimeout(function(){location.reload();},10000);
+		}
+			
+		poll();
+		</script>
+
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
 				<h2>Terminreservierung</h2>
