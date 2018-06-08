@@ -86,6 +86,7 @@
 		
 		<script type="text/javascript">
 			setInterval(setTimeout(function(){ location.reload();},3000);
+			setInterval(setTimeout(function(){ alert("Hallo");},3000);
 		</script>
 
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
