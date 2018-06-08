@@ -19,6 +19,7 @@
 	$userid = "SELECT id from usr where name = '$username'";
 
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['commentBtn'])){
+        echo "<script type='text/javascript'>alert('this->eventId, this->comment, this->userId');</script>";
 	    $commentContent = $_POST['commentField'];
 	    $c = new createComment($eventid, $commentContent, $userid);
 		$c->execute();
