@@ -728,23 +728,25 @@ class createComment extends UserCommand{
     private $userId;
     private $comment;
 
-    public function __construct($eventId, $comment, $userId) {
-        $this->eventId = $eventId;
+    public function __construct($eventname, $comment, $username) {
+        $this->eventname = $eventname;
         $this->comment = $comment;
-        $this->userId = $userId;
+        $this->username = $username;
     }
 
     public function execute() {
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-        //echo "<script type='text/javascript'>alert('this->eventId, this->comment, this->userId');</script>";
-        /*
-        $addComment = "insert into kommentar(event, comment, usr) values('$this->eventId','$this->comment','$this->userId')";
-        $cmnt = pg_query($dbconn, $addComment);
-        */
+        $eventid = "SELECT id from event where name = '$this->eventname'";
+        $sqleventid = pg_query($dbconn, $eventid);
+        $evntid = pg_fetch_row($sqleventid);
 
-        /*
-        $add = "UPDATE usr SET comment'$this->comment' WHERE name = '$this->userName'";
-        $usr = pg_query($dbconn, $add);*/
+        $userid = "SELECT id from benutzer where name = '$this->username'";
+        $sqluserid = pg_query($dbconn, $userid);
+        $usrid = pg_fetch_row($sqluserid);
+
+        echo "<script type='text/javascript'>alert('$evntid[0]','$this->comment','$usrid[0]');</script>";
+        $addComment = "insert into kommentar(event, comment, usr) values('$evntid[0]','$this->comment','$usrid[0]')";
+        $cmnt = pg_query($dbconn, $addComment);
     }
 
 }
