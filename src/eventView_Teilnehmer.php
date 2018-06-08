@@ -15,10 +15,9 @@
 	}
 	$eventname = $_SESSION['teilnehmerEvent'];
 
-	$eventid = "SELECT id from event where name = '$eventname'";
-	$userid = "SELECT id from usr where name = '$username'";
-
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['commentBtn'])){
+        $eventid = "SELECT id from event where name = '$eventname'";
+        $userid = "SELECT id from usr where name = '$username'";
 	    $commentContent = $_POST['commentField'];
         echo "<script type='text/javascript'>alert('$eventId, $comment, $userId');</script>";
 	    $c = new createComment($eventid, $commentContent, $userid);
