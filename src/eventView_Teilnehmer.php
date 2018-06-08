@@ -14,6 +14,13 @@
 		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
 	}
 	$eventname = $_SESSION['teilnehmerEvent'];
+
+	if(isset($_POST['submit'])){
+	    $commentContent = $_POST['commentField'];
+    }
+
+    $eventid = "SELECT id from event where name = '$eventname'";
+	$userid = "SELECT id from usr where name = '$username'";
 	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
@@ -158,8 +165,8 @@
 		<div class="container">
 			<form method="post">
 				<div class="form-group">
-					<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" name="commentField" />
-					<button type="submit" class="btn btn-outline-dark form-control" onclick="" name="commentBtn" id="commentBtn style="float: right;">Posten</button>
+					<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" />
+					<button type="submit" class="btn btn-outline-dark form-control" onclick="<?php createComment($eventid, $commentContent, $userid)?>" name="commentBtn" id="commentBtn style="float: right;">Posten</button>
 				</div>
 				<table class="table scroll">
 					<thead>

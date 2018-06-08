@@ -5,6 +5,11 @@
       <sourceFolder url="file://$MODULE_DIR$/vendor/guzzle/guzzle/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/vendor/guzzle/guzzle/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/vendor/aws/aws-sdk-php/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/aws/aws-sdk-php" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/guzzle/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/phpmailer/phpmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/event-dispatcher" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -622,4 +622,49 @@ class SendMailInvitation extends EventCommand
         }
     }
 }
+
+class createComment extends UserCommand{
+
+    private $eventId;
+    private $userId;
+    private $comment;
+
+    function __construct($eventId, $userId, $comment) {
+        $this->eventId = $eventId;
+        $this->comment = $comment;
+        $this->userId = $userId;
+    }
+
+    function execute() {
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+        echo "<script type='text/javascript'>alert('$this->eventId, $this->userId, $this->comment');</script>";
+        /*
+        $addComment = "insert into kommentar(event, comment, usr) values('$this->eventId','$this->comment','$this->userId')";
+        $cmnt = pg_query($dbconn, $addComment);
+        */
+
+        /*
+        $add = "UPDATE usr SET comment'$this->comment' WHERE name = '$this->userName'";
+        $usr = pg_query($dbconn, $add);*/
+    }
+
+}
+
+class Comment extends UserCommand {
+
+    private $userName;
+    private $usr;
+    private $comment;
+
+    function __construct($username, $comment) {
+        $this->comment = $comment;
+        $this->user = $username;
+    }
+
+    function execute() {
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+        $usr = "SELECT * FROM event WHERE id = ''";
+    }
+
+}
 ?>
