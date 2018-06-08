@@ -18,10 +18,16 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['commentBtn'])){
         $eventid = "SELECT id from event where name = '$eventname'";
         $userid = "SELECT id from usr where name = '$username'";
+        $sqleventid = pg_query($dbconn, $eventid);
+        $sqluserid = pg_query($dbconn, $userid);
+
+        $eventid = $sqleventid[0];
+        $userid = $userid[0];
+
 	    $commentContent = $_POST['commentField'];
-        echo "<script type='text/javascript'>alert('$eventId, $comment, $userId');</script>";
-	    $c = new createComment($eventid, $commentContent, $userid);
-		$c->execute();
+        echo "<script type='text/javascript'>alert('$eventid, $comment, $userid');</script>";
+	    //$c = new createComment($eventid, $commentContent, $userid);
+		//$c->execute();
     }
 
 	
