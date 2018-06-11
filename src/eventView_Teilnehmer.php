@@ -194,9 +194,10 @@
         				$commentSELECT = "SELECT comment from event where id = '$evntid[0]'";
         				$sqlcomment = pg_query($dbconn, $commentSELECT);
         				$comment = pg_fetch_row($sqlcomment); 
+        				?>
 
-        				echo "<td>$username</td>";
-        				echo "<td>$comment[0]</td>";?>
+        				<td><?php echo $username; ?></td>
+        				<td><?php echo $comment[0]; ?></td>
 					</tbody>
 				</table>
 			</form>
