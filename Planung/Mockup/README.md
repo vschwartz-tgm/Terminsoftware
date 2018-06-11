@@ -5,3 +5,7 @@
         This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/vschwartz-tgm/Terminsoftware/tree/master/Planung/Mockup/NiceProject.pdf">Download PDF</a>.</p>
     </embed>
 </object>
+
+[Zurück zur Planung](../README.md)
+
+[Zurück zur Startseite](../../README.md)
