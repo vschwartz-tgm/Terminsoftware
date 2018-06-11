@@ -1,18 +1,21 @@
 <?php
 	include ("functions.php");
-
+	
+	// Ist ein Benuter angemeldet?
 	session_start();
 	if(!isset($_SESSION['uname'])) {
 		die('Bitte zuerst <a href="login.php">einloggen</a>');
 	}
 	$username = $_SESSION['uname'];
 	
+	// Wurde ein Event angeklickt?
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
 		session_start();
 		session_destroy();
 		header("Location: login.php");
 	}
 	
+	// Event erstellen
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$eventName = $_POST['eventName'];
 		$user = $_POST['people'];
@@ -77,7 +80,6 @@
     			</div>
     		</div>
 		</form>
-
 		<script>
 			//Adds new input with incrementing id and name
 			var count_date = 1;
@@ -123,19 +125,3 @@
 		</script>
 	</body>
 </html>
-
-
-<?php 
-	/*
-	function addEvent($eventName, $users, $dates, $ort, $desc){
-		$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-		$fehler = false;
-		
-		// Bei keinem Fehler, Account erstellen und auf login Seite ändern
-		if ($fehler == false){
-			// Event hinzufügen
-			$insert = "INSERT INTO users(name,teilnehmer,dates, place, descr,usr) VALUES('$eventName','$users',{'$dates'}, '$ort', '$desc', {'$uname'});";
-			$i = pg_query($dbconn, $insert);
-		}
-	}*/
-?>
