@@ -14,15 +14,14 @@
 		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
 	}
 	$eventname = $_SESSION['teilnehmerEvent'];
-
+	
+	// Kommentar-Funktionalität
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['commentBtn'])){
-
 	    $commentContent = $_POST['commentField'];
         //echo "<script type='text/javascript'>alert('$evntid[0], $commentContent, $usrid[0]');</script>";
 	    $c = new CommentEvent($eventname, $commentContent, $username);
 		$c->execute();
     }
-
 	
 	// Logout
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout'])){
@@ -185,8 +184,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<td>paul</td>
-						<td>cool</td>
+						<td>Paul</td>
+						<td>Gefällt mir!</td>
 					</tbody>
 				</table>
 			</form>

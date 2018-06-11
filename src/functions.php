@@ -204,6 +204,52 @@ class Search extends UserCommand
 }
 
 /**
+ * Klasse ShowEvents, zum alle Events eines Benutzers
+ *
+ * @author	Paul Mazzolini
+ * @version  06112018
+ */
+class ShowEvents extends UserCommand
+{
+    private $username;
+
+    function __construct($username){
+        $this->username = $username;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+							
+		$userid = "SELECT id FROM benutzer WHERE name = '$this->username';";
+		$sql = pg_query($dbconn, $userid); 
+		$row = pg_fetch_row($sql);
+		
+		$eventid = "SELECT event FROM teilnehmer WHERE usr = '$row[0]' AND angenommen='false';";
+		$sql = pg_query($dbconn, $eventid);
+		
+		while ($row = pg_fetch_row($sql)) {
+			$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
+			$sqlname = pg_query($dbconn, $eventname); 
+			$ergname = pg_fetch_row($sqlname);
+			
+			$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
+			$sqlort = pg_query($dbconn, $eventort); 
+			$ergort = pg_fetch_row($sqlort);
+			
+			echo "<tr>
+					<td><a href ='terminreservierung.php?einlEvent=$ergname[0]'> $ergname[0] </a></td>
+					<td>
+						<form action='' method='post'>
+							<input type='submit' class='btn btn-outline-dark' name='anmelden$row[0]' value='Ja' />
+							<input type='submit' class='btn btn-outline-dark' name='loeschen$row[0]' value='Nein' />
+						</form>
+					</td>
+				</tr>";
+		}
+    }
+}
+
+/**
  * Klasse Accept, zum Annehmen der Einladungen, entspricht Klasse TakePartEvent
  *
  * @author	Christoph Kern

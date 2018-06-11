@@ -82,16 +82,12 @@
 		<title>Terminreservierung</title>
 	</head>
 	<body>
-		
-		
 		<script type="text/javascript">
 		function poll() {
 			setTimeout(function(){location.reload();},10000);
 		}
-			
 		poll();
 		</script>
-
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
 				<h2>Terminreservierung</h2>
@@ -133,7 +129,10 @@
 						</tr>
 						<?php
 							// Vom aktuellen Benutzer alle Einladungen in die Tabelle schreiben
+							$s = new ShowEvents($username);
+							$s->execute();
 							
+							/*
 							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 							
 							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
@@ -161,7 +160,7 @@
 											</form>
 										</td>
 									</tr>";
-							}
+							}*/
 							
 						?>
 					</table>

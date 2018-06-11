@@ -225,8 +225,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<td>paul</td>
-						<td>cool</td>
+						<td>Paul</td>
+						<td>Tolles Event!</td>
 					</tbody>
 				</table>
 			</form>
