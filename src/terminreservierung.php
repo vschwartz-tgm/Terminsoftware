@@ -200,37 +200,37 @@
     			</div>
     			<div class="col-sm border">
     				<div class="scroll2">
-      				<h4>Erstellungen:</h4>
-					<table class="table">
-						<tr>
-							<th>Eventname:</th><th>Ort:</th>
-						</tr>
-						<?php 
-							// Alle vom User erstellten Events anzeigen
-							
-							$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-							
-							$userid = "SELECT id FROM benutzer WHERE name = '$username';";
-							$sql = pg_query($dbconn, $userid); 
-							$row = pg_fetch_row($sql);
-							
-							$eventid = "SELECT id from event where usr ='$row[0]';";
-							$sql = pg_query($dbconn, $eventid);
-							
-							while ($row = pg_fetch_row($sql)) {
-								$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
-								$sqlname = pg_query($dbconn, $eventname); 
-								$ergname = pg_fetch_row($sqlname);
+						<h4>Erstellungen:</h4>
+						<table class="table">
+							<tr>
+								<th>Eventname:</th><th>Ort:</th>
+							</tr>
+							<?php 
+								// Alle vom User erstellten Events anzeigen
 								
-								$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
-								$sqlort = pg_query($dbconn, $eventort); 
-								$ergort = pg_fetch_row($sqlort);
+								$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 								
-								echo "<tr><td><a href ='terminreservierung.php?erstEvent=$ergname[0]'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
-							}
-						
-						?>
-					</table>
+								$userid = "SELECT id FROM benutzer WHERE name = '$username';";
+								$sql = pg_query($dbconn, $userid); 
+								$row = pg_fetch_row($sql);
+								
+								$eventid = "SELECT id from event where usr ='$row[0]';";
+								$sql = pg_query($dbconn, $eventid);
+								
+								while ($row = pg_fetch_row($sql)) {
+									$eventname = "SELECT name FROM event WHERE id = '$row[0]';";
+									$sqlname = pg_query($dbconn, $eventname); 
+									$ergname = pg_fetch_row($sqlname);
+									
+									$eventort = "SELECT ort FROM event WHERE id = '$row[0]';";
+									$sqlort = pg_query($dbconn, $eventort); 
+									$ergort = pg_fetch_row($sqlort);
+									
+									echo "<tr><td><a href ='terminreservierung.php?erstEvent=$ergname[0]'> $ergname[0] </a></td><td>$ergort[0]</td></tr>";
+								}
+							
+							?>
+						</table>
 					</div>
 					<div>
 						<button type="button" class="btn btn-outline-dark" name="addEvent" onclick="window.location='newEvent.php'">Add Event</button>

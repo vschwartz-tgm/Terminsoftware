@@ -8,7 +8,7 @@
 	}
 	$username = $_SESSION['uname'];
 	
-	// Wurde ein Event angeclickt?
+	// Wurde ein Event angeklickt?
 	session_start();
 	if(!isset($_SESSION['teilnehmerEvent'])) {
 		die('Bitte zuerst <a href="terminreservierung.php">Event auswählen</a>');
