@@ -1,16 +1,40 @@
 <?php
+/**
+ * Interface Command
+ *
+ * @author	Paul Mazzolini
+ * @version  05102018
+ */
 interface Command
 {
     public function execute();
 }
+/**
+ * Klasse UserCommand, Funktion die der User ausführen kann
+ *
+ * @author	Paul Mazzolini
+ * @version  05102018
+ */
 abstract class UserCommand implements Command
 {
     public function execute(){}
 }
+/**
+ * Klasse OrganisatorCommand, Funktion die der Organisator ausführen kann
+ *
+ * @author	Paul Mazzolini
+ * @version  05102018
+ */
 abstract class OrganisatorCommand implements Command
 {
     public function execute(){}
 }
+/**
+ * Klasse EventCommand, Funktion die beim Event ausführt werden
+ *
+ * @author	Paul Mazzolini
+ * @version  05102018
+ */
 abstract class EventCommand implements Command
 {
     public function execute(){}
@@ -23,7 +47,7 @@ abstract class EventCommand implements Command
  * Klasse LoginUser, zum Einloggen des Users
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  05142018
  */
 class LoginUser extends UserCommand
 {
@@ -70,7 +94,7 @@ class LoginUser extends UserCommand
  * Klasse RegisterUser, zum Registrieren neuer User
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  05142018
  */
 class RegisterUser extends UserCommand
 {
@@ -138,7 +162,7 @@ class RegisterUser extends UserCommand
  * Klasse Search, zum Suchen von Events oder Usern
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  05162018
  */
 class Search extends UserCommand
 {
@@ -183,7 +207,7 @@ class Search extends UserCommand
  * Klasse Accept, zum Annehmen der Einladungen, entspricht Klasse TakePartEvent
  *
  * @author	Christoph Kern
- * @version  1.0
+ * @version  05232018
  */
 class Accept extends UserCommand
 {
@@ -210,7 +234,7 @@ class Accept extends UserCommand
  * Klasse Decline, zum Ablehnen der Einladungen, entspricht Klasse TakePartEvent
  *
  * @author	Christoph Kern
- * @version  1.0
+ * @version  05232018
  */
 class Decline extends UserCommand
 {
@@ -243,7 +267,7 @@ use PHPMailer\PHPMailer\Exception;
  * Klasse CreateEvent, zum Erstellen eines Events
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  05212018
  */
 class CreateEvent extends OrganisatorCommand
 {
@@ -310,7 +334,7 @@ class CreateEvent extends OrganisatorCommand
  * Klasse ChangeEvent, zum Ändern eines Events
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  06012018
  */
 class ChangeEvent extends OrganisatorCommand
 {
@@ -335,6 +359,7 @@ class ChangeEvent extends OrganisatorCommand
 		
 		header("Location: eventView_Ersteller.php");
 		
+		// Überprüfung, falls Eventname auch geändert werden sollte:
 		
 		/*// Eventname schon vorhanden?
 		try{
@@ -369,7 +394,7 @@ class ChangeEvent extends OrganisatorCommand
  * Klasse DeleteEvent, zum Löschen von Events (solange möglich, bis ein User die Einladung angenommen hat)
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  06062018
  */
 class DeleteEvent extends OrganisatorCommand
 {
@@ -415,7 +440,7 @@ class DeleteEvent extends OrganisatorCommand
  * Klasse DeleteEingelander, zum Löschen von Usern von Events, deren Einladung noch unbeantwortet ist, entspricht Klasse DeleteUserFromEvent
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  06062018
  */
 class DeleteEingeladener extends OrganisatorCommand
 {
@@ -465,7 +490,7 @@ class DeleteEingeladener extends OrganisatorCommand
  * Klasse DeleteDate, zum Löschen eines Datums eines Events
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  06072018
  */
 class DeleteDate extends OrganisatorCommand
 {
@@ -495,7 +520,7 @@ class DeleteDate extends OrganisatorCommand
  * Klasse AddUserToEvent, zum Hinzufügen von einem User zu einem Event
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  06072018
  */
 class AddUserToEvent extends OrganisatorCommand
 {
@@ -529,7 +554,7 @@ class AddUserToEvent extends OrganisatorCommand
  * Klasse AddDate, zum Hinzufügen von einem Date zu einem Event
  *
  * @author	Paul Mazzolini
- * @version  1.0
+ * @version  06072018
  */
 class AddDate extends OrganisatorCommand
 {
@@ -558,8 +583,8 @@ class AddDate extends OrganisatorCommand
 /**
  * Klasse SetFixedEventDate, zum setzen eines fixen Event Dates eines Events
  *
- * @author	Paul Mazzolini
- * @version  1.0
+ * @author	Paul Mazzolini & Michael Wintersperger
+ * @version  06072018
  */
 class SetFixedEventDate extends OrganisatorCommand
 {
@@ -584,33 +609,44 @@ class SetFixedEventDate extends OrganisatorCommand
 /**
  * Klasse CommentEvent, zum Kommentieren eines Events
  *
- * @author	Paul Mazzolini
- * @version  1.0
+ * @author	Paul Mazzolini & Vincent Schwartz
+ * @version  06072018
  */
 class CommentEvent extends EventCommand
 {
-    private $user;
-	private $event;
-	private $comment;
+    private $eventname;
+    private $username;
+    private $comment;
 
-    function __construct($user, $event, $comment){
-        $this->user = $user;
-		$this->event = $event;
-		$this->comment = $comment;
+    public function __construct($eventname, $comment, $username) {
+        $this->eventname = $eventname;
+        $this->comment = $comment;
+        $this->username = $username;
     }
 
-    public function execute(){
+    public function execute() {
         $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-		
+        
 		// ToDo: Event Command in die DB schreiben
+		
+		$eventid = "SELECT id from event where name = '$this->eventname'";
+        $sqleventid = pg_query($dbconn, $eventid);
+        $evntid = pg_fetch_row($sqleventid);
+
+        $userid = "SELECT id from benutzer where name = '$this->username'";
+        $sqluserid = pg_query($dbconn, $userid);
+        $usrid = pg_fetch_row($sqluserid);
+
+        $addComment = "insert into kommentar(event, comment, usr) values('$evntid[0]','$this->comment','$usrid[0]')";
+        pg_query($dbconn, $addComment);
     }
 }
 
 /**
  * Klasse ChooseDateEvent, zum wählen eines Wunschdatums von einem Event
  *
- * @author	Paul Mazzolini
- * @version  1.0
+ * @author	Paul Mazzolini & Michael Wintersperger
+ * @version  06072018
  */
 class ChooseDateEvent extends EventCommand
 {
@@ -635,7 +671,7 @@ class ChooseDateEvent extends EventCommand
  * Klasse SendMailRegister, zum Versenden der Notifications bei der Registrierung
  *
  * @author	Christoph Kern
- * @version  1.0
+ * @version  05152018
  */
 class SendMailRegister extends EventCommand
 {
@@ -676,7 +712,7 @@ class SendMailRegister extends EventCommand
  * Klasse SendMailInvitation, zum Versenden der Notifications bei einer neuen Eventeinladung
  *
  * @author	Christoph Kern
- * @version  1.0
+ * @version  05152018
  */
 class SendMailInvitation extends EventCommand
 {
@@ -720,51 +756,5 @@ class SendMailInvitation extends EventCommand
 			echo "<script type='text/javascript'>alert('Could not send Message!');</script>";
         }
     }
-}
-
-class createComment extends UserCommand{
-
-    private $eventname;
-    private $username;
-    private $comment;
-
-    public function __construct($eventname, $comment, $username) {
-        $this->eventname = $eventname;
-        $this->comment = $comment;
-        $this->username = $username;
-    }
-
-    public function execute() {
-        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-        $eventid = "SELECT id from event where name = '$this->eventname'";
-        $sqleventid = pg_query($dbconn, $eventid);
-        $evntid = pg_fetch_row($sqleventid);
-
-        $userid = "SELECT id from benutzer where name = '$this->username'";
-        $sqluserid = pg_query($dbconn, $userid);
-        $usrid = pg_fetch_row($sqluserid);
-
-        $addComment = "insert into kommentar(event, comment, usr) values('$evntid[0]','$this->comment','$usrid[0]')";
-        pg_query($dbconn, $addComment);
-    }
-
-}
-
-class Comment extends UserCommand {
-
-    private $userName;
-    private $usr;
-    private $comment;
-
-    function __construct($username, $comment) {
-        $this->comment = $comment;
-        $this->user = $username;
-    }
-
-    function execute() {
-        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-        
-    }
-
 }
 ?>

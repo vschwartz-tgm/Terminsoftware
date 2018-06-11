@@ -19,7 +19,7 @@
 
 	    $commentContent = $_POST['commentField'];
         //echo "<script type='text/javascript'>alert('$evntid[0], $commentContent, $usrid[0]');</script>";
-	    $c = new createComment($eventname, $commentContent, $username);
+	    $c = new CommentEvent($eventname, $commentContent, $username);
 		$c->execute();
     }
 
