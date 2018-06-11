@@ -1,6 +1,7 @@
 <?php
 	include ("functions.php");	
 	
+	// Registrierung durchführen
 	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
 		$uname = $_POST['uname'];
 		$email = $_POST['email'];
