@@ -1,5 +1,7 @@
 # Planung - Diagramme
 
+- Pattern: Command
+
 - Controller:
 ![UML_Controller](controller.png "UML-Controller")
 
