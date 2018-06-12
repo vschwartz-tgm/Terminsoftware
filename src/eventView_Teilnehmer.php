@@ -184,9 +184,7 @@
 					</thead>
 					<tbody>
 						<?php
-						$s = new ShowEventComments($eventname);
-						$s->execute();
-						/*
+						// Herauslesen der Kommentare
 						$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
 
         				$eventidSELECT = "SELECT id from event where name = '$eventname'";
@@ -213,7 +211,7 @@
 									<td>$uname[0]</td>
 									<td>$comment[0]</td>
 								</tr>";
-						}*/
+						}
         				?>
 					</tbody>
 				</table>
