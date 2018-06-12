@@ -721,51 +721,6 @@ class CommentEvent extends EventCommand
 }
 
 /**
- * Klasse ShowEventComments, zum Anzeigen der Eventkommentare
- *
- * @author	Paul Mazzolini
- * @version  06122018
- */
-class ShowEventComments extends EventCommand
-{
-    private $eventname;
-
-    function __construct($eventname){
-        $this->eventname = $eventname;
-    }
-
-    public function execute(){
-        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
-
-		$eventidSELECT = "SELECT id from event where name = '$this->eventname'";
-		$sqleventid = pg_query($dbconn, $eventidSELECT);
-		$eventid = pg_fetch_row($sqleventid);
-		
-		$commentIDSELECT = "SELECT id from kommentar where event = '$eventid[0]'";
-		$sqlcomment = pg_query($dbconn, $commentIDSELECT);
-		while ($commentid = pg_fetch_row($sqlcomment)) {							
-			//User-ID des aktuellen Comments
-			$useridSELECT = "SELECT usr FROM kommentar WHERE id = '$commentid[0]';";
-			$userid = pg_query($dbconn, $useridSELECT); 
-			$uid = pg_fetch_row($userid);
-			//User-Name des aktuellen Comments
-			$usernameSELECT = "SELECT name FROM benutzer WHERE id = '$uid[0]';";
-			$username = pg_query($dbconn, $usernameSELECT); 
-			$uname = pg_fetch_row($username);
-			//Text des aktuellen Comments
-			$commentSELECT = "SELECT comment FROM kommentar WHERE id = '$commentid[0]';";
-			$commentQuery = pg_query($dbconn, $commentSELECT); 
-			$comment = pg_fetch_row($commentQuery);
-			
-			echo "<tr>
-					<td>$uname[0]</td>
-					<td>$comment[0]</td>
-				</tr>";
-		}
-    }
-}
-
-/**
  * Klasse SendMailRegister, zum Versenden der Notifications bei der Registrierung
  *
  * @author	Christoph Kern
