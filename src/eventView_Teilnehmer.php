@@ -204,12 +204,12 @@
 							$uname = pg_fetch_row($username);
 							//Text des aktuellen Comments
 							$commentSELECT = "SELECT comment FROM kommentar WHERE id = '$commentid[0]';";
-							$commentQuery = pg_query($dbconn, $useridSELECT); 
-							$comment = pg_fetch_row($userid);
+							$commentQuery = pg_query($dbconn, $commentSELECT); 
+							$comment = pg_fetch_row($commentQuery);
 							
 							echo "<tr>
 									<td>$uname[0]</td>
-									<td>Hallo</td>
+									<td>$comment[0]</td>
 								</tr>";
 						}
         				?>
