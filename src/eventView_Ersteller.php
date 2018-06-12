@@ -99,6 +99,13 @@
 		}
 		$d = $d + 1;
 	}
+	
+	// Kommentar-Funktionalität
+	if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['commentBtn'])){
+	    $commentContent = $_POST['commentField'];
+	    $c = new CommentEvent($eventname, $commentContent, $username);
+		$c->execute();
+    }
 ?>
 
 <html>
@@ -214,8 +221,8 @@
 		<div class="container">
 			<form method="post">
 				<div class="form-group">
-					<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" name="commentField" />
-					<button type="submit" class="btn btn-outline-dark form-control" onclick="" name="commentBtn" id="commentBtn style="float: right;">Posten</button>
+					<input type="text" placeholder="Kommentar" name="commentField" class="form-control" id="commentField" />
+					<button type="submit" class="btn btn-outline-dark form-control" name="commentBtn" id="commentBtn" style="float: right;">Posten</button>
 				</div>
 				<table class="table scroll">
 					<thead>
@@ -225,8 +232,36 @@
 						</tr>
 					</thead>
 					<tbody>
-						<td>Paul</td>
-						<td>Tolles Event!</td>
+						<?php
+						// Herauslesen der Kommentare
+						$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+
+        				$eventidSELECT = "SELECT id from event where name = '$eventname'";
+        				$sqleventid = pg_query($dbconn, $eventidSELECT);
+        				$eventid = pg_fetch_row($sqleventid);
+						
+        				$commentIDSELECT = "SELECT id from kommentar where event = '$eventid[0]'";
+        				$sqlcomment = pg_query($dbconn, $commentIDSELECT);
+						while ($commentid = pg_fetch_row($sqlcomment)) {							
+							//User-ID des aktuellen Comments
+							$useridSELECT = "SELECT usr FROM kommentar WHERE id = '$commentid[0]';";
+							$userid = pg_query($dbconn, $useridSELECT); 
+							$uid = pg_fetch_row($userid);
+							//User-Name des aktuellen Comments
+							$usernameSELECT = "SELECT name FROM benutzer WHERE id = '$uid[0]';";
+							$username = pg_query($dbconn, $usernameSELECT); 
+							$uname = pg_fetch_row($username);
+							//Text des aktuellen Comments
+							$commentSELECT = "SELECT comment FROM kommentar WHERE id = '$commentid[0]';";
+							$commentQuery = pg_query($dbconn, $commentSELECT); 
+							$comment = pg_fetch_row($commentQuery);
+							
+							echo "<tr>
+									<td>$uname[0]</td>
+									<td>$comment[0]</td>
+								</tr>";
+						}
+        				?>
 					</tbody>
 				</table>
 			</form>
