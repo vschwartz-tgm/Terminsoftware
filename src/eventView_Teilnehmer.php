@@ -189,15 +189,30 @@
 
         				$eventid = "SELECT id from event where name = '$eventname'";
         				$sqleventid = pg_query($dbconn, $eventid);
-        				$evntid = pg_fetch_row($sqleventid);
-
-        				$commentSELECT = "SELECT comment from kommentar where event = '$evntid[0]'";
-        				$sqlcomment = pg_query($dbconn, $commentSELECT);
-        				$comment = pg_fetch_row($sqlcomment);
-        				?>
+        				$eventid = pg_fetch_row($sqleventid);
 						
-        				<td><?php echo $username; ?></td>
-        				<td><?php echo $comment[0]; ?></td>
+						
+						
+        				$commentSELECT = "SELECT id from kommentar where event = '$eventid[0]'";
+        				$sqlcomment = pg_query($dbconn, $commentSELECT);
+						while ($commentid = pg_fetch_row($sqlcomment);) {							
+							//User-ID des aktuellen Comments
+							$useridSELECT = "SELECT usr FROM comment WHERE id = '$commentid[0]';";
+							$userid = pg_query($dbconn, $useridSELECT); 
+							$uid = pg_fetch_row($userid);
+							//User-Name des aktuellen Comments
+							$usernameSELECT = "SELECT name FROM benutzer WHERE id = '$uid[0]';";
+							$username = pg_query($dbconn, $usernameSELECT); 
+							$uname = pg_fetch_row($username);
+							//Text des aktuellen Comments
+							$commentSELECT = "SELECT comment FROM kommentar WHERE id = '$commentid[0]';";
+							$commentQuery = pg_query($dbconn, $useridSELECT); 
+							$comment = pg_fetch_row($userid);
+							
+							echo "<td>$uname[0]</td>";
+							echo "<td>$comment[0]</td>";
+						}
+        				?>
 					</tbody>
 				</table>
 			</form>
