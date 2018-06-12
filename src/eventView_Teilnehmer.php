@@ -193,7 +193,7 @@
 						
         				$commentIDSELECT = "SELECT id from kommentar where event = '$eventid[0]'";
         				$sqlcomment = pg_query($dbconn, $commentIDSELECT);
-						while ($commentid = pg_fetch_row($sqlcomment);) {							
+						while ($commentid = pg_fetch_row($sqlcomment)) {							
 							//User-ID des aktuellen Comments
 							$useridSELECT = "SELECT usr FROM kommentar WHERE id = '$commentid[0]';";
 							$userid = pg_query($dbconn, $useridSELECT); 
