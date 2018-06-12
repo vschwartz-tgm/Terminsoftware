@@ -207,8 +207,10 @@
 							$commentQuery = pg_query($dbconn, $useridSELECT); 
 							$comment = pg_fetch_row($userid);
 							
+							echo "<tr>";
 							echo "<td>$uname[0]</td>";
 							echo "<td>$comment[0]</td>";
+							echo "</tr>";
 						}
         				?>
 					</tbody>
