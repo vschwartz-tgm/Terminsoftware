@@ -191,8 +191,8 @@
         				$sqleventid = pg_query($dbconn, $eventidSELECT);
         				$eventid = pg_fetch_row($sqleventid);
 						
-        				$commentSELECT = "SELECT id from kommentar where event = '$eventid[0]'";
-        				$sqlcomment = pg_query($dbconn, $commentSELECT);
+        				$commentIDSELECT = "SELECT id from kommentar where event = '$eventid[0]'";
+        				$sqlcomment = pg_query($dbconn, $commentIDSELECT);
 						while ($commentid = pg_fetch_row($sqlcomment);) {							
 							//User-ID des aktuellen Comments
 							$useridSELECT = "SELECT usr FROM kommentar WHERE id = '$commentid[0]';";
