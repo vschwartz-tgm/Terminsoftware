@@ -86,7 +86,10 @@
 		function poll() {
 			setTimeout(function(){location.reload();},10000);
 		}
+		
+		var p = document.getElementById("searchtext").value;
 		poll();
+		document.getElementById("searchtext").value = p;
 		</script>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
@@ -106,7 +109,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">&#x1F50D;</div>
 					</div>
-					<input type="text" class="form-control" name="searchtext" placeholder="search" />
+					<input type="text" class="form-control" name="searchtext" id="searchtext" placeholder="search" />
 				</div>
 				<br />
 				<div>
