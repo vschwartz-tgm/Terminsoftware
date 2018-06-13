@@ -84,9 +84,9 @@
 	<body>
 		<script type="text/javascript">
 		function poll() {
-			var p = document.getElementById("searchtext").value;
+			//var p = document.getElementById("searchtext").value;
 			setTimeout(function(){location.reload();},10000);
-			document.getElementById("searchtext").value = p;
+			//document.getElementById("searchtext").value = p;
 		}
 		
 		poll();
