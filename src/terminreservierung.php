@@ -84,7 +84,7 @@
 	<body>
 		<script type="text/javascript">
 		function poll() {
-			setTimeout(function(){location.reload();},10000);
+			setTimeout(function(){location.reload();},1000);
 		}
 		
 		var p = document.getElementById("searchtext").value;
