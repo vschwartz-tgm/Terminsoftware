@@ -259,6 +259,7 @@
 							echo "<tr>
 									<td>$uname[0]</td>
 									<td>$comment[0]</td>
+									<td><input type='radio' name='date' value='Delete'></td>
 								</tr>";
 						}
         				?>
