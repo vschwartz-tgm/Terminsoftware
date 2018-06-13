@@ -84,12 +84,12 @@
 	<body>
 		<script type="text/javascript">
 		function poll() {
-			setTimeout(function(){location.reload();},1000);
+			var p = document.getElementById("searchtext").value;
+			setTimeout(function(){location.reload();},10000);
+			document.getElementById("searchtext").value = p;
 		}
 		
-		var p = document.getElementById("searchtext").value;
 		poll();
-		document.getElementById("searchtext").value = p;
 		</script>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
