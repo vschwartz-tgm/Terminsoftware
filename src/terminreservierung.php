@@ -87,20 +87,15 @@
 			document.cookie = "searchtext="+document.getElementById("searchtext").value;
 			setTimeout(function(){location.reload();},3000);
 			//document.getElementById("searchtext").value = document.cookie.substring(name.length, c.length);
-			
-			var ca = document.cookie.split(';');
-			//var showCookie; 
-			for (var i=0; i<ca.length; i++) {
-				var single = ca[i].split('=');
-				alert(single[1]);
-				//showCookie += '<div><b>' + single[0] + '</b> ' +
-				
-				//decodeURIComponent(single[1]) + '</div>';
-			}
-			//document.getElementById('youCookie').innerHTML = showCookie;
 		}
 		
 		poll();
+		
+		var ca = document.cookie.split(';');
+			for (var i=0; i<ca.length; i++) {
+				var single = ca[i].split('=');
+				alert(single[1]);
+			}
 		</script>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
