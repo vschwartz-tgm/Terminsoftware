@@ -259,7 +259,7 @@
 							echo "<tr>
 									<td>$uname[0]</td>
 									<td>$comment[0]</td>
-									<td><input type='radio' name='date' value='Delete'></td>
+									<td><input type='submit' class='btn btn-outline-dark' name='' value='Löschen' /></td>
 								</tr>";
 						}
         				?>
