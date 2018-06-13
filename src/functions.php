@@ -650,10 +650,10 @@ class SetFixedEventDate extends OrganisatorCommand
 }
 
 /**
- * Klasse DeleteComment, zum löschen von Event Kommentaren
+ * Klasse DeleteComment, zum Löschen von Event Kommentaren
  *
  * @author	Paul Mazzolini & Michael Wintersperger
- * @version  06072018
+ * @version  06132018
  */
 class DeleteComment extends OrganisatorCommand
 {
