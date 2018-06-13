@@ -84,16 +84,8 @@
 	<body>
 		<script type="text/javascript">
 		function poll() {
-			document.cookie = "searchtext="+document.getElementById("searchtext").value;
 			setTimeout(function(){location.reload();},3000);
-			//document.getElementById("searchtext").value = document.cookie.substring(name.length, c.length);
 		}
-		
-		var ca = document.cookie.split(';');
-			for (var i=0; i<ca.length; i++) {
-				var single = ca[i].split('=');
-				alert(single[1]);
-			}
 		
 		poll();
 		</script>
