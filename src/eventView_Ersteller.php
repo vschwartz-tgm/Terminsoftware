@@ -106,6 +106,20 @@
 	    $c = new CommentEvent($eventname, $commentContent, $username);
 		$c->execute();
     }
+	
+	// Funktion für KommentarLöschen vorbereiten
+	$dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+	$eventidSELECT = "SELECT id from event where name = '$eventname'";
+	$sqleventid = pg_query($dbconn, $eventidSELECT);
+	$eventid = pg_fetch_row($sqleventid);
+	$commentIDSELECT = "SELECT id from kommentar where event = '$eventid[0]'";
+	$sqlcomment = pg_query($dbconn, $commentIDSELECT);
+	while ($commentid = pg_fetch_row($sqlcomment)) {
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["deleteComment$commentid[0]"])){
+			$d = new DeleteComment($commentid[0]);
+			$d->execute();
+		}
+	}
 ?>
 
 <html>
@@ -259,7 +273,7 @@
 							echo "<tr>
 									<td>$uname[0]</td>
 									<td>$comment[0]</td>
-									<td><input type='submit' class='btn btn-outline-dark' name='' value='Löschen' /></td>
+									<td><input type='submit' class='btn btn-outline-dark' name='deleteComment$commentid[0]' value='Löschen' /></td>
 								</tr>";
 						}
         				?>

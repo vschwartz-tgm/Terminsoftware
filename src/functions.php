@@ -648,6 +648,28 @@ class SetFixedEventDate extends OrganisatorCommand
 		// ToDo: Fixen Event Date setzen & alle anderen Event-Dates entfernen
     }
 }
+
+/**
+ * Klasse DeleteComment, zum löschen von Event Kommentaren
+ *
+ * @author	Paul Mazzolini & Michael Wintersperger
+ * @version  06072018
+ */
+class DeleteComment extends OrganisatorCommand
+{
+    private $commentid;
+
+    function __construct($commentid){
+        $this->commentid = $commentid;
+    }
+
+    public function execute(){
+        $dbconn = pg_connect("host=ec2-23-23-247-245.compute-1.amazonaws.com port=5432 dbname=de8h555uj0b1mq user=xokkwplhovrges password=56a064f11b2b07249b0497b9f3e6e4ee306fc72b24fd469618658c0738e23e7d");
+		$deleteC = "DELETE FROM kommentar WHERE id = '$this->commentid';";
+        $delete = pg_query($dbconn, $deleteC);
+		header("Location: eventView_Ersteller.php");
+    }
+}
 ?>
 
 
