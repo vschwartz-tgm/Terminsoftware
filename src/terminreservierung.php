@@ -89,13 +89,13 @@
 			//document.getElementById("searchtext").value = document.cookie.substring(name.length, c.length);
 		}
 		
-		poll();
-		
 		var ca = document.cookie.split(';');
 			for (var i=0; i<ca.length; i++) {
 				var single = ca[i].split('=');
 				alert(single[1]);
 			}
+		
+		poll();
 		</script>
 		<nav class="navbar navbar-right navbar-dark bg-dark rounded">
 			<div class="navbar-text">
